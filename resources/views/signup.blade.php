@@ -52,7 +52,7 @@
 
             <p class="text-center mt-8 text-sm text-gray-500">
                 Déjà membre ? 
-                <a href="#" class="text-indigo-600 font-bold hover:underline">Se connecter</a>
+                <a href="/login" class="text-indigo-600 font-bold hover:underline">Se connecter</a>
             </p>
         </div>
         
