@@ -42,5 +42,8 @@
 						<span class="text-gray-500 text-sm">Max 280 characters</span>
 					</div>
 				</form>
+
+
+
 			</div>
 		</div>
