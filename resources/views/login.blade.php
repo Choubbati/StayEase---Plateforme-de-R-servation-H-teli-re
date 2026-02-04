@@ -20,26 +20,23 @@
                 <p class="text-gray-500 mt-2 text-sm">Connectez-vous pour gérer vos réservations.</p>
             </div>
 
-            <form action="#" class="space-y-6">
+            <form action="/login" class="space-y-6" method="POST">
+                @csrf
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 ml-1">Adresse Email</label>
-                    <input type="email" placeholder="votre@email.com" 
+                    <input name="email" type="email" placeholder="votre@email.com" 
                            class="w-full p-4 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 outline-none transition-all">
                 </div>
 
                 <div>
                     <div class="flex justify-between items-center mb-2 ml-1">
                         <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Mot de passe</label>
-                        <a href="#" class="text-xs font-bold text-indigo-600 hover:underline">Oublié ?</a>
                     </div>
-                    <input type="password" placeholder="••••••••" 
+                    <input name="password" type="password" placeholder="••••••••" 
                            class="w-full p-4 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 outline-none transition-all">
                 </div>
 
-                <div class="flex items-center px-1">
-                    <input type="checkbox" id="remember" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                    <label for="remember" class="ml-2 text-sm text-gray-600 cursor-pointer">Rester connecté</label>
-                </div>
+
 
                 <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition active:scale-[0.98]">
                     Se connecter
@@ -48,7 +45,7 @@
 
             <p class="text-center mt-8 text-sm text-gray-500">
                 Pas encore de compte ? 
-                <a href="#" class="text-indigo-600 font-bold hover:underline">Créer un compte</a>
+                <a href="/signup" class="text-indigo-600 font-bold hover:underline">Créer un compte</a>
             </p>
         </div>
     </div>
