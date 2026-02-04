@@ -65,6 +65,7 @@
         </div>
     </header>
    @endguest
+   
     @auth
         
     <header class="max-w-7xl mx-auto px-10 py-20 flex flex-col md:flex-row items-center gap-12">
