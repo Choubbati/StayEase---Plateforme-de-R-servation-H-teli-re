@@ -33,6 +33,6 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/hotels/hotels', [HotelController::class, 'index']);
 Route::get('/hotels/create', [HotelController::class, 'create']);
-Route::get('/hotels/search', [HotelController::class, 'search']);
-
+Route::get('/hotels', [HotelController::class, 'index'])->name('hotels.index');
+Route::get('/hotels/search', [HotelController::class, 'search'])->name('hotels.search');
 

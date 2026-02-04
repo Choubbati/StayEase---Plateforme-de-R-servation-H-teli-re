@@ -8,8 +8,11 @@ class HotelController extends Controller
 {
 
     public function index(){
-        $hotels = Hotel::all();
-        return view('hotels.Hotels', compact('hotels'));
+        $$hotels = Hotel::where('status', 'approved')
+            ->latest()
+            ->paginate(9);
+
+        return view('hotels.index', compact('hotels'));
     }
 
     public function create(){
@@ -62,6 +65,26 @@ class HotelController extends Controller
         $hotel->delete();
         return redirect()->route('hotels.index');
 
+    }
+
+     public function search(Request $request)
+    {
+        $name = $request->query('name');
+        $city = $request->query('city');
+
+        $hotels = Hotel::query()
+            ->where('status', 'approved')
+            ->when($name, function ($q) use ($name) {
+                $q->where('name', 'like', "%{$name}%");
+            })
+            ->when($city, function ($q) use ($city) {
+                $q->where('city', 'like', "%{$city}%");
+            })
+            ->latest()
+            ->paginate(9)
+            ->withQueryString();
+
+        return view('admin.hotels.index', compact('hotels'));
     }
 
 }

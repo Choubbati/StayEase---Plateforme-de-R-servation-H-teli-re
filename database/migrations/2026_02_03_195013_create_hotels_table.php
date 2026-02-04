@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('ville')->default(null);
             $table->string('image')->default(null);
             $table->foreignId('chambre_id')->constrained();
+            $table->string('address');
+            $table->enum('status',['pending','approved','rejected'])->default('pending');
+            $table->foreignId('manager_id')->constrained('users');
             $table->timestamps();
         });
     }
