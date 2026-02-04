@@ -3,13 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-<<<<<<< HEAD
 
-class Hotel extends Model
-{
-    //
-=======
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Hotel extends Model
 {
@@ -23,5 +17,4 @@ class Hotel extends Model
     {
         return $this->hasMany(Chambre::class);
     }
->>>>>>> origin/develop
 }
