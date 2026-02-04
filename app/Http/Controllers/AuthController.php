@@ -35,12 +35,13 @@ class AuthController extends Controller
         'email' => 'required|email',
         'password' => 'required|string',
     ]);
+
     if(Auth::attempt($validated)){
         $request->session()->regenerate();
-        return $_SESSION;
-
-        // return redirect()->intended('/');
+        
+        return redirect()->intended('/');
     }
+
     }
 
 
