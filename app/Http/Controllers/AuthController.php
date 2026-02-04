@@ -18,17 +18,14 @@ class AuthController extends Controller
         
         $user = User::create([
             'Firstname' => $request->prenom,
-            'Nom' => $request->nom,
-            'Email' =>$request->email,
-            'Password' =>Hash::make($request->password),
-            'role_id' => '2',
+            'Lastname' => $request->nom,
+            'email' =>$request->email,
+            'password' =>Hash::make($request->password),
+            'role_id' => 3,
             ]);
-            dd($user);
-        
-
-
-        // Auth::login($user);
-        // return redirect('/')->route('home');
+            
+        Auth::login($user);
+        return redirect()->route('home');
 
     }
 
