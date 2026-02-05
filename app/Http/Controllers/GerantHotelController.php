@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
 
-class HotelController extends Controller
+class GerantHotelController extends Controller
 {
 
     public function index(){
@@ -25,7 +25,7 @@ class HotelController extends Controller
         ]);
         $hotels= Hotel::create($validatedHotel);
 //        dd($hotels);
-        return redirect()->route('hotels.index');
+        return redirect()->route('hotels.hotels');
     }
 
     public function edit($hotel){
@@ -51,7 +51,7 @@ class HotelController extends Controller
         ]);
 
         $hotel->update($validatedHotel);
-        return redirect()->route('hotels.index');
+        return redirect()->route('hotels.hotels');
     }
 
     public function destroy($hotel){
@@ -61,7 +61,7 @@ class HotelController extends Controller
         }
 
         $hotel->delete();
-        return redirect()->route('hotels.index');
+        return redirect()->route('hotels.hotels');
 
     }
 
