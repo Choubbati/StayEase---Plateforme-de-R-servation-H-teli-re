@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('description')->default(null);
             $table->string('ville')->default(null);
             $table->string('image')->default(null);
-            $table->foreignId('chambre_id')->constrained();
             $table->timestamps();
         });
     }
