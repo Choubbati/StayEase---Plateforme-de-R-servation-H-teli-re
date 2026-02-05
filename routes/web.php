@@ -4,9 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHotelController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
 
 // Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function() {
 //     Route::get("/hotels/pending", [AdminHotelController::class,'pending']->name('admin.hotels.pending'));
@@ -15,9 +14,19 @@ Route::get('/', function () {
 // });
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
 
+Route::get('/signup', function (){
+    return view('signup');
+})->name('register');
+Route::post('/signup', [AuthController::class, 'register'])->name('register');
+
+Route::get('/login', function(){
+    return view('login');
+})->name('login');  
+Route::post('/login', [AuthController::class, 'login']);   
+Route::post('/signup', [AuthController::class, 'register'])->name('register');
 Route::prefix('admin')->group(function () {
 
     Route::get('/hotels/pending', [AdminHotelController::class, 'pending'])
