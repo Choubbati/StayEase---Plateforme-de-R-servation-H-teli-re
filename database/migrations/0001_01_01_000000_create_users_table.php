@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('role_id')->constrained();
             $table->rememberToken();
             $table->timestamps();
+            $table->engine('InnoDB');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
