@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Properties;
+use App\Models\Propertie;
 
 class ProprietesSeeder extends Seeder
 {
@@ -15,7 +15,7 @@ class ProprietesSeeder extends Seeder
     {
         $propietes = ['Wi-Fi', 'Climatisation','Vue sur mer', 'Piscine', 'Balcon'];
         foreach ($propietes as $propiete) {
-        Properties::create([
+        Propertie::create([
         'nom' => $propiete,
         ]);
 

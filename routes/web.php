@@ -2,6 +2,8 @@
 use App\Http\Controllers\GerantHotelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\PropertieController;
 
 Route::get('/', function () {
     return view('home');
@@ -25,6 +27,7 @@ Route::post('/signup', [AuthController::class, 'register'])->name('register');
     Route::put('/hotels/{hotel}', [GerantHotelController::class, 'update'])->name('hotels.update');
     Route::delete('/hotels/{hotel}', [GerantHotelController::class, 'destroy'])->name('hotels.destroy');
 //});
-
+Route::resource('tags', TagController::class);
+Route::resource('properties', PropertieController::class);
 
 
