@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('description')->default(null);
             $table->string('ville')->default(null);
             $table->string('image')->default(null);
+            $table->string('address');
+            $table->enum('status',['pending','approved','rejected'])->default('pending');
             $table->timestamps();
             $table->engine('InnoDB');
 
