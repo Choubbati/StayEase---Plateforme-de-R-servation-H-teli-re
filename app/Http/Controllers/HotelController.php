@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
 
-class GerantHotelController extends Controller
+class HotelController extends Controller
 {
 
     public function index(){
@@ -26,9 +26,8 @@ class GerantHotelController extends Controller
             'ville' => 'required',
             'image' => 'required',
         ]);
-        $hotels= Hotel::create($validatedHotel);
-//        dd($hotels);
-        return redirect()->route('hotels.hotels');
+        Hotel::create($validatedHotel);
+        return redirect()->route('hotels.index');
     }
 
     public function edit($hotel){
@@ -54,7 +53,7 @@ class GerantHotelController extends Controller
         ]);
 
         $hotel->update($validatedHotel);
-        return redirect()->route('hotels.hotels');
+        return redirect()->route('hotels.index');
     }
 
     public function destroy($hotel){
@@ -64,7 +63,7 @@ class GerantHotelController extends Controller
         }
 
         $hotel->delete();
-        return redirect()->route('hotels.hotels');
+        return redirect()->route('hotels.index');
 
     }
 
@@ -75,8 +74,8 @@ class GerantHotelController extends Controller
 
         $hotels = Hotel::query()
             ->where('status', 'approved')
-            ->when($nom, function ($q) use ($nom) {
-                $q->where('nom', 'like', "%{$nom}%");
+            ->when($name, function ($q) use ($nom) {
+                $q->where('name', 'like', "%{$nom}%");
             })
             ->when($ville, function ($q) use ($ville) {
                 $q->where('ville', 'like', "%{$ville}%");
