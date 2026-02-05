@@ -1,7 +1,10 @@
 <?php
+
 use App\Http\Controllers\GerantHotelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHotelController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HotelController;
 
 
 
