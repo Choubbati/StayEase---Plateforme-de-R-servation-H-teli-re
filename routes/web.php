@@ -16,7 +16,7 @@ Route::get('/login', function (){
 Route::post('/signup', [AuthController::class, 'register'])->name('register');
 
 /* hotels crud for gerant */
-Route:middleware(['auth', 'role:gerant'])->group( function (){
+//Route:middleware(['auth', 'role:gerant'])->group( function (){
 
     Route::get('/hotels/hotels', [GerantHotelController::class, 'index'])->name("hotels.hotels");
     Route::get('/hotels/create', [GerantHotelController::class, 'create'])->name('hotels.create');
@@ -24,7 +24,7 @@ Route:middleware(['auth', 'role:gerant'])->group( function (){
     Route::get('/hotels/{hotel}', [GerantHotelController::class, 'edit'])->name('hotels.edit');
     Route::put('/hotels/{hotel}', [GerantHotelController::class, 'update'])->name('hotels.update');
     Route::delete('/hotels/{hotel}', [GerantHotelController::class, 'destroy'])->name('hotels.destroy');
-});
+//});
 
 
 
