@@ -48,8 +48,9 @@ Route::prefix('admin')->group(function () {
 
 /* hotels crud for gerant */
 //Route:middleware(['auth', 'role:gerant'])->group( function (){
-
+//Route::get('/hh', function(){return view('hotels.dashbord');});
 Route::get('/hotels/hotels', [GerantHotelController::class, 'index'])->name("hotels.hotels");
+Route::get('/hotels/show/{hotel}', [GerantHotelController::class, 'show'])->name("hotels.detail");
 Route::get('/hotels/create', [GerantHotelController::class, 'create'])->name('hotels.create');
 Route::post('/hotels/hotels', [GerantHotelController::class, 'store'])->name('hotels.store');
 Route::get('/hotels/{hotel}', [GerantHotelController::class, 'edit'])->name('hotels.edit');

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -17,7 +15,7 @@
             <span class="text-2xl font-extrabold tracking-tight text-slate-900">
                 Stay<span class="text-indigo-600">Ease</span>
             </span>        <div class="hidden md:flex gap-8 font-medium text-gray-600">
-                <a href="/hotels/Hotels" class="hover:text-indigo-600 transition">Hôtels</a>
+                <a href="/admin/hotels/Hotels" class="hover:text-indigo-600 transition">Hôtels</a>
                 <a href="#" class="hover:text-indigo-600 transition">Destinations</a>
                 <a href="#" class="hover:text-indigo-600 transition">À propos</a>
             </div>
@@ -32,7 +30,7 @@
             <span class="text-2xl font-extrabold tracking-tight text-slate-900">
                 Stay<span class="text-indigo-600">Ease</span>
             </span>        <div class="hidden md:flex gap-8 font-medium text-gray-600">
-                <a href="/hotels/hotels" class="hover:text-indigo-600 transition">Hôtels</a>
+                <a href="/admin/hotels/hotels" class="hover:text-indigo-600 transition">Hôtels</a>
                 <a href="#" class="hover:text-indigo-600 transition">Destinations</a>
                 <a href="#" class="hover:text-indigo-600 transition">À propos</a>
             </div>
@@ -69,7 +67,7 @@
         </div>
     </header>
    @endguest
-   
+
     @auth
 
     <header class="max-w-7xl mx-auto px-10 py-20 flex flex-col md:flex-row items-center gap-12">
