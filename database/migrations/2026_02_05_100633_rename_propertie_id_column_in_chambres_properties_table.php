@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('properties', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->timestamps();
-            $table->engine('InnoDB');
-
+        Schema::table('chambres_properties', function (Blueprint $table) {
+            $table->renameColumn('properties_id', 'propertie_id');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('properties');
+        Schema::table('chambres_properties', function (Blueprint $table) {
+            $table->renameColumn('propertie_id', 'properties_id');
+        });
     }
 };

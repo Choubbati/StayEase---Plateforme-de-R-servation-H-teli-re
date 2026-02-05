@@ -15,6 +15,6 @@ class Chambre extends Model
         return $this->belongsToMany(Tag::class, 'chambres_tags');
     }
     public function properties(){
-         return $this->belongsToMany(Properties::class,'chambres_properties');
+         return $this->belongsToMany(Propertie::class,'chambres_properties');
     }
 }
