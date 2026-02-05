@@ -14,6 +14,7 @@ return new class extends Migration
     Schema::table('hotels', function (Blueprint $table) {
         $table->index('nom');
         $table->index('ville');
+        
     });
 }
 

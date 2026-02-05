@@ -69,16 +69,16 @@ class HotelController extends Controller
 
      public function search(Request $request)
     {
-        $name = $request->query('name');
-        $city = $request->query('city');
+        $nom = $request->query('nom');
+        $ville = $request->query('ville');
 
         $hotels = Hotel::query()
             ->where('status', 'approved')
-            ->when($name, function ($q) use ($name) {
-                $q->where('name', 'like', "%{$name}%");
+            ->when($nom, function ($q) use ($nom) {
+                $q->where('nom', 'like', "%{$nom}%");
             })
-            ->when($city, function ($q) use ($city) {
-                $q->where('city', 'like', "%{$city}%");
+            ->when($ville, function ($q) use ($ville) {
+                $q->where('ville', 'like', "%{$ville}%");
             })
             ->latest()
             ->paginate(9)
