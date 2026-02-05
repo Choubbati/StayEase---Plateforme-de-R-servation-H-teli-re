@@ -8,8 +8,11 @@ class GerantHotelController extends Controller
 {
 
     public function index(){
-        $hotels = Hotel::all();
-        return view('hotels.Hotels', compact('hotels'));
+        $$hotels = Hotel::where('status', 'approved')
+            ->latest()
+            ->paginate(9);
+
+        return view('hotels.index', compact('hotels'));
     }
 
     public function create(){
@@ -63,6 +66,26 @@ class GerantHotelController extends Controller
         $hotel->delete();
         return redirect()->route('hotels.hotels');
 
+    }
+
+     public function search(Request $request)
+    {
+        $nom = $request->query('nom');
+        $ville = $request->query('ville');
+
+        $hotels = Hotel::query()
+            ->where('status', 'approved')
+            ->when($nom, function ($q) use ($nom) {
+                $q->where('nom', 'like', "%{$nom}%");
+            })
+            ->when($ville, function ($q) use ($ville) {
+                $q->where('ville', 'like', "%{$ville}%");
+            })
+            ->latest()
+            ->paginate(9)
+            ->withQueryString();
+
+        return view('admin.hotels.index', compact('hotels'));
     }
 
 }
