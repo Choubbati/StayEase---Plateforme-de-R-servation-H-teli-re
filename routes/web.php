@@ -27,7 +27,11 @@ Route::get('/login', function(){
 })->name('login');  
 Route::post('/login', [AuthController::class, 'login']);   
 Route::post('/signup', [AuthController::class, 'register'])->name('register');
+<<<<<<< HEAD
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+=======
 Route::prefix('admin')->group(function () {
+>>>>>>> 9052498d1d622bafb782ce9f0937832a8744aa6e
 
     Route::get('/hotels/pending', [AdminHotelController::class, 'pending'])
         ->name('admin.hotels.pending');
