@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('properties', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->timestamps();
-            $table->engine('InnoDB');
+        Schema::create('roles', function (Blueprint $table) {
+        $table->id();
+        $table->string('name')->unique();
+        $table->timestamps();
+        $table->engine('InnoDB');
 
-        });
+    });
     }
 
     /**
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('properties');
+        Schema::dropIfExists('roles');
     }
 };

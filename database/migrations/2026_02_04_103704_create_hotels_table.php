@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('ville')->default(null);
             $table->string('image')->default(null);
             $table->timestamps();
+            $table->engine('InnoDB');
+
         });
     }
 
