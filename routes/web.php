@@ -5,9 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHotelController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HotelController;
-
-
-
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
 
 
 // Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function() {
@@ -51,3 +50,5 @@ Route::get('/hotels/create', [HotelController::class, 'create']);
 Route::get('/hotels', [HotelController::class, 'index'])->name('hotels.index');
 Route::get('/hotels/search', [HotelController::class, 'search'])->name('hotels.search');
 
+Route::get('/admin/adminDashboard', [AdminController::class,'index'])->middleware(['auth'])->name('admin.dashboard');
+Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
