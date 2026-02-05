@@ -10,7 +10,7 @@ class Hotel extends Model
 
     protected $fillables =
     [
-        'nom', 'description', 'ville', 'image', 'chambre_id'
+        'nom', 'description', 'ville', 'image'
     ];
 
     public function chambres(): HasMany
