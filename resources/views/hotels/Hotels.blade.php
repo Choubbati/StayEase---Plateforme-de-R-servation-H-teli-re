@@ -9,6 +9,9 @@
 </head>
 <body>
 
+@foreach($hotels as $hotel)
+    {{$hotel->id}}
+@endforeach
 <!-- component -->
 <div class="flex justify-center items-center min-h-screen">
 
@@ -59,7 +62,7 @@
 
 
 
-                
+
 
                 <div class="inline-flex flex-wrap items-center gap-3 mt-8 group">
                     <span

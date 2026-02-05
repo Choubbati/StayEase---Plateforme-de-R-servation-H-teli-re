@@ -23,7 +23,8 @@ class HotelController extends Controller
             'ville' => 'required',
             'image' => 'required',
         ]);
-        Hotel::create($validatedHotel);
+        $hotels= Hotel::create($validatedHotel);
+//        dd($hotels);
         return redirect()->route('hotels.index');
     }
 
