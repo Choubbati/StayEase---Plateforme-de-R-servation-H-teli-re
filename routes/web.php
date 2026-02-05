@@ -5,14 +5,17 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('/signup', function (){
     return view('signup');
 })->name('register');
-Route::get('/login', function (){
+Route::post('/signup', [AuthController::class, 'register'])->name('register');
+
+Route::get('/login', function(){
     return view('login');
-});
+})->name('login');
+Route::post('/login', [AuthController::class, 'login']);   
 Route::post('/signup', [AuthController::class, 'register'])->name('register');
 
 /* hotels crud for gerant */
@@ -25,6 +28,7 @@ Route::post('/signup', [AuthController::class, 'register'])->name('register');
     Route::put('/hotels/{hotel}', [GerantHotelController::class, 'update'])->name('hotels.update');
     Route::delete('/hotels/{hotel}', [GerantHotelController::class, 'destroy'])->name('hotels.destroy');
 //});
+
 
 
 

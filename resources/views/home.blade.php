@@ -38,6 +38,8 @@
             </div>
             <div class="flex gap-4">
                 <a href="/login"><button class="px-5 py-2 font-semibold text-gray-700">Profile</button></a>
+                <a href="/signup"><button class="px-5 py-2 bg-transparent text-red font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition">Deconnection</button></a>
+
             </div>
         </nav>
         @endauth
@@ -65,6 +67,7 @@
         </div>
     </header>
    @endguest
+   
     @auth
 
     <header class="max-w-7xl mx-auto px-10 py-20 flex flex-col md:flex-row items-center gap-12">
