@@ -38,8 +38,10 @@
             </div>
             <div class="flex gap-4">
                 <a href="/login"><button class="px-5 py-2 font-semibold text-gray-700">Profile</button></a>
-                <a href="/signup"><button class="px-5 py-2 bg-transparent text-red-500 border border-red-500 font-semibold rounded-lg shadow-md hover:bg-red-500 hover:text-white transition">Deconnection</button></a>
-
+                <form method="post" action="{{ route('logout') }}">
+                    @csrf
+                <button type="submit" class="px-5 py-2 bg-transparent text-red-500 border border-red-500 font-semibold rounded-lg shadow-md hover:bg-red-500 hover:text-white transition">Deconnection</button></a>
+                </form>
             </div>
         </nav>
         @endauth
