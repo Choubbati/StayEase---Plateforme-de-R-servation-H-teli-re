@@ -28,7 +28,12 @@ return view('Chambres.index', compact('chambres'));    }
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(['nom' => 'required|string|max:50']);
+        $validated = $request->validate(['number' => 'required|string|max:50']);
+        $validated['price_per_night'] = $request->input('price_per_night');
+        $validated['capacity'] = $request->input('capacity');
+        $validated['hotel_id'] = $request->input('hotel_id');
+        $validated['tags'] = $request->input('tags', []);
+        $validated['properties'] = $request->input('properties', []);       
         Chambre::create($validated);
         return redirect()->route('chambres.index');
     }
