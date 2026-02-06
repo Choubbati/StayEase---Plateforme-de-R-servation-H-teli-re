@@ -72,7 +72,7 @@ class GerantHotelController extends Controller
         ]);
 
         $hotel->update($validatedHotel);
-        return redirect()->route('hotels.hotels');
+        return redirect()->route('hotels.hotels')->with('success', 'Hotel modifier avec succes');;
     }
 
     public function destroy($hotel){
@@ -82,7 +82,7 @@ class GerantHotelController extends Controller
         }
 
         $hotel->delete();
-        return redirect()->route('hotels.hotels');
+        return redirect()->route('hotels.hotels')->with('success', 'Hotel supprimer avec succes');
 
     }
 

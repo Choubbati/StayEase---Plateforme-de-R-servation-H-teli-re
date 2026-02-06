@@ -48,34 +48,13 @@
                 <a href="{{ route('profile') }}"><button class="px-5 py-2 font-semibold text-gray-700">Profile</button></a>
                 <form method="post" action="{{ route('logout') }}">
                     @csrf
-                <button type="submit" class="px-5 py-2 bg-transparent text-red-500 border border-red-500 font-semibold rounded-lg shadow-md hover:bg-red-500 hover:text-white transition">Deconnection</button></a>
+                <button type="submit" class="px-5 py-2 bg-transparent text-red-500 border border-red-500 font-semibold rounded-lg shadow-md hover:bg-red-500 hover:text-white transition">Deconnection</button>
                 </form>
             </div>
         </nav>
-        @endauth
+    @endauth
+
     @guest
-            </span>
-        <div class="hidden md:flex gap-8 font-medium text-gray-600">
-            <a href="/admin/hotels/hotels" class="hover:text-indigo-600 transition">Hôtels</a>
-            <a href="#" class="hover:text-indigo-600 transition">Destinations</a>
-            <a href="#" class="hover:text-indigo-600 transition">À propos</a>
-        </div>
-        <div class="flex gap-4">
-            <a href="/login">
-                <button class="px-5 py-2 font-semibold text-gray-700">Profile</button>
-            </a>
-            <form method="post" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit"
-                        class="px-5 py-2 bg-transparent text-red-500 border border-red-500 font-semibold rounded-lg shadow-md hover:bg-red-500 hover:text-white transition">
-                    Deconnection
-                </button>
-                </a>
-            </form>
-        </div>
-    </nav>
-@endauth
-@guest
 
     <header class="max-w-7xl mx-auto px-10 py-20 flex flex-col md:flex-row items-center gap-12">
         <div class="flex-1">
@@ -158,40 +137,30 @@
                     </div>
                 </div>
                 @foreach($hotelsApprouved as $hotelapproved)
-                <div
-                    class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-gray-100">
-                    <img src="{{ $hotelapproved->image }}" class="h-56 w-full object-cover" alt="image Hotel">
-                    <div class="p-6">
-                        <div class="mt-6 flex justify-between items-center">
+                    <div
+                        class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-gray-100">
+                        <img src="{{ $hotelapproved->image }}" class="h-56 w-full object-cover" alt="image Hotel">
+                        <div class="p-6">
+                            <div class="mt-6 flex justify-between items-center">
                             <span
                                 class="text-indigo-600 font-bold text-sm uppercase">{{ $hotelapproved->ville }}</span>
-                            <span
-                                class="text-indigo-600 font-bold text-sm uppercase">categorie</span>
-                        </div>
-                        <h3 class="text-xl font-bold mt-2"> {{$hotelapproved->nom}} </h3>
-                        <p class="text-gray-500 mt-2 text-sm italic">{{ $hotelapproved->description }}</p>
-                        <div class="mt-6 flex justify-between items-center">
-                            <!-- <span class="text-2xl font-bold">150€<span class="text-sm text-gray-400 font-normal">/nuit</span></span> -->
-                            <a href="#" class="text-indigo-600 font-bold hover:underline">Voir l'offre</a>
+                                <span
+                                    class="text-indigo-600 font-bold text-sm uppercase">categorie</span>
+                            </div>
+                            <h3 class="text-xl font-bold mt-2"> {{$hotelapproved->nom}} </h3>
+                            <p class="text-gray-500 mt-2 text-sm italic">{{ $hotelapproved->description }}</p>
+                            <div class="mt-6 flex justify-between items-center">
+                                <!-- <span class="text-2xl font-bold">150€<span class="text-sm text-gray-400 font-normal">/nuit</span></span> -->
+                                <a href="#" class="text-indigo-600 font-bold hover:underline">Voir l'offre</a>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                @endforeach
-
-                @elseif(!$hotelsApprouved)
-
-                    <h1> Aucun Hotels n'existe en ce moment la</h1>
-                @else
-                    <h1>hola</h1>
-                @endif
-
-
+                @endforeach()
             </div>
             <h1> {{ $hotelsApprouved->links() }}</h1>
-
         </section>
+    @endif
 @endguest
 
     <script>
@@ -215,12 +184,7 @@
             }, 300);
         }
 
-        // Scroll Event Listener
         window.addEventListener('scroll', throttleScroll(500));
-
-
-        // DESTINATION PAGE
-        // ================
 
         const repositionPage = () => {
 
