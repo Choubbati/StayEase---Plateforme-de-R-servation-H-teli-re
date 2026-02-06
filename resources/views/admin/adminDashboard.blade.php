@@ -16,7 +16,6 @@
         <aside class="w-72 bg-white border-r border-slate-200 hidden lg:flex flex-col">
             <div class="p-8">
                 <div class="flex items-center gap-3">
-              
                     <h1 class="text-slate-900 text-2xl font-black tracking-tight">Stay<span
                             class="text-indigo-600">Ease</span></h1>
                 </div>
@@ -33,8 +32,8 @@
                 <div class="mt-8 mb-2 px-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Contrôle
                     Réseau</div>
 
-                <a href="#"
-                    class="flex items-center justify-between px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                <a href="#"`
+                    class="flex items-center justify-between px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group" id="hotelsBtn">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-hotel group-hover:scale-110 transition"></i>
                         <span>Validation Hôtels</span>
@@ -43,18 +42,18 @@
                 </a>
 
                 <a href="{{ route('gestionGerants') }}"
-                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group" id="GestionGerantsBtn">
                     <i class="fa-solid fa-user-tie"></i>
                     <span>Gestion des Gérants</span>
                 </a>
 
                 <a href="#"
-                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group" id="   ">
                     <i class="fa-solid fa-users"></i>
                     <span>Comptes Clients</span>
                 </a>
                 <a href="#"
-                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group" id="rolesBtn">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -77,7 +76,7 @@
             </div>
         </aside>
 
-        <main class="flex-1 overflow-y-auto">
+        <main class="flex-1 overflow-y-auto" id="dashboardMain">
             <header
                 class="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 flex justify-between items-center sticky top-0 z-20">
                 <h2 class="text-xl font-black text-slate-800 tracking-tight">Console de Supervision</h2>
@@ -95,7 +94,7 @@
                 </div>
             </header>
 
-            <div class="p-8 max-w-7xl mx-auto">
+            <div class="p-8 max-w-7xl mx-auto" id="dashboardAdmin">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                     <div
                         class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm group hover:border-indigo-200 transition">
@@ -135,7 +134,7 @@
                             <p class="text-sm text-slate-500">Hôtels souhaitant rejoindre le réseau StayEase</p>
                         </div>
                         <button
-                            class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-xs font-bold hover:bg-indigo-600 transition">Voir
+                            class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-xs font-bold hover:bg-indigo-600 transition" id="test">Voir
                             tout le catalogue</button>
                     </div>
 
@@ -186,6 +185,68 @@
         </main>
     </div>
 
+            <main class="flex-1 p-8" id="gerant">
+            <header class="flex justify-between items-center mb-10">
+                <div>
+                    <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tight">Gestion des Gérants</h2>
+                    <p class="text-sm text-slate-500 font-medium">Supervisez les comptes partenaires de StayEase</p>
+                </div>
+                <button class="bg-indigo-600 text-white px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest hover:shadow-lg hover:shadow-indigo-200 transition">
+                    + Ajouter un gérant
+                </button>
+            </header>
+
+            <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50/50 border-b border-slate-50 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                            <th class="px-8 py-5">Gérant</th>
+                            <th class="px-8 py-5">Établissements</th>
+                            <th class="px-8 py-5">Date d'inscription</th>
+                            <th class="px-8 py-5">Statut</th>
+                            <th class="px-8 py-5 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-50">
+                       
+                        <tr class="hover:bg-indigo-50/20 transition">
+                            <td class="px-8 py-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-10 w-10 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 font-bold">
+                                       
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-black text-slate-800">jldskn</p>
+                                        <p class="text-xs text-slate-400">jvkdlfsnk</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-8 py-6 text-sm font-bold text-slate-600">
+                                <span class="bg-slate-100 px-2 py-1 rounded-md text-[10px]">3 Hôtels</span>
+                            </td>
+                            <td class="px-8 py-6 text-sm text-slate-500">
+                               
+                            </td>
+                            <td class="px-8 py-6">
+                                <span class="px-3 py-1 bg-green-100 text-green-700 text-[10px] font-black rounded-full uppercase">Actif</span>
+                            </td>
+                            <td class="px-8 py-6 text-right">
+                                <div class="flex justify-end gap-2">
+                                    <button title="Modifier" class="p-2 text-slate-400 hover:text-indigo-600"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button title="Suspendre" class="p-2 text-slate-400 hover:text-red-500"><i class="fa-solid fa-user-slash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                
+                    </tbody>
+                </table>
+                
+
+            </div>
+        </main>
+
+    
+    @vite(['resources/js/app.js'])
 </body>
 
 </html>
