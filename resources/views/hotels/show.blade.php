@@ -7,8 +7,11 @@
             <!-- Modal content -->
             <div class=" p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
                 <!-- Modal header -->
+                <div class="bg-neutral-primary-soft block max-w-sm border border-default rounded-base shadow-xs">
+                    <img class="object-cover w-full rounded-base h-64 md:h-auto md:w-48 mb-4 md:mb-0" src="{{ $hotel->image }}" alt="image profile">
+                </div>
                 <div class="flex justify-between mb-4 rounded-t sm:mb-5">
-                    <div></div>
+
                     <div class="text-lg text-gray-900 md:text-xl dark:text-white">
                         <h3 class="font-semibold ">
                             {{$hotel->nom}}
@@ -21,7 +24,7 @@
                 </div>
                 <dl>
                     <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Description</dt>
-                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $hotel->decription }}</dd>
+                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $hotel->description }}</dd>
                     <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Category</dt>
                     <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Electronics/PC</dd>
                 </dl>
@@ -56,7 +59,6 @@
                 </div>
             </div>
         </div>
-
 
 
 @endsection

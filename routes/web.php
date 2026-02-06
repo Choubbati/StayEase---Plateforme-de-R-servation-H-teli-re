@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GerantHotelController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHotelController;
 
@@ -16,9 +17,11 @@ use App\Http\Controllers\Admin\AdminHotelController;
 //     Route::put("/hotels/{hotel}/reject",[AdminHotelController::class,'reject']->name('admin.hotels.reject'));
 // });
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+//Route::get('/', function () {
+//    return view('home');
+//})->name('home');
+
+Route::get('/', [UserController::class, 'index'])->name('home');
 
 Route::get('/signup', function (){
     return view('signup');
