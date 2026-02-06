@@ -78,5 +78,13 @@ Route::put('/hotels/{hotel}', [GerantHotelController::class, 'update'])->name('h
 Route::delete('/hotels/{hotel}', [GerantHotelController::class, 'destroy'])->name('hotels.destroy');
 //});
 
-Route::get('/admin/adminDashboard', [AdminController::class,'index'])->middleware(['auth'])->name('admin.dashboard');
+Route::get('/admin/adminDashboard', [AdminController::class,'index'])->middleware('role:1')->name('admin.dashboard');
 Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
+Route::get('/admin/adminGerants', function (){
+    return view('admin.adminGerants');
+})->name('gestionGerants');
+
+
+Route::get('/hotel/manage', function () {
+    return view('gerant.dashboard');
+})->middleware('role:1,2');
