@@ -50,5 +50,13 @@ Route::get('/hotels/create', [HotelController::class, 'create']);
 Route::get('/hotels', [HotelController::class, 'index'])->name('hotels.index');
 Route::get('/hotels/search', [HotelController::class, 'search'])->name('hotels.search');
 
-Route::get('/admin/adminDashboard', [AdminController::class,'index'])->middleware(['auth'])->name('admin.dashboard');
+Route::get('/admin/adminDashboard', [AdminController::class,'index'])->middleware('role:1')->name('admin.dashboard');
 Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
+Route::get('/admin/adminGerants', function (){
+    return view('admin.adminGerants');
+})->name('gestionGerants');
+
+
+Route::get('/hotel/manage', function () {
+    return view('gerant.dashboard');
+})->middleware('role:1,2');
