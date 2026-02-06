@@ -8,11 +8,11 @@ class GerantHotelController extends Controller
 {
 
     public function index(){
-        $$hotels = Hotel::where('status', 'approved')
+        $hotel = Hotel::where('status', 'approved')
             ->latest()
             ->paginate(9);
 
-        return view('hotels.index', compact('hotels'));
+        return view('hotels.index', compact('hotel'));
     }
 
     public function create(){

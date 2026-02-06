@@ -20,7 +20,6 @@ class TagSeeder extends Seeder
         'name' => $tag,
         'slug' => Str::slug($tag),
         ]);
-
         }    
     }
 }
