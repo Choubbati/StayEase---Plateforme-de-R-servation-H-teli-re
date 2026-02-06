@@ -1,10 +1,11 @@
 <?php
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\PropertieController;
 use App\Http\Controllers\GerantHotelController;
+use App\Http\Controllers\HotelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHotelController;
-
-
-
 
 
 // Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function() {
