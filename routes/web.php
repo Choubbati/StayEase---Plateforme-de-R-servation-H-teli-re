@@ -5,9 +5,10 @@ use App\Http\Controllers\GerantHotelController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHotelController;
-
-
-
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HotelController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
 
 
 // Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function() {
@@ -57,3 +58,5 @@ Route::get('/hotels/{hotel}', [GerantHotelController::class, 'edit'])->name('hot
 Route::put('/hotels/{hotel}', [GerantHotelController::class, 'update'])->name('hotels.update');
 Route::delete('/hotels/{hotel}', [GerantHotelController::class, 'destroy'])->name('hotels.destroy');
 
+Route::get('/admin/adminDashboard', [AdminController::class,'index'])->middleware(['auth'])->name('admin.dashboard');
+Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');

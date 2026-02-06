@@ -39,6 +39,21 @@
     <nav class="flex justify-between items-center px-10 py-6 bg-white shadow-sm">
             <span class="text-2xl font-extrabold tracking-tight text-slate-900">
                 Stay<span class="text-indigo-600">Ease</span>
+            </span>        <div class="hidden md:flex gap-8 font-medium text-gray-600">
+                <a href="/hotels/hotels" class="hover:text-indigo-600 transition">Hôtels</a>
+                <a href="#" class="hover:text-indigo-600 transition">Destinations</a>
+                <a href="#" class="hover:text-indigo-600 transition">À propos</a>
+            </div>
+            <div class="flex gap-4">
+                <a href="{{ route('profile') }}"><button class="px-5 py-2 font-semibold text-gray-700">Profile</button></a>
+                <form method="post" action="{{ route('logout') }}">
+                    @csrf
+                <button type="submit" class="px-5 py-2 bg-transparent text-red-500 border border-red-500 font-semibold rounded-lg shadow-md hover:bg-red-500 hover:text-white transition">Deconnection</button></a>
+                </form>
+            </div>
+        </nav>
+        @endauth
+    @guest
             </span>
         <div class="hidden md:flex gap-8 font-medium text-gray-600">
             <a href="/admin/hotels/hotels" class="hover:text-indigo-600 transition">Hôtels</a>
