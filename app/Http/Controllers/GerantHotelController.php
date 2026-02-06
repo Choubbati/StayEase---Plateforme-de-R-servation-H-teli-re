@@ -8,6 +8,7 @@ class GerantHotelController extends Controller
 {
 
     public function index(){
+        $hotel = Hotel::where('status', 'approved');
 
         $count = Hotel::all()->count();
         $hotels = Hotel::where('status', 'pending')
@@ -26,6 +27,7 @@ class GerantHotelController extends Controller
         return view('hotels.show', compact('hotel'));
 
 
+        return view('hotels.index', compact('hotel'));
     }
 
     public function create(){
