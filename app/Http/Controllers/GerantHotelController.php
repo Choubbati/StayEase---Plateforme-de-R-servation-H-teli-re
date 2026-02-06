@@ -1,18 +1,31 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Hotel;
 use Illuminate\Http\Request;
+use App\Models\Hotel;
 
 class GerantHotelController extends Controller
 {
 
     public function index(){
-        $$hotels = Hotel::where('status', 'approved')
+
+        $count = Hotel::all()->count();
+        $hotels = Hotel::where('status', 'pending')
             ->latest()
             ->paginate(9);
+        //$hotels = Hotel::all();
 
-        return view('hotels.index', compact('hotels'));
+        return view('hotels.dashbord', compact('hotels', 'count'));
+    }
+
+    public function  show($hotel)
+    {
+        if($hotel){
+        $hotel = Hotel::find($hotel);
+        }
+        return view('hotels.show', compact('hotel'));
+
+
     }
 
     public function create(){
@@ -20,12 +33,17 @@ class GerantHotelController extends Controller
     }
 
     public function store(Request $request){
+
         $validatedHotel = $request->validate([
             'nom' => 'required',
             'description' => 'required',
+            //'categorie' => 'required',
             'ville' => 'required',
             'image' => 'required',
         ]);
+        $validatedHotel['status'] = "pending";
+        //dd($validatedHotel);
+
         $hotels= Hotel::create($validatedHotel);
 //        dd($hotels);
         return redirect()->route('hotels.hotels');
