@@ -1,11 +1,17 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\PropertieController;
 use App\Http\Controllers\GerantHotelController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHotelController;
+use App\Http\Controllers\ChambreController;
+
+
+
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\AdminController;
@@ -36,6 +42,16 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+    Route::get('/hotels/hotels', [GerantHotelController::class, 'index'])->name("hotels.hotels");
+    Route::get('/hotels/create', [GerantHotelController::class, 'create'])->name('hotels.create');
+    Route::post('/hotels/hotels', [GerantHotelController::class, 'store'])->name('hotels.store');
+    Route::get('/hotels/{hotel}', [GerantHotelController::class, 'edit'])->name('hotels.edit');
+    Route::put('/hotels/{hotel}', [GerantHotelController::class, 'update'])->name('hotels.update');
+    Route::delete('/hotels/{hotel}', [GerantHotelController::class, 'destroy'])->name('hotels.destroy');
+//});
+Route::resource('tags', TagController::class);
+Route::resource('properties', PropertieController::class);
+Route::resource('chambres', ChambreController::class);
 Route::prefix('admin')->group(function () {
 
 

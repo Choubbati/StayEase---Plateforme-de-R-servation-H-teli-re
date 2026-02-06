@@ -8,11 +8,11 @@ class HotelController extends Controller
 {
 
     public function index(){
-        $$hotels = Hotel::where('status', 'approved')
+        $hotel = Hotel::where('status', 'approved')
             ->latest()
             ->paginate(9);
 
-        return view('hotels.index', compact('hotels'));
+        return view('hotels.index', compact('hotel'));
     }
 
     public function create(){
@@ -74,8 +74,8 @@ class HotelController extends Controller
 
         $hotels = Hotel::query()
             ->where('status', 'approved')
-            ->when($name, function ($q) use ($nom) {
-                $q->where('name', 'like', "%{$nom}%");
+            ->when($nom, function ($q) use ($nom) {
+                $q->where('nom', 'like', "%{$nom}%");
             })
             ->when($ville, function ($q) use ($ville) {
                 $q->where('ville', 'like', "%{$ville}%");
