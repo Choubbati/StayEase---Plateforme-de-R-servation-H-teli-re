@@ -179,7 +179,45 @@
         </section>
 @endguest
 
-<footer class="py-10 text-center border-t border-gray-200 text-gray-400 text-sm">
+    <script>
+        const recordVerticalOffset = () => {
+
+            localStorage.setItem('pageVerticalPosition', window.scrollY);
+        }
+
+        // Only save window position after scrolling stops
+        const throttleScroll = (delay) => {
+
+            let time = Date.now();
+
+            const checkScroll = setInterval(() => {
+
+                if (Date.now() > (time + delay)) {
+
+                    clearInterval(checkScroll);
+                    return recordVerticalOffset();
+                }
+            }, 300);
+        }
+
+        // Scroll Event Listener
+        window.addEventListener('scroll', throttleScroll(500));
+
+
+        // DESTINATION PAGE
+        // ================
+
+        const repositionPage = () => {
+
+            let pageVerticalPosition = localStorage.getItem('pageVerticalPosition') || 0;
+
+            window.scrollTo(0, pageVerticalPosition);
+        }
+
+        window.addEventListener('load', repositionPage);
+    </script>
+
+    <footer class="py-10 text-center border-t border-gray-200 text-gray-400 text-sm">
     &copy; 2026 StayEase - Agence Digital Travel. Tous droits réservés.
 </footer>
 

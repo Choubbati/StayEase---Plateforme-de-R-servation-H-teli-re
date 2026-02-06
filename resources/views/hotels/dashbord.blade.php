@@ -1,6 +1,15 @@
 @extends('layouts.app')
 @section('content')
     @auth
+        @if(session()->has('success'))
+            <div  class="alert alert-success "> {{ session('success') }}</div>
+            <div class="alert alert-success">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Opération réussie !</span>
+            </div>
+        @endif
     <section class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5">
         <div class="px-4 mx-auto max-w-screen-2xl lg:px-12">
             <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
@@ -89,3 +98,42 @@
 
     @endauth
 @endsection
+
+
+    <script>
+    const recordVerticalOffset = () => {
+
+        localStorage.setItem('pageVerticalPosition', window.scrollY);
+    }
+
+    // Only save window position after scrolling stops
+    const throttleScroll = (delay) => {
+
+        let time = Date.now();
+
+        const checkScroll = setInterval(() => {
+
+            if (Date.now() > (time + delay)) {
+
+                clearInterval(checkScroll);
+                return recordVerticalOffset();
+            }
+        }, 300);
+    }
+
+    // Scroll Event Listener
+    window.addEventListener('scroll', throttleScroll(500));
+
+
+    // DESTINATION PAGE
+    // ================
+
+    const repositionPage = () => {
+
+        let pageVerticalPosition = localStorage.getItem('pageVerticalPosition') || 0;
+
+        window.scrollTo(0, pageVerticalPosition);
+    }
+
+    window.addEventListener('load', repositionPage);
+</script>

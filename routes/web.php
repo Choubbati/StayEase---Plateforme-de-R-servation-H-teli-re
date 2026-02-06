@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GerantHotelController;
-use App\Http\Controllers\HotelController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHotelController;
@@ -37,7 +36,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::prefix('admin')->group(function () {
 
-
     Route::get('/hotels/pending', [AdminHotelController::class, 'pending'])
         ->name('admin.hotels.pending');
 
@@ -50,8 +48,7 @@ Route::prefix('admin')->group(function () {
 
 
 /* hotels crud for gerant */
-//Route:middleware(['auth', 'role:gerant'])->group( function (){
-//Route::get('/hh', function(){return view('hotels.dashbord');});
+
 Route::get('/hotels/hotels', [GerantHotelController::class, 'index'])->name("hotels.hotels");
 Route::get('/hotels/show/{hotel}', [GerantHotelController::class, 'show'])->name("hotels.detail");
 Route::get('/hotels/create', [GerantHotelController::class, 'create'])->name('hotels.create');
@@ -59,5 +56,4 @@ Route::post('/hotels/hotels', [GerantHotelController::class, 'store'])->name('ho
 Route::get('/hotels/{hotel}', [GerantHotelController::class, 'edit'])->name('hotels.edit');
 Route::put('/hotels/{hotel}', [GerantHotelController::class, 'update'])->name('hotels.update');
 Route::delete('/hotels/{hotel}', [GerantHotelController::class, 'destroy'])->name('hotels.destroy');
-//});
 
