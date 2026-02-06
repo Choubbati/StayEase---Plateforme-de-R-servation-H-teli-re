@@ -17,7 +17,6 @@
                     <tr>
                         <th>Nom</th>
                         <th>Ville</th>
-                        <th>Gérant</th>
                         <th>Créé le</th>
                         <th class="text-end">Actions</th>
                     </tr>
@@ -25,9 +24,9 @@
                 <tbody>
                 @foreach($hotels as $hotel)
                     <tr>
-                        <td>{{ $hotel->name }}</td>
-                        <td>{{ $hotel->city }}</td>
-                        <td>{{ $hotel->manager?->name ?? '—' }}</td>
+                        <td>{{ $hotel->nom }}</td>
+                        <td>{{ $hotel->ville }}</td>
+                       
                         <td>{{ $hotel->created_at->format('d/m/Y') }}</td>
                         <td class="text-end d-flex justify-content-end gap-2">
                             <form method="POST" action="{{ route('admin.hotels.approve', $hotel) }}">
@@ -50,5 +49,6 @@
 
         {{ $hotels->links() }}
     @endif
+    
 </div>
 @endsection

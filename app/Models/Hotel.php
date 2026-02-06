@@ -10,10 +10,14 @@ class Hotel extends Model
 {
     use HasFactory;
 
-    protected $fillable  =['nom','description', 'ville', 'image'];
+    protected $fillable  =['nom','description', 'ville','manager_id', 'image','status'];
 
     public function chambres(): HasMany
     {
         return $this->hasMany(Chambre::class);
+    }
+    public function manager(){
+        // return $this->belongsTo(\App\Model\User::class,'manager_id');
+        return $this->belongsTo(\App\Models\User::class, 'manager_id');
     }
 }

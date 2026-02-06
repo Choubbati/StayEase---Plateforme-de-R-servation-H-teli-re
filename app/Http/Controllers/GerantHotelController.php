@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
+use Illuminate\Support\Facades\Auth;
+
 
 class GerantHotelController extends Controller
 {
@@ -10,10 +12,10 @@ class GerantHotelController extends Controller
     public function index(){
 
         $count = Hotel::all()->count();
-        $hotels = Hotel::where('status', 'pending')
+        $hotels = Hotel::where('status', 'approved')
             ->latest()
             ->paginate(9);
-        //$hotels = Hotel::all();
+        // $hotels = Hotel::all();
 
         return view('hotels.dashbord', compact('hotels', 'count'));
     }
@@ -42,6 +44,7 @@ class GerantHotelController extends Controller
             'image' => 'required',
         ]);
         $validatedHotel['status'] = "pending";
+        $validatedHotel['manager_id']=Auth::id();
         //dd($validatedHotel);
 
         $hotels= Hotel::create($validatedHotel);
