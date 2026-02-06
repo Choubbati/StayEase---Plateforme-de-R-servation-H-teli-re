@@ -51,12 +51,12 @@
                                 </td>
                                 <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"> {{ $hotel->ville }}</td>
                                 <td class="px-4 py-2 font-medium text-gray-700 whitespace-nowrap  ">
-                                    <div class="h-4 w-4 rounded-full inline-block mr-2 bg-red-700"></div>
+                                    <div class="h-4 w-4 rounded-full inline-block mr-2 bg-green-700"></div>
                                     {{ $hotel->status }}
                                 </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div class="flex items-center space-x-4">
-                                        <a href="{{ route('hotels.edit', $hotel)}}" type="button"  class="py-3 px-3 flex items-center text-sm font-medium text-center text-black bg-green-400 text-white rounded-lg hover:bg-gray-100 hover:text-gray-900  rounded-lg border border-green-200  ">
+                                        <a href="{{ route('hotels.edit', $hotel)}}" type="button"  class="py-3 px-3 flex items-center text-sm font-medium text-center text-black bg-orange-600 text-white rounded-lg hover:bg-gray-100 hover:text-gray-900  rounded-lg border border-green-200  ">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                                                 <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />

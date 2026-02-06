@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategorieController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GerantHotelController;
 use App\Http\Controllers\UserController;
@@ -56,5 +57,7 @@ Route::get('/hotels/{hotel}', [GerantHotelController::class, 'edit'])->name('hot
 Route::put('/hotels/{hotel}', [GerantHotelController::class, 'update'])->name('hotels.update');
 Route::delete('/hotels/{hotel}', [GerantHotelController::class, 'destroy'])->name('hotels.destroy');
 
+/* Categorie crud */
+Route::get('/admin/categories/index', [CategorieController::class, 'index'])->middleware(['auth'])->name('admin.categories');
 Route::get('/admin/adminDashboard', [AdminController::class,'index'])->middleware(['auth'])->name('admin.dashboard');
 Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
