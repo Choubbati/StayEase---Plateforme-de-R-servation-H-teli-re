@@ -8,11 +8,19 @@ class GerantHotelController extends Controller
 {
 
     public function index(){
-        $hotel = Hotel::where('status', 'approved')
+        $count = Hotel::where('status', 'approved')->count();
+        $hotels = Hotel::where('status', 'approved')
             ->latest()
             ->paginate(9);
+        return view('hotels.dashbord', compact('hotels', 'count'));
+    }
 
-        return view('hotels.index', compact('hotel'));
+    public function  show($hotel)
+    {
+        if($hotel){
+        $hotel = Hotel::find($hotel);
+        }
+        return view('hotels.show', compact('hotel'));
     }
 
     public function create(){
@@ -20,15 +28,20 @@ class GerantHotelController extends Controller
     }
 
     public function store(Request $request){
+
         $validatedHotel = $request->validate([
             'nom' => 'required',
             'description' => 'required',
+            //'categorie' => 'required',
             'ville' => 'required',
             'image' => 'required',
         ]);
+        $validatedHotel['status'] = "pending";
+        //dd($validatedHotel);
+
         $hotels= Hotel::create($validatedHotel);
 //        dd($hotels);
-        return redirect()->route('hotels.hotels');
+        return redirect()->route('hotels.hotels')->with('success', 'Hotel creer avec succes');
     }
 
     public function edit($hotel){
@@ -54,7 +67,7 @@ class GerantHotelController extends Controller
         ]);
 
         $hotel->update($validatedHotel);
-        return redirect()->route('hotels.hotels');
+        return redirect()->route('hotels.hotels')->with('success', 'Hotel modifier avec succes');;
     }
 
     public function destroy($hotel){
@@ -64,7 +77,7 @@ class GerantHotelController extends Controller
         }
 
         $hotel->delete();
-        return redirect()->route('hotels.hotels');
+        return redirect()->route('hotels.hotels')->with('success', 'Hotel supprimer avec succes');
 
     }
 

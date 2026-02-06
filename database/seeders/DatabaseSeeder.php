@@ -9,6 +9,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use Database\Seeders\ChambresSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         // to call one or more of seeders in the same time
         $this->call(
             HotelSeeder::class,
+            CategorieSeeder::class,
         );
 //        DB::table('hotels')->insert([
 //            'nom' => Str::random(10),

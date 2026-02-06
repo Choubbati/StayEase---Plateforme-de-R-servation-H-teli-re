@@ -140,7 +140,8 @@
 
 
 @foreach($hotels as $hotel)
-    {{$hotel->id}}
+    {{$hotel}}
+    <br>
 @endforeach
 <!-- component
 <div class="flex justify-center items-center min-h-screen">
