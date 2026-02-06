@@ -7,6 +7,7 @@ use App\Http\Controllers\GerantHotelController;
 use App\Http\Controllers\HotelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHotelController;
+use App\Http\Controllers\ChambreController;
 
 
 
@@ -43,6 +44,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 //});
 Route::resource('tags', TagController::class);
 Route::resource('properties', PropertieController::class);
+Route::resource('chambres', ChambreController::class);
 Route::prefix('admin')->group(function () {
 
 

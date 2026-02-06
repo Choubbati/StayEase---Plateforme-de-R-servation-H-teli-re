@@ -3,25 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Propertie;
-use Illuminate\Support\Str;
+use App\Models\Chambre;
 
-class PropertieController extends Controller
+class ChambreController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('Properties.index', ['properties' => Propertie::all()]);
-    }
+$chambres = Chambre::with('tags', 'properties')->get();
+return view('Chambres.index', compact('chambres'));    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('Properties.create');
+        return view('Chambres.create');
     }
 
     /**
@@ -30,16 +29,16 @@ class PropertieController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate(['nom' => 'required|string|max:50']);
-        Propertie::create($validated);
-        return redirect()->route('properties.index');
+        Chambre::create($validated);
+        return redirect()->route('chambres.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Chambre $chambre)
     {
-        //
+        return view('Chambres.show', compact('chambre'));
     }
 
     /**
@@ -61,9 +60,8 @@ class PropertieController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Propertie $propertie)
+    public function destroy(string $id)
     {
-        $propertie->delete();
-        return redirect()->route('properties.index');
+        //
     }
 }
