@@ -18,7 +18,7 @@
                 Stay<span class="text-indigo-600">Ease</span>
             </span>
         <div class="hidden md:flex gap-8 font-medium text-gray-600">
-            <a href="/admin/hotels/Hotels" class="hover:text-indigo-600 transition">Hôtels</a>
+            <a href="{{ route('hotels.hotels') }}" class="hover:text-indigo-600 transition">Hôtels</a>
             <a href="#" class="hover:text-indigo-600 transition">Destinations</a>
             <a href="#" class="hover:text-indigo-600 transition">À propos</a>
         </div>
@@ -40,7 +40,7 @@
             <span class="text-2xl font-extrabold tracking-tight text-slate-900">
                 Stay<span class="text-indigo-600">Ease</span>
             </span>        <div class="hidden md:flex gap-8 font-medium text-gray-600">
-                <a href="/hotels/hotels" class="hover:text-indigo-600 transition">Hôtels</a>
+                <a href="{{ route('hotels.hotels') }}" class="hover:text-indigo-600 transition">Hôtels</a>
                 <a href="#" class="hover:text-indigo-600 transition">Destinations</a>
                 <a href="#" class="hover:text-indigo-600 transition">À propos</a>
             </div>
@@ -52,9 +52,8 @@
                 </form>
             </div>
         </nav>
-    @endauth
-
-    @guest
+@endauth
+@guest
 
     <header class="max-w-7xl mx-auto px-10 py-20 flex flex-col md:flex-row items-center gap-12">
         <div class="flex-1">
@@ -137,66 +136,43 @@
                     </div>
                 </div>
                 @foreach($hotelsApprouved as $hotelapproved)
-                    <div
-                        class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-gray-100">
-                        <img src="{{ $hotelapproved->image }}" class="h-56 w-full object-cover" alt="image Hotel">
-                        <div class="p-6">
-                            <div class="mt-6 flex justify-between items-center">
+                <div
+                    class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-gray-100">
+                    <img src="{{ $hotelapproved->image }}" class="h-56 w-full object-cover" alt="image Hotel">
+                    <div class="p-6">
+                        <div class="mt-6 flex justify-between items-center">
                             <span
                                 class="text-indigo-600 font-bold text-sm uppercase">{{ $hotelapproved->ville }}</span>
-                                <span
-                                    class="text-indigo-600 font-bold text-sm uppercase">categorie</span>
-                            </div>
-                            <h3 class="text-xl font-bold mt-2"> {{$hotelapproved->nom}} </h3>
-                            <p class="text-gray-500 mt-2 text-sm italic">{{ $hotelapproved->description }}</p>
-                            <div class="mt-6 flex justify-between items-center">
-                                <!-- <span class="text-2xl font-bold">150€<span class="text-sm text-gray-400 font-normal">/nuit</span></span> -->
-                                <a href="#" class="text-indigo-600 font-bold hover:underline">Voir l'offre</a>
+                            <span
+                                class="text-indigo-600 font-bold text-sm uppercase">categorie</span>
+                        </div>
+                        <h3 class="text-xl font-bold mt-2"> {{$hotelapproved->nom}} </h3>
+                        <p class="text-gray-500 mt-2 text-sm italic">{{ $hotelapproved->description }}</p>
+                        <div class="mt-6 flex justify-between items-center">
+                            <!-- <span class="text-2xl font-bold">150€<span class="text-sm text-gray-400 font-normal">/nuit</span></span> -->
+                            <a href="#" class="text-indigo-600 font-bold hover:underline">Voir l'offre</a>
 
-                            </div>
                         </div>
                     </div>
-                @endforeach()
+                </div>
+
+                @endforeach
+
+                @elseif(!$hotelsApprouved)
+
+                    <h1> Aucun Hotels n'existe en ce moment la</h1>
+                @else
+                    <h1>hola</h1>
+                @endif
+
+
             </div>
             <h1> {{ $hotelsApprouved->links() }}</h1>
+
         </section>
-    @endif
 @endguest
 
-    <script>
-        const recordVerticalOffset = () => {
-
-            localStorage.setItem('pageVerticalPosition', window.scrollY);
-        }
-
-        // Only save window position after scrolling stops
-        const throttleScroll = (delay) => {
-
-            let time = Date.now();
-
-            const checkScroll = setInterval(() => {
-
-                if (Date.now() > (time + delay)) {
-
-                    clearInterval(checkScroll);
-                    return recordVerticalOffset();
-                }
-            }, 300);
-        }
-
-        window.addEventListener('scroll', throttleScroll(500));
-
-        const repositionPage = () => {
-
-            let pageVerticalPosition = localStorage.getItem('pageVerticalPosition') || 0;
-
-            window.scrollTo(0, pageVerticalPosition);
-        }
-
-        window.addEventListener('load', repositionPage);
-    </script>
-
-    <footer class="py-10 text-center border-t border-gray-200 text-gray-400 text-sm">
+<footer class="py-10 text-center border-t border-gray-200 text-gray-400 text-sm">
     &copy; 2026 StayEase - Agence Digital Travel. Tous droits réservés.
 </footer>
 
