@@ -46,7 +46,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($hotels as $hotel)
+
+                        @forelse($hotels as $hotel)
                             <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <img src="{{ $hotel->image }}" alt="Image Hotel" class="w-auto h-8 mr-3">
@@ -89,10 +90,15 @@
                                     </div>
                                 </td>
                             </tr>
-
-                        @endforeach
+                        @empty
+                            <div class="flex justify-center">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m6 6 12 12m3-6a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                <h1>Aucun Hotels existes</h1>
+                            </div>
+                        @endforelse
                         </tbody>
-
                     </table>
                     {{ $hotels->links() }}
                 </div>

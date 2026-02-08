@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Chambre;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Hotel extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
 
     protected $fillable  =['nom','description', 'ville', 'image', 'user_id'];
 

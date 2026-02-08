@@ -3,7 +3,18 @@
 <div class="container py-5">
 
     <h2 class="mb-4 text-center fw-bold">Liste des Chambres</h2>
-
+    <div class="mb-10 flex flex-col md:flex-row gap-4">
+        <form action="{{ route('hotels.hotels')}}" method="post">
+            @csrf
+            <select name ="cat" class="p-3 rounded-lg border border-gray-200 bg-white">
+                <option value="0">Toutes les catégories</option>
+                @foreach($categories as $categorie)
+                    <option value="{{ $categorie->id }}">{{$categorie->nom}}</option>
+                @endforeach
+            </select>
+            <button type="submit"  class="flex items-center mt-3 py-2 px-3 text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center">Filtrer</button>
+        </form>
+    </div>
     <div class="row g-4">
         @foreach ($chambres as $chambre)
             <div class="col-md-6 col-lg-4">
