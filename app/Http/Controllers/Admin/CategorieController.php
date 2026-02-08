@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategorieController extends Controller
 {
     public function index(){
-        $categories = Categorie::all();
-        return view('admin.categories.index', compact('categories'));
+
+        $categories = Categorie::all()->where('user_id', Auth::id());
+        $count = $categories->count();
+        return view('admin.categories.index', compact('categories', 'count'));
     }
 
     public function create(){
@@ -22,8 +25,11 @@ class CategorieController extends Controller
         $validatedCategorie = $request->validate([
             'nom' => 'required',
         ]);
-        $validatedCategorie = Categorie::create($validatedCategorie);
-        return redirect()->route('admin.categories')->with('success', 'Categorie creer avec succes');
+        $validatedCategorie['user_id'] = Auth::id();
+
+        $categories = Categorie::create($validatedCategorie);
+
+        return redirect()->route('categories.index')->with('success', 'Categorie creer avec succes');
     }
 
     public function edit($categorie){
@@ -46,7 +52,7 @@ class CategorieController extends Controller
         ]);
 
         $categorie->update($validatedCategorie);
-        return redirect()->route('admin.categories')->with('success', 'Categorie modifier avec succes');;
+        return redirect()->route('categories.index')->with('success', 'Categorie modifier avec succes');;
     }
 
     public function destroy($categorie){
@@ -56,7 +62,7 @@ class CategorieController extends Controller
         }
 
         $categorie->delete();
-        return redirect()->route('admin.categories')->with('success', 'Categorie supprimer avec succes');
+        return redirect()->route('categories.index')->with('success', 'Categorie supprimer avec succes');
 
     }
 }

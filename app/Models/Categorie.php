@@ -11,9 +11,16 @@ class Categorie extends Model
 {
     use HasFactory;
 
-    protected $fillable = [' nom'];
-    public function post(): HasMany
+    protected $fillable = ['nom', 'user_id'];
+
+    public function chambres(): HasMany
     {
         return $this->hasMany(Chambre::class);
     }
+
+    public function users(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

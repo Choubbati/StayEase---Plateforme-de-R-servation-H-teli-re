@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
+use Illuminate\Support\Facades\Auth;
 
 class GerantHotelController extends Controller
 {
 
     public function index(){
         $count = Hotel::where('status', 'approved')->count();
-        $hotels = Hotel::where('status', 'approved')
+        $hotels = Hotel::where('status', 'approved')->where('user_id', Auth::id())
+            ->with('categories')
             ->latest()
             ->paginate(9);
         return view('hotels.dashbord', compact('hotels', 'count'));
@@ -18,7 +20,7 @@ class GerantHotelController extends Controller
     public function  show($hotel)
     {
         if($hotel){
-        $hotel = Hotel::find($hotel);
+        $hotel = Hotel::find($hotel)->where('user_id', Auth::id());
         }
         return view('hotels.show', compact('hotel'));
     }
@@ -37,7 +39,7 @@ class GerantHotelController extends Controller
             'image' => 'required',
         ]);
         $validatedHotel['status'] = "pending";
-        //dd($validatedHotel);
+        $validatedHotel['user_id'] = Auth::id();
 
         $hotels= Hotel::create($validatedHotel);
 //        dd($hotels);
@@ -47,7 +49,7 @@ class GerantHotelController extends Controller
     public function edit($hotel){
 
         if($hotel){
-            $hotel = Hotel::find($hotel);
+            $hotel = Hotel::find($hotel)->where('user_id', Auth::id());
         }
 
         return view('hotels.edit', compact('hotel'));
@@ -56,7 +58,7 @@ class GerantHotelController extends Controller
     public function update(Request $request, $hotel){
 
         if($hotel){
-            $hotel = Hotel::find($hotel);
+            $hotel = Hotel::find($hotel)->where('user_id', Auth::id());
         }
 
         $validatedHotel = $request->validate([
@@ -73,7 +75,7 @@ class GerantHotelController extends Controller
     public function destroy($hotel){
 
         if($hotel){
-            $hotel = Hotel::find($hotel);
+            $hotel = Hotel::find($hotel)->where('user_id', Auth::id());
         }
 
         $hotel->delete();

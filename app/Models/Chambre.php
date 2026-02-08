@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Chambre extends Model
@@ -19,5 +20,10 @@ class Chambre extends Model
     public function properties(): BelongsToMany
     {
          return $this->belongsToMany(Propertie::class,'chambres_properties');
+    }
+
+    public function categories(): BelongsTo
+    {
+        return $this->belongsTo(Categorie::class);
     }
 }

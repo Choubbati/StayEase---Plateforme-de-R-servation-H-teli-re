@@ -26,6 +26,12 @@
                             </svg>
                             Ajouter nouveau Hotel
                         </a>
+                        <a href="{{ route('categories.create') }}" type="button" class="flex items-center justify-center flex-shrink-0 px-5 py-3 text-sm font-medium text-white focus:outline-none bg-blue-600 rounded-lg border border-blue-200 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:ring-4 focus:ring-gray-200">
+                            <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                            </svg>
+                            Ajouter nouveau Categorie
+                        </a>
                     </div>
                 </div>
                 <div class="overflow-x-auto " id="dashHotel">
