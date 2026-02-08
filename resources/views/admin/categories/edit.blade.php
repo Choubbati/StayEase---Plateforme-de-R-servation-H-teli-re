@@ -4,6 +4,15 @@
     <section class="bg-white">
         <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900 ">Modifier Categorie</h2>
+            @foreach($errors->all() as $error)
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Holy smokes!</strong>
+                    <span class="block sm:inline"> {{$error}}</span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    </span>
+                </div>
+                <br>
+            @endforeach
             <form action="{{ route('categories.update', $categorie) }}" method="post">
                 @csrf
                 @method('PUT')

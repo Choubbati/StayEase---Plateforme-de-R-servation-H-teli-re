@@ -34,8 +34,8 @@ class GerantHotelController extends Controller
     public function store(Request $request){
 
         $validatedHotel = $request->validate([
-            'nom' => 'required',
-            'description' => 'required',
+            'nom' => 'required|unique:hotels|min:6',
+            'description' => 'required|max:255',
             'ville' => 'required',
             'image' => 'required',
         ]);

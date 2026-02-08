@@ -130,7 +130,7 @@
                         <p class="text-gray-500 mt-2 text-sm italic">{{ $hotelapproved->description }}</p>
                         <div class="mt-6 flex justify-between items-center">
                             <!-- <span class="text-2xl font-bold">150€<span class="text-sm text-gray-400 font-normal">/nuit</span></span> -->
-                            <a href="#" class="text-indigo-600 font-bold hover:underline">Voir l'offre</a>
+                            <a href="{{ route('hotels.detail', $hotelapproved) }}" class="text-indigo-600 font-bold hover:underline">Voir l'offre</a>
                         </div>
                     </div>
                 </div>
