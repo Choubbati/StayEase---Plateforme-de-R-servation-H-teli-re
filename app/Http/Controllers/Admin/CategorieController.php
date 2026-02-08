@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
+use App\Models\Chambre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,5 +65,13 @@ class CategorieController extends Controller
         $categorie->delete();
         return redirect()->route('categories.index')->with('success', 'Categorie supprimer avec succes');
 
+    }
+
+    public function filter(Request $request)
+    {
+        $nom = $request->query('nom');
+        $catgorie = Categorie::find($nom);
+        $chambres = Chambre::all()->with('categories')->where('categorie_id', $catgorie->id);
+        return view('hotels.dashbord', compact('chambres'));
     }
 }
