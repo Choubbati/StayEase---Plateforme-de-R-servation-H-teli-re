@@ -54,9 +54,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         return view('admin.gerants.index');
     })->name('admin.gerants.index');
 
-    Route::get('/users', function () {
-        return view('admin.users.index');
-    })->name('admin.users.index');
+    Route::get('/users', [AdminController::class, 'showUsers'])->name('admin.users.index');
 
     Route::resource('tags', TagController::class);
     Route::resource('properties', PropertieController::class);
