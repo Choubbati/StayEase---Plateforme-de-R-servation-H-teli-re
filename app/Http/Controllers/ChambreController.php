@@ -2,25 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Models\Chambre;
+use App\Models\Tag;
+use App\Models\Propertie;
 
 class ChambreController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-$chambres = Chambre::with('tags', 'properties')->get();
-return view('Chambres.index', compact('chambres'));    }
+        $categories = Categorie::all();
+        if($request['cat'] && $request['cat'] !== 0) {
+            $chambres = Chambre::with('tags', 'properties')->where('chambres.category_id', $request['cat'])->get();
+            return view('Chambres.index', compact('chambres', 'categories'));
+        }
+        $chambres = Chambre::with('tags', 'properties')->get();
+        return view('Chambres.index', compact('chambres', 'categories'));
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('Chambres.create');
+         $tags = Tag::all();
+        $properties = Propertie::all();
+        $categories = Categorie::all();
+        return view('Chambres.create', compact('tags', 'properties','categories'));
     }
 
     /**
@@ -28,15 +40,19 @@ return view('Chambres.index', compact('chambres'));    }
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(['number' => 'required|string|max:50']);
-        $validated['price_per_night'] = $request->input('price_per_night');
-        $validated['capacity'] = $request->input('capacity');
-        $validated['hotel_id'] = $request->input('hotel_id');
-        $validated['tags'] = $request->input('tags', []);
-        $validated['properties'] = $request->input('properties', []);       
-        Chambre::create($validated);
-        return redirect()->route('chambres.index');
+        $validated = $request->validate([
+            'hotel_id' => 'required|integer',
+            'number' => 'required|string',
+            'price_per_night' => 'required|numeric|min:0',
+            'capacity' => 'required|integer|min:1',
+            'description' => 'nullable|string',
+        ]);
+        $chambre = Chambre::create($validated);
+        $chambre->tags()->sync($request->get('tags', []));
+        $chambre->properties()->sync($request->get('properties', []));
+        return redirect()->route('chambres.show', $chambre);
     }
+
 
     /**
      * Display the specified resource.
@@ -49,17 +65,34 @@ return view('Chambres.index', compact('chambres'));    }
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Chambre $chambre)
     {
-        //
+
+        $tags = Tag::all();
+    $properties = Propertie::all();
+
+    return view('Chambres.edit', compact('chambre', 'tags', 'properties'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Chambre $chambre)
     {
-        //
+        $validated = $request->validate([
+            'hotel_id' => 'required|integer',
+            'number' => 'required|string',
+            'price_per_night' => 'required|numeric|min:0',
+            'capacity' => 'required|integer|min:1',
+            'description' => 'nullable|string',
+        ]);
+
+        $chambre->update($validated);
+
+        $chambre->tags()->sync($request->get('tags', []));
+        $chambre->properties()->sync($request->get('properties', []));
+
+        return redirect()->route('chambres.show', $chambre);
     }
 
     /**
@@ -67,6 +100,9 @@ return view('Chambres.index', compact('chambres'));    }
      */
     public function destroy(string $id)
     {
-        //
+        $chambre = Chambre::findOrFail($id);
+        $chambre->delete();
+        return redirect()->route('chambres.index');
     }
+
 }

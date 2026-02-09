@@ -11,18 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hotels', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('description')->default(null);
-            $table->string('ville')->default(null);
-            $table->string('image')->default(null);
-            $table->foreignId('manager_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained();
-            $table->enum('status',['pending','approved','rejected'])->default('pending');
-            $table->timestamps();
             $table->engine('InnoDB');
 
+            $table->timestamps();
         });
     }
 
@@ -31,7 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-         Schema::dropIfExists('hotels');
+        Schema::dropIfExists('categories');
     }
-
 };

@@ -16,54 +16,24 @@ class PropertieController extends Controller
         return view('Properties.index', ['properties' => Propertie::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('Properties.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $validated = $request->validate(['nom' => 'required|string|max:50']);
         Propertie::create($validated);
-        return redirect()->route('properties.index');
+        return redirect()->route('properties.index') ->with('success', 'Propriété ajoutée avec succès !');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Propertie $propertie)
-    {
+        $propertie = Propertie::findOrFail($id);
         $propertie->delete();
-        return redirect()->route('properties.index');
+        return redirect()->route('properties.index')->with('success', 'Propriété supprimée avec succès !');
     }
 }
