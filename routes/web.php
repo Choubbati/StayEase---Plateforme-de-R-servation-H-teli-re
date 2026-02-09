@@ -9,6 +9,9 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHotelController;
 use App\Http\Controllers\ChambreController;
+
+
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 
