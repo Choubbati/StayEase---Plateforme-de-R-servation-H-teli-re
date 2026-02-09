@@ -93,19 +93,21 @@
                         <thead class="text-slate-400 text-[10px] uppercase font-black tracking-widest bg-slate-50/50">
                             <tr>
                                 <th class="px-10 py-5">Utilisateur</th>
-                                <th class="px-10 py-5">Statut</th>
-                                <th class="px-10 py-5">Dernière Connexion</th>
+                                <th class="px-10 py-5">email</th>
+                                <th class="px-10 py-5">Date creation</th>
                                 <th class="px-10 py-5 text-right">Actions</th>
                             </tr>
                         </thead>
+                        
                         <tbody class="divide-y divide-slate-100">
+                            @foreach ($users as $user)
                             <tr class="hover:bg-slate-50 transition">
                                 <td class="px-10 py-6">
                                     <div class="flex items-center gap-4">
-                                        <div class="h-10 w-10 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center font-black">TM</div>
+                                        <div class="h-10 w-10 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center font-black">{{strtoupper($user->Firstname[0] . $user->Lastname[0])}}</div>
                                         <div>
-                                            <p class="font-black text-slate-800 text-sm">Thomas Muller</p>
-                                            <p class="text-[10px] text-slate-400 font-bold">thomas.m@gmail.com</p>
+                                            <p class="font-black text-slate-800 text-sm">{{ $user->Firstname }}</p>
+                                            <p class="text-[10px] text-slate-400 font-bold">{{ $user->Lastname }}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -117,6 +119,7 @@
                                     <button class="p-2 text-slate-400 hover:text-red-500 transition"><i class="fa-solid fa-ban"></i></button>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
