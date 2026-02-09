@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Models\Chambre;
 
@@ -10,17 +11,24 @@ class ChambreController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-$chambres = Chambre::with('tags', 'properties')->get();
-return view('Chambres.index', compact('chambres'));    }
+        $categories = Categorie::all();
+        if($request['cat'] && $request['cat'] !== 0) {
+            $chambres = Chambre::with('tags', 'properties')->where('chambres.category_id', $request['cat'])->get();
+            return view('Chambres.index', compact('chambres', 'categories'));
+        }
+        $chambres = Chambre::with('tags', 'properties')->get();
+        return view('Chambres.index', compact('chambres', 'categories'));
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('Chambres.create');
+        $categories = Categorie::all();
+        return view('Chambres.create', compact('categories'));
     }
 
     /**
@@ -29,11 +37,14 @@ return view('Chambres.index', compact('chambres'));    }
     public function store(Request $request)
     {
         $validated = $request->validate(['number' => 'required|string|max:50']);
+        $validated['categorie_id'] = $request['cat'];
         $validated['price_per_night'] = $request->input('price_per_night');
         $validated['capacity'] = $request->input('capacity');
         $validated['hotel_id'] = $request->input('hotel_id');
         $validated['tags'] = $request->input('tags', []);
-        $validated['properties'] = $request->input('properties', []);       
+        $validated['properties'] = $request->input('properties', []);
+
+
         Chambre::create($validated);
         return redirect()->route('chambres.index');
     }
@@ -69,4 +80,5 @@ return view('Chambres.index', compact('chambres'));    }
     {
         //
     }
+
 }

@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Hotel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Hotel>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Categorie>
  */
-class HotelFactory extends Factory
+class CategorieFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,11 +17,7 @@ class HotelFactory extends Factory
     public function definition(): array
     {
         return [
-          'nom' => fake()->text(10),
-            'description' => fake()->paragraph(2),
-            'ville' => fake()->text(5),
-            'image' => fake()->text(7),
-            'user_id' => 1,
+            'nom' => fake()->text(10),
         ];
     }
 }

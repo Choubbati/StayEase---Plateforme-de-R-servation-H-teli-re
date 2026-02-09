@@ -32,13 +32,22 @@
                                 <label for="description">Description de la chambre</label>
                                 <input type="text" name="description" id="description" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="Decrire la chambre" />
                             </div>
-
                             <div class="md:col-span-3">
                                 <label for="ville">Ville</label>
                                 <input type="text" name="ville" id="ville" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="Entrer la ville ou la chambre se trouve" />
                             </div>
+                            <div class="md:col-span-3">
+                                <label for="category">Categorie</label>
+                                <select id="category"  name ="cat" class="p-3 rounded-lg border border-gray-200 bg-white">
+                                    <option value="0">Toutes les catégories</option>
+                                    @foreach($categories as $categorie)
+                                        <option value="{{ $categorie->id }}">{{$categorie->nom}}</option>
+                                    @endforeach
+                                </select>
 
-                            
+                            </div>
+
+
                             <div class="md:col-span-5 text-right">
                                 <div class="inline-flex items-end">
                                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
@@ -47,6 +56,7 @@
 
                         </div>
                     </div>
+
                     </form>
                 </div>
             </div>
