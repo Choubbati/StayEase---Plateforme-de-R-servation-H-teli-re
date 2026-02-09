@@ -35,7 +35,7 @@
                     </td>
 
                     <td class="px-6 py-4">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
                                      bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">
                             {{ $hotel->ville }}
                         </span>
@@ -51,7 +51,7 @@
                                 @csrf
                                 @method('PUT')
                                 <button type="submit"
-                                    class="inline-flex items-center gap-1 bg-green-600 hover:bg-green-700 
+                                    class="inline-flex items-center gap-1 bg-green-600 hover:bg-green-700
                                            text-white text-xs font-medium px-3 py-1.5 rounded-lg transition">
                                     ✔ Approuver
                                 </button>
@@ -61,7 +61,7 @@
                                 @csrf
                                 @method('PUT')
                                 <button type="submit"
-                                    class="inline-flex items-center gap-1 bg-red-600 hover:bg-red-700 
+                                    class="inline-flex items-center gap-1 bg-red-600 hover:bg-red-700
                                            text-white text-xs font-medium px-3 py-1.5 rounded-lg transition">
                                     ✖ Rejeter
                                 </button>
