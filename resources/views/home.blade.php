@@ -41,8 +41,10 @@
                 Stay<span class="text-indigo-600">Ease</span>
             </span>        <div class="hidden md:flex gap-8 font-medium text-gray-600">
                 <a href="/hotels/hotels" class="hover:text-indigo-600 transition">Hôtels</a>
-                <a href="#" class="hover:text-indigo-600 transition">Destinations</a>
-                <a href="#" class="hover:text-indigo-600 transition">À propos</a>
+
+                @if(Auth::user()->role_id == 1)
+                    <a href="{{ route('admin.dashboard') }}" class="hover:text-indigo-600 transition font-bold text-indigo-600">Dashboard Admin</a>
+                @endif
             </div>
             <div class="flex gap-4">
                 <a href="{{ route('profile') }}"><button class="px-5 py-2 font-semibold text-gray-700">Profile</button></a>
