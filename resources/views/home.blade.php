@@ -112,6 +112,7 @@
 @endauth
 
 @guest
+    
         <section class="max-w-7xl mx-auto px-10 py-20">
             <h2 class="text-3xl font-bold mb-10">Nos offres à la une</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">

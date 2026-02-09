@@ -25,6 +25,7 @@ class CategorieController extends Controller
 
         $validatedCategorie = $request->validate([
             'nom' => 'required',
+            'quantite' => 'required|min:0',
         ]);
         $validatedCategorie['user_id'] = Auth::id();
 

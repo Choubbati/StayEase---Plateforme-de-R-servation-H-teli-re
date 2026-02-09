@@ -20,6 +20,10 @@
                         <label for="nom" class="block mb-2 text-sm font-medium text-gray-900">Nom Categorie</label>
                         <input type="text" name="nom" id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-[#2563eb] focus:border-primary-[#2563eb] block w-full p-2.5 " placeholder="Entrer nom de l'hôtel" required="">
                     </div>
+                    <div class="sm:col-span-2">
+                        <label for="quantite" class="block mb-2 text-sm font-medium text-gray-900">Quantite</label>
+                        <input type="number" name="quantite" id="quantite" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-[#2563eb] focus:border-primary-[#2563eb] block w-full p-2.5 " placeholder="Entrer nom de l'hôtel" required="">
+                    </div>
                 </div>
                 <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-[#1d4ed8] rounded-lg    hover:bg-primary-[#1e40af]">
                     Ajouter Categorie

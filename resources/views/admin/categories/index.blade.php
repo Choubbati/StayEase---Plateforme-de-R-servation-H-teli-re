@@ -26,6 +26,9 @@
                 <th scope="col" class="px-6 py-3 font-medium">
                     Nom Categorie
                 </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Quantite
+                </th>
                 <th scope="col"  class="px-6 py-3 text-center font-medium">
                     Actions
                 </th>
@@ -37,6 +40,9 @@
                 <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                     <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                         {{ $categorie->nom }}
+                    </th>
+                    <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                        {{ $categorie->quantite }}
                     </th>
                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div class="flex items-center space-x-4">

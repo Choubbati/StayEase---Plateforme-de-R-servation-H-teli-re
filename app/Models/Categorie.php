@@ -13,7 +13,7 @@ class Categorie extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['nom', 'user_id'];
+    protected $fillable = ['nom', 'user_id', 'quantite'];
 
     public function chambres(): HasMany
     {

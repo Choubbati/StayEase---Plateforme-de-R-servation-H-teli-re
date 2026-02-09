@@ -11,6 +11,7 @@ class UserController extends Controller
         $hotelsApprouved = Hotel::where('status', 'approved')
             ->latest()
             ->paginate(2);
+        //dd($hotelsApprouved);
         return view('home', compact('hotelsApprouved'));
     }
 
