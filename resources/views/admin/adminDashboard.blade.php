@@ -24,16 +24,16 @@
             </div>
 
             <nav class="flex-1 px-4 space-y-1">
-                <a href="#"
-                    class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-xl font-bold">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-xl font-bold transition">
                     <i class="fa-solid fa-chart-pie"></i> Vue d'ensemble
                 </a>
 
                 <div class="mt-8 mb-2 px-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Contrôle
                     Réseau</div>
 
-                <a href="#"`
-                    class="flex items-center justify-between px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group" id="hotelsBtn">
+                <a href="{{ route('admin.hotels.validation') }}"
+                    class="flex items-center justify-between px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group cursor-pointer">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-hotel group-hover:scale-110 transition"></i>
                         <span>Validation Hôtels</span>
@@ -41,19 +41,19 @@
                     <span class="bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded-full font-black">8</span>
                 </a>
 
-                <a href="{{ route('gestionGerants') }}"
-                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group" id="GestionGerantsBtn">
+                <a href="{{ route('admin.gerants.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
                     <i class="fa-solid fa-user-tie"></i>
                     <span>Gestion des Gérants</span>
                 </a>
 
-                <a href="#"
-                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group" id="   ">
+                <a href="{{ route('admin.users.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
                     <i class="fa-solid fa-users"></i>
                     <span>Comptes Clients</span>
                 </a>
-                <a href="#"
-                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group" id="rolesBtn">
+                <a href="{{ route('admin.roles.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -185,9 +185,10 @@
         </main>
     </div>
 
+    @vite(['resources/js/app.js'])
+</body>
 
-    {{-- GESTION GERANTS --}}
-            <main class="flex-1 p-8" id="gerant">
+</html>
             <header class="flex justify-between items-center mb-10">
                 <div>
                     <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tight">Gestion des Gérants</h2>
@@ -249,7 +250,7 @@
 
         {{-- GESTION UTILISATEUR --}}
 
-        <main class="flex-1 bg-slate-50 min-h-screen" id="users">
+        <main class="flex-1 bg-slate-50 min-h-screen" id="users" style="display: none;">
     <header class="bg-white border-b border-slate-200 px-10 py-6 flex justify-between items-center sticky top-0 z-10">
         <div>
             <h2 class="text-2xl font-black text-slate-800 tracking-tight">Comptes Clients</h2>
@@ -301,7 +302,7 @@
 
     {{-- VALIDATION HOTELS --}}
 
-    <main class="flex-1 bg-slate-50 min-h-screen" id="hotels">
+    <main class="flex-1 bg-slate-50 min-h-screen" id="hotels" style="display: none;">
     <header class="bg-white border-b border-slate-200 px-10 py-6 sticky top-0 z-10">
         <h2 class="text-2xl font-black text-slate-800 tracking-tight">Hôtels en Attente</h2>
         <p class="text-[11px] text-amber-500 font-black uppercase tracking-widest mt-1 italic">8 Établissements demandent une validation</p>
@@ -331,7 +332,7 @@
 </main>
 
     {{-- GESTION ROLES --}}
-    <main class="flex-1 bg-slate-50 min-h-screen" id="roles">
+    <main class="flex-1 bg-slate-50 min-h-screen" id="roles" style="display: none;">
     <header class="bg-white border-b border-slate-200 px-10 py-6 sticky top-0 z-10">
         <h2 class="text-2xl font-black text-slate-800 tracking-tight">Matrice des Rôles</h2>
         <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-1">Définition des accès StayEase</p>
@@ -368,7 +369,7 @@
     </div>
 </main>
     
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/app.js', 'resources/js/admin.js'])
 </body>
 
 </html>

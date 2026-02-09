@@ -6,8 +6,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHotelController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HotelController;
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 
@@ -37,7 +36,25 @@ Route::post('/signup', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.adminDashboard');
+    })->name('admin.dashboard');
 
+    Route::get('/hotels/validation', function () {
+        return view('admin.hotels.validation');
+    })->name('admin.hotels.validation');
+
+    Route::get('/gerants', function () {
+        return view('admin.gerants.index');
+    })->name('admin.gerants.index');
+
+    Route::get('/users', function () {
+        return view('admin.users.index');
+    })->name('admin.users.index');
+
+    Route::get('/roles', function () {
+        return view('admin.roles.index');
+    })->name('admin.roles.index');
 
     Route::get('/hotels/pending', [AdminHotelController::class, 'pending'])
         ->name('admin.hotels.pending');
@@ -64,11 +81,11 @@ Route::delete('/hotels/{hotel}', [GerantHotelController::class, 'destroy'])->nam
 
 Route::get('/admin/adminDashboard', [AdminController::class,'index'])->middleware('role:1')->name('admin.dashboard');
 Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
-Route::get('/admin/adminGerants', function (){
-    return view('admin.adminGerants');
-})->name('gestionGerants');
+// // Route::get('/admin/adminGerants', function (){
+// //     return view('admin.adminGerants');
+// })->name('gestionGerants');
 
 
-Route::get('/hotel/manage', function () {
-    return view('gerant.dashboard');
-})->middleware('role:1,2');
+// Route::get('/hotel/manage', function () {
+//     return view('gerant.dashboard');
+// })->middleware('role:1,2');
