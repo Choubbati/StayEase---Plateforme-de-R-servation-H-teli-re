@@ -2,55 +2,56 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Créer Chambre</title>
+    <title>Modifier Chambre</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
+
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
 <div class="w-full max-w-4xl bg-white p-8 rounded shadow">
-    <h2 class="text-2xl font-bold mb-6 text-gray-700">Créer une nouvelle chambre</h2>
+    <h2 class="text-2xl font-bold mb-6 text-gray-700">Modifier la chambre</h2>
 
-    <form method="POST" action="{{ route('chambres.store') }}" class="space-y-6">
+    <form method="POST" action="{{ route('chambres.update', $chambre) }}" class="space-y-6">
         @csrf
+        @method('PUT')
 
         {{-- hotel_id --}}
         <div>
             <label class="block text-sm font-medium text-gray-600">Hotel ID</label>
             <input type="number" name="hotel_id"
-                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
-                   required>
+                   value="{{ old('hotel_id', $chambre->hotel_id) }}"
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">
         </div>
 
         {{-- number --}}
         <div>
             <label class="block text-sm font-medium text-gray-600">Numéro de chambre</label>
             <input type="text" name="number"
-                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
-                   required>
+                   value="{{ old('number', $chambre->number) }}"
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">
         </div>
 
         {{-- price --}}
         <div>
             <label class="block text-sm font-medium text-gray-600">Prix par nuit</label>
             <input type="number" step="0.01" name="price_per_night"
-                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
-                   required>
+                   value="{{ old('price_per_night', $chambre->price_per_night) }}"
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">
         </div>
 
         {{-- capacity --}}
         <div>
             <label class="block text-sm font-medium text-gray-600">Capacité</label>
             <input type="number" name="capacity"
-                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
-                   required>
+                   value="{{ old('capacity', $chambre->capacity) }}"
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">
         </div>
 
         {{-- description --}}
         <div>
             <label class="block text-sm font-medium text-gray-600">Description</label>
-            <textarea name="description"
-                      class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
-                      rows="3"></textarea>
+            <textarea name="description" rows="3"
+                      class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">{{ old('description', $chambre->description) }}</textarea>
         </div>
 
         {{-- Tags --}}
@@ -59,8 +60,9 @@
             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
                 @foreach($tags as $tag)
                     <label class="flex items-center gap-2">
-                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
-                               class="rounded border-gray-300">
+                        <input type="checkbox" name="tags[]"
+                               value="{{ $tag->id }}"
+                               {{ $chambre->tags->contains($tag->id) ? 'checked' : '' }}>
                         {{ $tag->name }}
                     </label>
                 @endforeach
@@ -71,24 +73,27 @@
         <div>
             <p class="font-medium text-gray-700 mb-2">Propriétés</p>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                @foreach($properties as $propertie)
+                @foreach($properties as $property)
                     <label class="flex items-center gap-2">
-                        <input type="checkbox" nom="properties[]" value="{{ $propertie->id }}"
-                               class="rounded border-gray-300">
-                        {{ $propertie->nom }}
+                        <input type="checkbox" name="properties[]"
+                               value="{{ $property->id }}"
+                               {{ $chambre->properties->contains($property->id) ? 'checked' : '' }}>
+                        {{ $property->nom }}
                     </label>
                 @endforeach
             </div>
         </div>
 
         {{-- Submit --}}
-        <div class="text-right">
+        <div class="flex justify-between">
+            <a href="{{ route('chambres.index') }}"
+               class="text-gray-600 hover:underline">⬅ Retour</a>
+
             <button type="submit"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-semibold">
-                Créer la chambre
+                    class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded font-semibold">
+                Mettre à jour
             </button>
         </div>
-
     </form>
 </div>
 
