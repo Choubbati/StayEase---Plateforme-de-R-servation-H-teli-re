@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-
-class Tag extends Model
+class Propertie extends Model
 {
-    protected $fillable =  ['name', 'slug'];
+    protected $fillable =['nom'];
+
     public function chambres(): BelongsToMany
     {
-        return $this->belongsToMany(Chambre::class, 'chambres_tags');
+    return $this->belongsToMany(Chambre::class, 'chambre_properties');
     }
 }
+

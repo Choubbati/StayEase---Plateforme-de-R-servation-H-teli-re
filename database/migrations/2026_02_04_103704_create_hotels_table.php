@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('description')->default(null);
             $table->string('ville')->default(null);
             $table->string('image')->default(null);
+            $table->foreignId('manager_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained();
             $table->enum('status',['pending','approved','rejected'])->default('pending');
             $table->timestamps();
             $table->engine('InnoDB');
@@ -29,6 +31,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hotels');
+         Schema::dropIfExists('hotels');
     }
+
 };
