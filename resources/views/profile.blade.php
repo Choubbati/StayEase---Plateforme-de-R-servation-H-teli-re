@@ -33,7 +33,7 @@
                 <div class="space-y-6">
                     <div class="flex items-center gap-6">
                         <div class="h-20 w-20 bg-indigo-600 rounded-2xl flex items-center justify-center text-white text-3xl font-black">
-                            {{ substr(Auth::user()->Firstname, 0, 1) }}
+                            {{strtoupper($user->Firstname[0] . $user->Lastname[0])}}
                         </div>
                         <div>
                             <p class="text-2xl font-black text-slate-900">{{ Auth::user()->Firstname }} {{ Auth::user()->Lastname }}</p>
