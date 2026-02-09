@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategorieController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\PropertieController;
 use App\Http\Controllers\GerantHotelController;
@@ -88,3 +89,8 @@ Route::get('/admin/adminGerants', function (){
 Route::get('/hotel/manage', function () {
     return view('gerant.dashboard');
 })->middleware('role:1,2');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/reservations', [ReservationController::class, 'store'])
+        ->name('reservations.store');
+});

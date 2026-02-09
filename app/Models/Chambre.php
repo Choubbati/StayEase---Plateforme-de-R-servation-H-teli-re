@@ -29,5 +29,9 @@ class Chambre extends Model
     {
         return $this->belongsTo(Categorie::class);
     }
+
+    public function reservation(){
+        return $this->hasMany(Reservation::class);
+    }
 }
 
