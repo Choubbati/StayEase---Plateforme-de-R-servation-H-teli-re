@@ -30,3 +30,4 @@ class Chambre extends Model
         return $this->belongsTo(Categorie::class);
     }
 }
+

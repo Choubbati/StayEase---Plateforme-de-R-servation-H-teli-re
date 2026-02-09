@@ -1,9 +1,12 @@
 @extends('layouts.clean')
 
+
 @section('childContent')
     @guest
+
         <header class="max-w-7xl mx-auto px-10 py-20 flex flex-col md:flex-row items-center gap-12">
             <div class="flex-1">
+
                 <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
                     Réservez l'hôtel de vos <span class="text-indigo-600">rêves</span>.
                 </h1>

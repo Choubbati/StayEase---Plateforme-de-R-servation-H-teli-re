@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayEase | Gestion des Gérants</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-[#fcfcfd] font-sans antialiased text-slate-900">
+
+    <div class="flex min-h-screen">
+        <aside class="w-72 bg-white border-r border-slate-200 hidden lg:flex flex-col">
+            <div class="p-8">
+                <div class="flex items-center gap-3">
+                    <h1 class="text-slate-900 text-2xl font-black tracking-tight">Stay<span
+                            class="text-indigo-600">Ease</span></h1>
+                </div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-4 ml-1">Administration
+                    Système</p>
+            </div>
+
+            <nav class="flex-1 px-4 space-y-1">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="flex items-center gap-3 px-4 py-3 hover:bg-indigo-50 hover:text-indigo-700 rounded-xl font-bold transition">
+                    <i class="fa-solid fa-chart-pie"></i> Vue d'ensemble
+                </a>
+
+                <div class="mt-8 mb-2 px-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Contrôle
+                    Réseau</div>
+
+                <a href="{{ route('admin.hotels.validation') }}"
+                    class="flex items-center justify-between px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-hotel group-hover:scale-110 transition"></i>
+                        <span>Validation Hôtels</span>
+                    </div>
+                    <span class="bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded-full font-black">8</span>
+                </a>
+
+                <a href="{{ route('admin.gerants.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-xl transition group font-bold">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>Gestion des Gérants</span>
+                </a>
+
+                <a href="{{ route('admin.users.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Comptes Clients</span>
+                </a>
+                <a href="{{ route('admin.roles.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                    </svg>
+                    <span>Roles</span>
+                </a>
+            </nav>
+
+            <div class="p-6 mt-auto border-t border-slate-100">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button
+                        class="flex items-center gap-3 w-full px-4 py-3 text-sm font-bold text-red-500 hover:bg-red-50 rounded-xl transition">
+                        <i class="fa-solid fa-power-off"></i> Déconnexion
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-8">
+            <header class="flex justify-between items-center mb-10">
+                <div>
+                    <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tight">Gestion des Gérants</h2>
+                    <p class="text-sm text-slate-500 font-medium">Supervisez les comptes partenaires de StayEase</p>
+                </div>
+                <button class="bg-indigo-600 text-white px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest hover:shadow-lg hover:shadow-indigo-200 transition">
+                    + Ajouter un gérant
+                </button>
+            </header>
+
+            <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50/50 border-b border-slate-50 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                            <th class="px-8 py-5">Gérant</th>
+                            <th class="px-8 py-5">Établissements</th>
+                            <th class="px-8 py-5">Date d'inscription</th>
+                            <th class="px-8 py-5">Statut</th>
+                            <th class="px-8 py-5 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-50">
+                        <tr class="hover:bg-indigo-50/20 transition">
+                            <td class="px-8 py-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-10 w-10 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 font-bold">
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-black text-slate-800">jldskn</p>
+                                        <p class="text-xs text-slate-400">jvkdlfsnk</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-8 py-6 text-sm font-bold text-slate-600">
+                                <span class="bg-slate-100 px-2 py-1 rounded-md text-[10px]">3 Hôtels</span>
+                            </td>
+                            <td class="px-8 py-6 text-sm text-slate-500">
+                            </td>
+                            <td class="px-8 py-6">
+                                <span class="px-3 py-1 bg-green-100 text-green-700 text-[10px] font-black rounded-full uppercase">Actif</span>
+                            </td>
+                            <td class="px-8 py-6 text-right">
+                                <div class="flex justify-end gap-2">
+                                    <button title="Modifier" class="p-2 text-slate-400 hover:text-indigo-600"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button title="Suspendre" class="p-2 text-slate-400 hover:text-red-500"><i class="fa-solid fa-user-slash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    @vite(['resources/js/app.js'])
+</body>
+
+</html>

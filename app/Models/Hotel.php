@@ -15,12 +15,15 @@ class Hotel extends Model
     use SoftDeletes;
 
 
-    protected $fillable  =['nom','description', 'ville', 'image', 'user_id'];
+    protected $fillable  =['nom','description', 'ville','manager_id', 'image','status'];
 
     public function chambres(): HasMany
     {
         return $this->hasMany(Chambre::class);
     }
+    public function manager(){
+        // return $this->belongsTo(\App\Model\User::class,'manager_id');
+        return $this->belongsTo(\App\Models\User::class, 'manager_id');
 
     public function users(): BelongsTo
     {
