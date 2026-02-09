@@ -12,7 +12,7 @@ class AdminController extends Controller
     return view('admin.adminDashboard');
 }   
     public function showUsers(){
-        $users = User::all();
+        $users = User::all()->where('role_id', 3);
         return view('admin.users.index', compact('users'));
     }
     
