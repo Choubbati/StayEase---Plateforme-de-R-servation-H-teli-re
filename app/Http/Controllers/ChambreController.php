@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Models\Chambre;
+use Illuminate\Support\Facades\Auth;
 
 class ChambreController extends Controller
 {
@@ -13,6 +14,7 @@ class ChambreController extends Controller
      */
     public function index(Request $request)
     {
+
         $categories = Categorie::all();
         if($request['cat'] && $request['cat'] !== 0) {
             $chambres = Chambre::with('tags', 'properties')->where('chambres.category_id', $request['cat'])->get();
