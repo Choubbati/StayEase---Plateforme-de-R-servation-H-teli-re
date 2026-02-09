@@ -35,6 +35,30 @@
             <input type="number" step="0.01" name="price_per_night"
                    class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
                    required>
+                            <div class="md:col-span-3">
+                                <label for="category">Categorie</label>
+                                <select id="category"  name ="cat" class="p-3 rounded-lg border border-gray-200 bg-white">
+                                    <option value="0">Toutes les catégories</option>
+                                    @foreach($categories as $categorie)
+                                        <option value="{{ $categorie->id }}">{{$categorie->nom}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+
+
+                            <div class="md:col-span-5 text-right">
+                                <div class="inline-flex items-end">
+                                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    </form>
+                </div>
+            </div>
         </div>
 
         {{-- capacity --}}

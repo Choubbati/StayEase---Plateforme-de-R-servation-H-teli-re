@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Models\Chambre;
 use App\Models\Tag;
@@ -12,10 +13,15 @@ class ChambreController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $categories = Categorie::all();
+        if($request['cat'] && $request['cat'] !== 0) {
+            $chambres = Chambre::with('tags', 'properties')->where('chambres.category_id', $request['cat'])->get();
+            return view('Chambres.index', compact('chambres', 'categories'));
+        }
         $chambres = Chambre::with('tags', 'properties')->get();
-        return view('Chambres.index', compact('chambres'));
+        return view('Chambres.index', compact('chambres', 'categories'));
     }
 
     /**
@@ -25,8 +31,8 @@ class ChambreController extends Controller
     {
          $tags = Tag::all();
         $properties = Propertie::all();
-
-    return view('Chambres.create', compact('tags', 'properties'));
+        $categories = Categorie::all();
+        return view('Chambres.create', compact('tags', 'properties','categories'));
     }
 
     /**
@@ -98,4 +104,5 @@ class ChambreController extends Controller
         $chambre->delete();
         return redirect()->route('chambres.index');
     }
+
 }

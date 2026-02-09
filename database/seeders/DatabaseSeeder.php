@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         // to call one or more of seeders in the same time
         $this->call(
             HotelSeeder::class,
+            CategorieSeeder::class,
         );
 //        DB::table('hotels')->insert([
 //            'nom' => Str::random(10),
