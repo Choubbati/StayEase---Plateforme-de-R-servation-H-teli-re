@@ -10,11 +10,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Cashier\Billable;
+
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens,Billable;
 
 
     /**
@@ -55,6 +57,8 @@ class User extends Authenticatable
     public function role(): BelongsTo{
         return $this->BelongsTo(Role::class);
     }
+
+    
     public function  hotels(): hasMany
     {
         return $this->HasMany(Hotel::class);

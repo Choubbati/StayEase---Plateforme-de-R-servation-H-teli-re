@@ -16,7 +16,6 @@
         <aside class="w-72 bg-white border-r border-slate-200 hidden lg:flex flex-col">
             <div class="p-8">
                 <div class="flex items-center gap-3">
-              
                     <h1 class="text-slate-900 text-2xl font-black tracking-tight">Stay<span
                             class="text-indigo-600">Ease</span></h1>
                 </div>
@@ -25,16 +24,16 @@
             </div>
 
             <nav class="flex-1 px-4 space-y-1">
-                <a href="#"
-                    class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-xl font-bold">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-xl font-bold transition">
                     <i class="fa-solid fa-chart-pie"></i> Vue d'ensemble
                 </a>
 
                 <div class="mt-8 mb-2 px-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Contrôle
                     Réseau</div>
 
-                <a href="#"
-                    class="flex items-center justify-between px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                <a href="{{ route('admin.hotels.validation') }}"
+                    class="flex items-center justify-between px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group cursor-pointer">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-hotel group-hover:scale-110 transition"></i>
                         <span>Validation Hôtels</span>
@@ -42,18 +41,18 @@
                     <span class="bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded-full font-black">8</span>
                 </a>
 
-                <a href="{{ route('gestionGerants') }}"
+                <a href="{{ route('admin.gerants.index') }}"
                     class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
                     <i class="fa-solid fa-user-tie"></i>
                     <span>Gestion des Gérants</span>
                 </a>
 
-                <a href="#"
+                <a href="{{ route('admin.users.index') }}"
                     class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
                     <i class="fa-solid fa-users"></i>
                     <span>Comptes Clients</span>
                 </a>
-                <a href="#"
+                <a href="{{ route('admin.roles.index') }}"
                     class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
@@ -77,7 +76,7 @@
             </div>
         </aside>
 
-        <main class="flex-1 overflow-y-auto">
+        <main class="flex-1 overflow-y-auto" id="dashboardMain">
             <header
                 class="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 flex justify-between items-center sticky top-0 z-20">
                 <h2 class="text-xl font-black text-slate-800 tracking-tight">Console de Supervision</h2>
@@ -95,7 +94,7 @@
                 </div>
             </header>
 
-            <div class="p-8 max-w-7xl mx-auto">
+            <div class="p-8 max-w-7xl mx-auto" id="dashboardAdmin">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                     <div
                         class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm group hover:border-indigo-200 transition">
@@ -135,7 +134,7 @@
                             <p class="text-sm text-slate-500">Hôtels souhaitant rejoindre le réseau StayEase</p>
                         </div>
                         <button
-                            class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-xs font-bold hover:bg-indigo-600 transition">Voir
+                            class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-xs font-bold hover:bg-indigo-600 transition" id="test">Voir
                             tout le catalogue</button>
                     </div>
 
@@ -185,6 +184,7 @@
             </div>
         </main>
     </div>
+
 
 </body>
 
