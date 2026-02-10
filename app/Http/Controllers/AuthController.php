@@ -21,7 +21,7 @@ class AuthController extends Controller
             'Lastname' => $request->nom,
             'email' =>$request->email,
             'password' =>Hash::make($request->password),
-            'role_id' => 3,
+            'role_id' => 2,
             ]);
             
         Auth::login($user);

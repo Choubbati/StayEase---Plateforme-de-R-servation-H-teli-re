@@ -13,7 +13,7 @@ class AdminHotelController extends Controller
             ->with('manager')
             ->paginate(10);
 
-        return view('admin.hotels.pending', compact('hotels'));
+        return view('admin.adminDashboard', compact('hotels'));
     }
 
     public function approve(Hotel $hotel)

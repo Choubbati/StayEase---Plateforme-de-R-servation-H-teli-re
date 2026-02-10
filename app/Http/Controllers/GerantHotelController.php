@@ -32,7 +32,7 @@ class GerantHotelController extends Controller
     public function  show($hotel)
     {
         if($hotel){
-        $hotel = Hotel::find($hotel)->where('user_id', Auth::id());
+        $hotel = Hotel::find($hotel);
         }
         return view('hotels.show', compact('hotel'));
     }
