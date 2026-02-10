@@ -1,9 +1,7 @@
 @extends('layouts.clean')
 
-
 @section('childContent')
     @guest
-
         <header class="max-w-7xl mx-auto px-10 py-20 flex flex-col md:flex-row items-center gap-12">
             <div class="flex-1">
 
@@ -50,10 +48,11 @@
             </div>
         </header>
     @endauth
+
     @yield('content')
-    <footer class="py-10 text-center border-t border-gray-200 text-gray-400 text-sm">
-        &copy; 2026 StayEase - Agence Digital Travel. Tous droits réservés.
-    </footer>
+
 @endsection
+
+
 
 

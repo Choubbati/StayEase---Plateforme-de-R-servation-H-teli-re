@@ -1,8 +1,8 @@
-@extends('layouts.app')
-@section('content')
+@extends('layouts.clean')
+@section('childContent')
     @auth
         @if(session()->has('success'))
-            <div class="flex justify-center">
+            <div class="flex justify-center mt-5">
                 <div class="bg-green-100 border border-green-400 text-black-700 px-4 py-3 rounded relative w-11/12" role="alert">
                     <strong class="font-bold">Bravo !! </strong>
                     <span class="block sm:inline">{{ session('success') }}</span>
@@ -117,7 +117,6 @@
         localStorage.setItem('pageVerticalPosition', window.scrollY);
     }
 
-    // Only save window position after scrolling stops
     const throttleScroll = (delay) => {
 
         let time = Date.now();
@@ -131,14 +130,7 @@
             }
         }, 300);
     }
-
-    // Scroll Event Listener
     window.addEventListener('scroll', throttleScroll(500));
-
-
-    // DESTINATION PAGE
-    // ================
-
     const repositionPage = () => {
 
         let pageVerticalPosition = localStorage.getItem('pageVerticalPosition') || 0;

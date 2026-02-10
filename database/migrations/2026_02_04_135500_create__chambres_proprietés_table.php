@@ -13,7 +13,8 @@ return new class extends Migration
     {
           Schema::create('chambres_properties', function (Blueprint $table) {
            $table->foreignId('chambre_id')->constrained('chambres')->onDelete('cascade');
-            $table->foreignId('propertie_id')->constrained('properties')->onDelete('cascade'); 
+            $table->foreignId('propertie_id')->constrained('properties')->onDelete('cascade');
+            $table->engine('InnoDB');
 });
     }
 

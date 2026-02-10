@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Chambres</title>
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<nav class="flex justify-between items-center px-10 py-6 bg-white shadow-sm">
-            <span class="text-2xl font-extrabold tracking-tight text-slate-900">
-                Stay<span class="text-indigo-600">Ease</span>
-            </span>
-    </nav>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
+@extends('layouts.clean')
+@section('childContent')
+
 
     <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8 max-w-7xl">
 
@@ -24,10 +12,10 @@
                 </h2>
                 <p class="text-slate-500 mt-1">Gérez les disponibilités et les tarifs.</p>
             </div>
-            
+
             <a href="{{ route('chambres.create') }}"
                class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200">
-               
+
                 <svg class="w-5 h-5 mr-2 -ml-1 shrink-0"
                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -79,7 +67,7 @@
                         @endforeach
                     </select>
                 </div>
-            
+
                 <!-- Submit Button -->
                 <div class="w-full lg:w-auto">
                     <button type="submit"
@@ -134,7 +122,7 @@
                                     {{ $chambre->price_per_night }} €
                                 </p>
                             </div>
-                            
+
                             <span class="flex items-center px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full uppercase tracking-wide">
                                 <svg class="w-3 h-3 mr-1.5 shrink-0 text-slate-400"
                                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,12 +134,12 @@
                         </div>
 
                         <a href="{{ route('chambres.show', $chambre->id) }}" class="text-indigo-600 font-semibold text-sm mb-6 hover:text-indigo-800 transition-colors inline-flex items-center">
-                            Voir les détails 
+                            Voir les détails
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </a>
 
                         <div class="mt-auto pt-5 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
-                            
+
                             <a href="{{ route('chambres.edit', $chambre->id) }}"
                                class="flex-1 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold py-2.5 px-4 rounded-xl text-sm text-center transition-colors duration-200 shadow-sm">
                                 Modifier
@@ -173,6 +161,4 @@
             @endforeach
         </div>
     </div>
-
-</body>
-</html>
+@endsection

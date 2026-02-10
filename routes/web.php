@@ -10,19 +10,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHotelController;
 use App\Http\Controllers\ChambreController;
-
-
-
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Role;
-use Illuminate\Support\Facades\Auth;
-
-// Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function() {
-//     Route::get("/hotels/pending", [AdminHotelController::class,'pending']->name('admin.hotels.pending'));
-//     Route::put("/hotels/{hotel}/aprove",[AdminHotelController::class,'aprove']->name('admin.hotls.aprove'));
-//     Route::put("/hotels/{hotel}/reject",[AdminHotelController::class,'reject']->name('admin.hotels.reject'));
-// });
 
 
 
@@ -31,10 +20,6 @@ use Illuminate\Support\Facades\Auth;
 //})->name('home');
 
 Route::get('/', [UserController::class, 'index'])->name('home');
-
-
-
-
 
 Route::get('/signup', function (){
     return view('signup');
@@ -71,7 +56,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('tags', TagController::class);
     Route::resource('properties', PropertieController::class);
     Route::resource('chambres', ChambreController::class);
-
+});
     Route::prefix('admin')->group(function () {
 
     Route::get('/roles', function () {
@@ -87,21 +72,12 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::put('/hotels/{hotel}/reject', [AdminHotelController::class, 'reject'])
         ->name('admin.hotels.reject');
     });
-});
-
-
-/* hotels crud for gerant */
+;
 
 Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
 Route::put('/profile', [ProfileController::class, 'update'])->middleware('auth')->name('profile.update');
-// // Route::get('/admin/adminGerants', function (){
-// //     return view('admin.adminGerants');
-// })->name('gestionGerants');
 
-
-// Route::get('/hotel/manage', function () {
-//     return view('gerant.dashboard');
-// })->middleware('role:1,2');
+/* hotels crud for gerant */
 Route::get('/hotels/hotels', [GerantHotelController::class, 'index'])->middleware('role:2')->name("hotels.hotels");
 Route::get('/hotels/show/{hotel}', [GerantHotelController::class, 'show'])->name("hotels.detail");
 Route::get('/hotels/create', [GerantHotelController::class, 'create'])->middleware('role:2')->name('hotels.create');
@@ -147,3 +123,13 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
 });
+Route::get('categories/index', [CategorieController::class, 'index'])->middleware('role:2')->name('categories.index');
+Route::get('categories/create', [CategorieController::class, 'create'])->middleware('role:2')->name('categories.create');
+Route::post('categories/index', [CategorieController::class, 'store'])->middleware('role:2')->name('categories.store');
+Route::get('categories/{categorie}', [CategorieController::class, 'edit'])->middleware('role:2')->name('categories.edit');
+Route::put('categories/{categorie}', [CategorieController::class, 'update'])->middleware('role:2')->name('categories.update');
+Route::delete('categories/{categorie}', [CategorieController::class, 'destroy'])->middleware('role:2')->name('categories.delete');
+
+
+Route::get('/admin/adminDashboard', [AdminController::class,'index'])->middleware('role:1')->name('admin.dashboard');
+Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');

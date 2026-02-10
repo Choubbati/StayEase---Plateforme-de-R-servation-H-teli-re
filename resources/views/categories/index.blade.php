@@ -1,7 +1,14 @@
 @extends('layouts.clean');
 @section('childContent')
 
-
+    @if(session()->has('success'))
+        <div class="flex justify-center mt-5">
+            <div class="bg-green-100 border border-green-400 text-black-700 px-4 py-3 rounded relative w-11/12" role="alert">
+                <strong class="font-bold">Bravo !! </strong>
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        </div>
+    @endif
     <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
         <div class="flex items-center flex-1 space-x-4">
             <h5>
@@ -26,6 +33,9 @@
                 <th scope="col" class="px-6 py-3 font-medium">
                     Nom Categorie
                 </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Quantite
+                </th>
                 <th scope="col"  class="px-6 py-3 text-center font-medium">
                     Actions
                 </th>
@@ -37,6 +47,9 @@
                 <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                     <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                         {{ $categorie->nom }}
+                    </th>
+                    <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                        {{ $categorie->quantite }}
                     </th>
                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div class="flex items-center space-x-4">

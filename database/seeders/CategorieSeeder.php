@@ -15,5 +15,15 @@ class CategorieSeeder extends Seeder
     public function run(): void
     {
         Categorie::factory(10)->create();
+        Categorie::factory()->create([
+            'nom' => 'Suite',
+            'quantite' => fake()->numberBetween(),
+            'user_id' => 7
+        ]);
+        Categorie::factory()->create([
+            'nom' => 'Standard',
+            'quantite' => fake()->numberBetween(),
+            'user_id' => 7
+        ]);
     }
 }
