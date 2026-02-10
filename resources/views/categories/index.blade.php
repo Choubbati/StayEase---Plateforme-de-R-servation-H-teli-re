@@ -1,7 +1,14 @@
 @extends('layouts.clean');
 @section('childContent')
 
-
+    @if(session()->has('success'))
+        <div class="flex justify-center mt-5">
+            <div class="bg-green-100 border border-green-400 text-black-700 px-4 py-3 rounded relative w-11/12" role="alert">
+                <strong class="font-bold">Bravo !! </strong>
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        </div>
+    @endif
     <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
         <div class="flex items-center flex-1 space-x-4">
             <h5>

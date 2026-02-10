@@ -14,11 +14,11 @@ class CategorieController extends Controller
 
         $categories = Categorie::all()->where('user_id', Auth::id());
         $count = $categories->count();
-        return view('admin.categories.index', compact('categories', 'count'));
+        return view('categories.index', compact('categories', 'count'));
     }
 
     public function create(){
-        return view('admin.categories.create');
+        return view('categories.create');
     }
 
     public function store(Request $request){
@@ -40,7 +40,7 @@ class CategorieController extends Controller
             $categorie = Categorie::find($categorie);
         }
 
-        return view('admin.categories.edit', compact('categorie'));
+        return view('categories.edit', compact('categorie'));
     }
 
     public function update(Request $request, $categorie){
@@ -86,7 +86,7 @@ class CategorieController extends Controller
             ->disponiblesEntre($dateDebut, $dateFin)
             ->get();
 
-        return view('admin.categories.index', compact('categoriesDisponibles'));
+        return view('categories.index', compact('categoriesDisponibles'));
     }
 
 }
