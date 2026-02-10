@@ -89,7 +89,7 @@
                     </div>
                     <div
                         class="h-11 w-11 rounded-xl bg-slate-900 flex items-center justify-center text-white font-black shadow-lg shadow-slate-200">
-                        {{ substr(Auth::user()->Firstname, 0, 1) }}
+                        {{ strtoupper(Auth::user()->Firstname[0] . Auth::user()->Lastname[0]) }}
                     </div>
                 </div>
             </header>

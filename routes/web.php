@@ -59,6 +59,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     })->name('admin.gerants.index');
 
     Route::get('/users', [AdminController::class, 'showUsers'])->name('admin.users.index');
+    Route::delete('/users/{user}', [AdminController::class, 'banUser'])->name('admin.users.ban');
 
     Route::resource('tags', TagController::class);
     Route::resource('properties', PropertieController::class);

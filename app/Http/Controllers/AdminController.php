@@ -15,5 +15,10 @@ class AdminController extends Controller
         $users = User::all()->where('role_id', 3);
         return view('admin.users.index', compact('users'));
     }
+
+    public function banUser(User $user){
+        $user->delete();
+        return redirect()->route('admin.users.index');
+    }
     
 }
