@@ -44,8 +44,7 @@
                         <div class="d-flex flex-wrap gap-3">
                             @forelse ($chambre->properties as $property)
                                 <div class="d-flex align-items-center gap-2">
-                                    <span class="fs-5">{!! $property->icon !!}</span>
-                                    <span>{{ $property->name }}</span>
+                                    <span>{{ $property->nom }}</span>
                                 </div>
                             @empty
                                 <span class="text-muted">Aucune propriété</span>

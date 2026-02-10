@@ -18,7 +18,7 @@
                 Stay<span class="text-indigo-600">Ease</span>
             </span>
         <div class="hidden md:flex gap-8 font-medium text-gray-600">
-            <a href="/admin/hotels/Hotels" class="hover:text-indigo-600 transition">Hôtels</a>
+            <a href="{{ route('hotels.hotels') }}" class="hover:text-indigo-600 transition">Hôtels</a>
             <a href="#" class="hover:text-indigo-600 transition">Destinations</a>
             <a href="#" class="hover:text-indigo-600 transition">À propos</a>
         </div>
@@ -40,21 +40,23 @@
             <span class="text-2xl font-extrabold tracking-tight text-slate-900">
                 Stay<span class="text-indigo-600">Ease</span>
             </span>        <div class="hidden md:flex gap-8 font-medium text-gray-600">
-                <a href="/hotels/hotels" class="hover:text-indigo-600 transition">Hôtels</a>
+                <a href="{{ route('hotels.hotels') }}" class="hover:text-indigo-600 transition">Hôtels</a>
                 <a href="#" class="hover:text-indigo-600 transition">Destinations</a>
                 <a href="#" class="hover:text-indigo-600 transition">À propos</a>
             </div>
             <div class="flex gap-4">
-                <a href="{{ route('profile') }}"><button class="px-5 py-2 font-semibold text-gray-700">Profile</button></a>
-                <form method="post" action="{{ route('logout') }}">
+                <a href="{{ route('profile') }}">
+                    <div class="h-10 w-10 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center font-black">
+                        {{ strtoupper(Auth::user()->Firstname[0] . Auth::user()->Lastname[0]) }}
+                    </div>
+                </a>                <form method="post" action="{{ route('logout') }}">
                     @csrf
                 <button type="submit" class="px-5 py-2 bg-transparent text-red-500 border border-red-500 font-semibold rounded-lg shadow-md hover:bg-red-500 hover:text-white transition">Deconnection</button>
                 </form>
             </div>
         </nav>
-    @endauth
-
-    @guest
+@endauth
+@guest
 
     <header class="max-w-7xl mx-auto px-10 py-20 flex flex-col md:flex-row items-center gap-12">
         <div class="flex-1">
@@ -113,90 +115,49 @@
 @endauth
 
 @guest
-    @if($hotelsApprouved)
-
+    
         <section class="max-w-7xl mx-auto px-10 py-20">
             <h2 class="text-3xl font-bold mb-10">Nos offres à la une</h2>
-
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @forelse($hotelsApprouved as $hotelapproved)
                 <div
                     class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-gray-100">
-                    <img
-                        src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=600"
-                        class="h-56 w-full object-cover" alt="dd">
+                    <img src="{{ $hotelapproved->image }}" class="h-56 w-full object-cover" alt="image Hotel">
                     <div class="p-6">
-                        <span class="text-indigo-600 font-bold text-sm uppercase">Marrakech</span>
-                        <h3 class="text-xl font-bold mt-2">Le Palais Oasis</h3>
-                        <p class="text-gray-500 mt-2 text-sm italic">Calme et sérénité au cœur de la Palmeraie.</p>
                         <div class="mt-6 flex justify-between items-center">
-                            <span class="text-2xl font-bold">220€<span
-                                    class="text-sm text-gray-400 font-normal">/nuit</span></span>
-                            <button class="text-indigo-600 font-bold hover:underline">Voir l'offre</button>
+                            <span
+                                class="text-indigo-600 font-bold text-sm uppercase">{{ $hotelapproved->ville }}</span>
+                            <span
+                                class="text-indigo-600 font-bold text-sm uppercase">categorie</span>
+                        </div>
+                        <h3 class="text-xl font-bold mt-2"> {{$hotelapproved->nom}} </h3>
+                        <p class="text-gray-500 mt-2 text-sm italic">{{ $hotelapproved->description }}</p>
+                        <div class="mt-6 flex justify-between items-center">
+                            <!-- <span class="text-2xl font-bold">150€<span class="text-sm text-gray-400 font-normal">/nuit</span></span> -->
+                            <a href="{{ route('hotels.detail', $hotelapproved) }}" class="text-indigo-600 font-bold hover:underline">Voir l'offre</a>
                         </div>
                     </div>
                 </div>
-                @foreach($hotelsApprouved as $hotelapproved)
-                    <div
-                        class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-gray-100">
-                        <img src="{{ $hotelapproved->image }}" class="h-56 w-full object-cover" alt="image Hotel">
-                        <div class="p-6">
-                            <div class="mt-6 flex justify-between items-center">
-                            <span
-                                class="text-indigo-600 font-bold text-sm uppercase">{{ $hotelapproved->ville }}</span>
-                                <span
-                                    class="text-indigo-600 font-bold text-sm uppercase">categorie</span>
-                            </div>
-                            <h3 class="text-xl font-bold mt-2"> {{$hotelapproved->nom}} </h3>
-                            <p class="text-gray-500 mt-2 text-sm italic">{{ $hotelapproved->description }}</p>
-                            <div class="mt-6 flex justify-between items-center">
-                                <!-- <span class="text-2xl font-bold">150€<span class="text-sm text-gray-400 font-normal">/nuit</span></span> -->
-                                <a href="#" class="text-indigo-600 font-bold hover:underline">Voir l'offre</a>
 
+                @empty
+                    <div class="flex justify-center">
+                        <div
+                            class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-gray-100">
+                            <img src="https://static.vecteezy.com/system/resources/thumbnails/052/947/382/small/modern-and-clean-design-of-a-hotel-building-icon-for-graphic-representation-vector.jpg" class="h-56 w-full object-cover" alt="image Hotel">
+
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mt-2">Aucun Hotels existes</h3>
                             </div>
                         </div>
                     </div>
-                @endforeach()
+                @endforelse
+
             </div>
             <h1> {{ $hotelsApprouved->links() }}</h1>
         </section>
-    @endif
 @endguest
 
-    <script>
-        const recordVerticalOffset = () => {
-
-            localStorage.setItem('pageVerticalPosition', window.scrollY);
-        }
-
-        // Only save window position after scrolling stops
-        const throttleScroll = (delay) => {
-
-            let time = Date.now();
-
-            const checkScroll = setInterval(() => {
-
-                if (Date.now() > (time + delay)) {
-
-                    clearInterval(checkScroll);
-                    return recordVerticalOffset();
-                }
-            }, 300);
-        }
-
-        window.addEventListener('scroll', throttleScroll(500));
-
-        const repositionPage = () => {
-
-            let pageVerticalPosition = localStorage.getItem('pageVerticalPosition') || 0;
-
-            window.scrollTo(0, pageVerticalPosition);
-        }
-
-        window.addEventListener('load', repositionPage);
-    </script>
-
-    <footer class="py-10 text-center border-t border-gray-200 text-gray-400 text-sm">
+<footer class="py-10 text-center border-t border-gray-200 text-gray-400 text-sm">
     &copy; 2026 StayEase - Agence Digital Travel. Tous droits réservés.
 </footer>
 

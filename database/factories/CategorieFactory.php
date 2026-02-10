@@ -18,6 +18,7 @@ class CategorieFactory extends Factory
     {
         return [
             'nom' => fake()->text(10),
+            'quantite' => fake()->numberBetween(),
         ];
     }
 }

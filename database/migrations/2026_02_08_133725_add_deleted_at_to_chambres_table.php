@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->foreignId('user_id')->constrained();
-            $table->engine('InnoDB');
-
-            $table->timestamps();
+        Schema::table('chambres', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::table('chambres', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

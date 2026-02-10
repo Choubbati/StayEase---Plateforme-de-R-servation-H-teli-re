@@ -1,18 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Categorie;
+use App\Models\Chambre;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
+use Illuminate\Support\Facades\Auth;
+
 
 class GerantHotelController extends Controller
 {
 
     public function index(){
+
+        $categories = Categorie::all();
         $count = Hotel::where('status', 'approved')->count();
-        $hotels = Hotel::where('status', 'approved')
+        $hotels = Hotel::where('status', 'approved')->where('user_id', Auth::id())
             ->latest()
             ->paginate(9);
-        return view('hotels.dashbord', compact('hotels', 'count'));
+        return view('hotels.dashbord', compact('hotels', 'count', 'categories'));
     }
 
     public function  show($hotel)
@@ -20,6 +26,7 @@ class GerantHotelController extends Controller
         if($hotel){
         $hotel = Hotel::find($hotel);
         }
+
         return view('hotels.show', compact('hotel'));
     }
 
@@ -30,24 +37,25 @@ class GerantHotelController extends Controller
     public function store(Request $request){
 
         $validatedHotel = $request->validate([
-            'nom' => 'required',
-            'description' => 'required',
-            //'categorie' => 'required',
+            'nom' => 'required|unique:hotels|min:6',
+            'description' => 'required|max:255',
             'ville' => 'required',
             'image' => 'required',
         ]);
         $validatedHotel['status'] = "pending";
-        //dd($validatedHotel);
+        $validatedHotel['manager_id']=Auth::id();
 
+        $validatedHotel['user_id'] = Auth::id();
+        //dd($validatedHotel['user_id']);
         $hotels= Hotel::create($validatedHotel);
-//        dd($hotels);
-        return redirect()->route('hotels.hotels')->with('success', 'Hotel creer avec succes');
+       //dd($hotels);
+        return redirect()->route('hotels.hotels')->with('success', "Hotel creer avec succes, Il faut attendre la validation de l'admin");
     }
 
     public function edit($hotel){
 
         if($hotel){
-            $hotel = Hotel::find($hotel);
+            $hotel = Hotel::find($hotel)->where('user_id', Auth::id());
         }
 
         return view('hotels.edit', compact('hotel'));
@@ -56,7 +64,7 @@ class GerantHotelController extends Controller
     public function update(Request $request, $hotel){
 
         if($hotel){
-            $hotel = Hotel::find($hotel);
+            $hotel = Hotel::find($hotel)->where('user_id', Auth::id());
         }
 
         $validatedHotel = $request->validate([
@@ -73,7 +81,7 @@ class GerantHotelController extends Controller
     public function destroy($hotel){
 
         if($hotel){
-            $hotel = Hotel::find($hotel);
+            $hotel = Hotel::find($hotel)->where('user_id', Auth::id());
         }
 
         $hotel->delete();
@@ -99,6 +107,14 @@ class GerantHotelController extends Controller
             ->withQueryString();
 
         return view('admin.hotels.index', compact('hotels'));
+    }
+    public function filter(Request $request)
+    {
+        //dd($request['cat']);
+        $chambres = Chambre::with('categories')->where('chambres.category_id', $request['cat'])->get();
+        //dd($chambres);
+        return view('hotels.dashbord', compact('chambres'));
+
     }
 
 }

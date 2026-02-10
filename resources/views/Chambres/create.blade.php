@@ -1,44 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Créer Chambre</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-<div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
-    <div class="container max-w-screen-lg mx-auto">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-4xl bg-white p-8 rounded shadow">
+    <h2 class="text-2xl font-bold mb-6 text-gray-700">Créer une nouvelle chambre</h2>
+
+    <form method="POST" action="{{ route('chambres.store') }}" class="space-y-6">
+        @csrf
+
+        {{-- hotel_id --}}
         <div>
-            <h2 class="font-semibold text-xl text-gray-600">Enregistrer Votre Hotel</h2>
+            <label class="block text-sm font-medium text-gray-600">Hotel ID</label>
+            <input type="number" name="hotel_id"
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
+                   required>
+        </div>
 
-            <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                    <div class="text-gray-600">
-                        <p class="font-medium text-lg">Informations sur chambre</p>
-                        <p>Tous les champs sont obligatoires</p>
-                    </div>
-                    <form method="post" action="{{ route('chambres.store') }}">
-                        @csrf
-                    <div class="lg:col-span-2">
-                        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                            <div class="md:col-span-5">
-                                <label for="nom">numero de la chambre</label>
-                                <input type="text" name="n" id="nom" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                            </div>
+        {{-- number --}}
+        <div>
+            <label class="block text-sm font-medium text-gray-600">Numéro de chambre</label>
+            <input type="text" name="number"
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
+                   required>
+        </div>
 
-                            <div class="md:col-span-5">
-                                <label for="description">Description de la chambre</label>
-                                <input type="text" name="description" id="description" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="Decrire la chambre" />
-                            </div>
-
+        {{-- price --}}
+        <div>
+            <label class="block text-sm font-medium text-gray-600">Prix par nuit</label>
+            <input type="number" step="0.01" name="price_per_night"
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
+                   required>
                             <div class="md:col-span-3">
-                                <label for="ville">Ville</label>
-                                <input type="text" name="ville" id="ville" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="Entrer la ville ou la chambre se trouve" />
+                                <label for="category">Categorie</label>
+                                <select id="category"  name ="cat" class="p-3 rounded-lg border border-gray-200 bg-white">
+                                    <option value="0">Toutes les catégories</option>
+                                    @foreach($categories as $categorie)
+                                        <option value="{{ $categorie->id }}">{{$categorie->nom}}</option>
+                                    @endforeach
+                                </select>
+
                             </div>
 
-                            
+
                             <div class="md:col-span-5 text-right">
                                 <div class="inline-flex items-end">
                                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
@@ -47,78 +55,66 @@
 
                         </div>
                     </div>
+
                     </form>
                 </div>
             </div>
         </div>
 
-    </div>
-</div>
-
-
-<!-- Modal toggle -->
-<div class="flex justify-center m-5">
-    <button id="defaultModalButton" data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="block text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="button">
-        Create product
-    </button>
-</div>
-
-<!-- Main modal -->
-<div id="defaultModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
-    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-        <!-- Modal content -->
-        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
-            <!-- Modal header -->
-            <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Add Product
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-            <!-- Modal body -->
-            <form action="#">
-                <div class="grid gap-4 mb-4 sm:grid-cols-2">
-                    <div>
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                        <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
-                    </div>
-                    <div>
-                        <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
-                        <input type="text" name="brand" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Product brand" required="">
-                    </div>
-                    <div>
-                        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                        <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
-                    </div>
-                    <div>
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                        <select id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="">Select category</option>
-                            <option value="TV">TV/Monitors</option>
-                            <option value="PC">PC</option>
-                            <option value="GA">Gaming/Console</option>
-                            <option value="PH">Phones</option>
-                        </select>
-                    </div>
-                    <div class="sm:col-span-2">
-                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                        <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here"></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                    <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                    Add new product
-                </button>
-            </form>
+        {{-- capacity --}}
+        <div>
+            <label class="block text-sm font-medium text-gray-600">Capacité</label>
+            <input type="number" name="capacity"
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
+                   required>
         </div>
-    </div>
+
+        {{-- description --}}
+        <div>
+            <label class="block text-sm font-medium text-gray-600">Description</label>
+            <textarea name="description"
+                      class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
+                      rows="3"></textarea>
+        </div>
+
+        {{-- Tags --}}
+        <div>
+            <p class="font-medium text-gray-700 mb-2">Tags</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                @foreach($tags as $tag)
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                               class="rounded border-gray-300">
+                        {{ $tag->name }}
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- Properties --}}
+        <div>
+            <p class="font-medium text-gray-700 mb-2">Propriétés</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                @foreach($properties as $propertie)
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" nom="properties[]" value="{{ $propertie->id }}"
+                               class="rounded border-gray-300">
+                        {{ $propertie->nom }}
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- Submit --}}
+        <div class="text-right">
+            <button type="submit"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-semibold">
+                Créer la chambre
+            </button>
+        </div>
+
+    </form>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-        document.getElementById('defaultModalButton').click();
-    });
-</script>
+</body>
+</html>
