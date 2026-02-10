@@ -16,8 +16,11 @@ return new class extends Migration
             $table->string('nom');
             $table->foreignId('user_id')->constrained();
             $table->engine('InnoDB');
-
             $table->timestamps();
+        });
+
+        Schema::table('chambres', function (Blueprint $table) {
+            $table->foreignId('category_id')->constrained('categories');
         });
     }
 

@@ -1,5 +1,4 @@
-{{-- Formulaire pour sélectionner les dates --}}
-<form method="GET" action="{{ route('reserve') }}">
+{{-- Formulaire pour sélectionner les dates --}}<form method="GET" action="{{ route('reserve') }}">
     @csrf
     <label for="date_debut">Date d'arrivée :</label>
     <input type="date" name="date_debut" value="{{ old('date_debut', $dateDebut ?? '') }}" required>

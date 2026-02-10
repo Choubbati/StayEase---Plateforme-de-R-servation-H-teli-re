@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('chambres_tags', function (Blueprint $table) {
         $table->foreignId('chambre_id')->constrained('chambres')->onDelete('cascade');
         $table->foreignId('tag_id')->constrained('tags')->onDelete('cascade');
+        $table->engine('InnoDB');
         });
     }
 

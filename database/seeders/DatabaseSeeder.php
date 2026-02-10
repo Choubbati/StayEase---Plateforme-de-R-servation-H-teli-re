@@ -5,6 +5,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Hotel;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
@@ -20,19 +21,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call(RoleSeeder::class);
+
+        $this->call(UserSeeder::class);
+
+        $this->call(TagSeeder::class);
+
+        $this->call(ProprietesSeeder::class);
+
+        $this->call(CategorieSeeder::class);
+
+        $this->call(HotelSeeder::class);
+
         $this->call(ChambresSeeder::class);
-        // to call one or more of seeders in the same time
-        $this->call(
-            HotelSeeder::class,
-            CategorieSeeder::class,
-        );
-//        DB::table('hotels')->insert([
-//            'nom' => Str::random(10),
-//            'description' =>Str::random(20),
-//            'ville' => Str::random(10),
-//            'image' => Str::random(10),
-//        ]);
-        //Hotel::factory(10)->create();
+
+        //$this->call(ReservationsSeeder::class);
     }
 }
