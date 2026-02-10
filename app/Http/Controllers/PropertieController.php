@@ -8,9 +8,6 @@ use Illuminate\Support\Str;
 
 class PropertieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('Properties.index', ['properties' => Propertie::all()]);
@@ -28,6 +25,14 @@ class PropertieController extends Controller
         $validated = $request->validate(['nom' => 'required|string|max:50']);
         Propertie::create($validated);
         return redirect()->route('properties.index') ->with('success', 'Propriété ajoutée avec succès !');
+    }
+
+    public function update(Request $request, string $id)
+     {
+        $validated = $request->validate(['nom' => 'required|string|max:50']);
+        $propertie = Propertie::findOrFail($id);
+        $propertie->update($validated);
+        return redirect()->route('properties.index') ->with('success', 'Propriété mise à jour avec succès !');
     }
 
     public function destroy($id)

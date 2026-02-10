@@ -63,7 +63,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('tags', TagController::class);
     Route::resource('properties', PropertieController::class);
     Route::resource('chambres', ChambreController::class);
-
+});
     Route::prefix('admin')->group(function () {
 
     Route::get('/roles', function () {
