@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reservation extends Model
 {
+    protected $table = 'reservation';
     protected $fillable= ["user_id","chambre_id","check_in","check_out","nights","total_prix","status"];
 
     protected $casts = [

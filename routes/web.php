@@ -141,3 +141,9 @@ Route::middleware('auth')->group(function () {
 // Route::get('/hotel/manage', function () {
 //     return view('gerant.dashboard');
 // })->middleware('role:1,2');
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+});
