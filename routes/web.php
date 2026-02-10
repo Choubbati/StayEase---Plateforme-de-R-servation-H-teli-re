@@ -15,7 +15,8 @@ use App\Http\Controllers\ChambreController;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
-
+use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 // Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function() {
 //     Route::get("/hotels/pending", [AdminHotelController::class,'pending']->name('admin.hotels.pending'));
@@ -31,6 +32,10 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/', [UserController::class, 'index'])->name('home');
 
+
+
+
+
 Route::get('/signup', function (){
     return view('signup');
 })->name('register');
@@ -43,11 +48,35 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::resource('tags', TagController::class);
+Route::resource('tags', controller: TagController::class);
 Route::resource('properties', PropertieController::class);
 Route::resource('chambres', ChambreController::class);
 Route::prefix('admin')->group(function () {
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.adminDashboard');
+    })->name('admin.dashboard');
 
+    Route::get('/hotels/validation', function () {
+        return view('admin.hotels.validation');
+    })->name('admin.hotels.validation');
+
+    Route::get('/gerants', function () {
+        return view('admin.gerants.index');
+    })->name('admin.gerants.index');
+
+    Route::get('/users', [AdminController::class, 'showUsers'])->name('admin.users.index');
+    Route::delete('/users/{user}', [AdminController::class, 'banUser'])->name('admin.users.ban');
+
+    Route::resource('tags', TagController::class);
+    Route::resource('properties', PropertieController::class);
+    Route::resource('chambres', ChambreController::class);
+
+    Route::prefix('admin')->group(function () {
+
+    Route::get('/roles', function () {
+        return view('admin.roles.index');
+    })->name('admin.roles.index');
 
     Route::get('/hotels/pending', [AdminHotelController::class, 'pending'])
         ->name('admin.hotels.pending');
@@ -57,11 +86,22 @@ Route::prefix('admin')->group(function () {
 
     Route::put('/hotels/{hotel}/reject', [AdminHotelController::class, 'reject'])
         ->name('admin.hotels.reject');
+    });
 });
 
 
 /* hotels crud for gerant */
 
+Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
+Route::put('/profile', [ProfileController::class, 'update'])->middleware('auth')->name('profile.update');
+// // Route::get('/admin/adminGerants', function (){
+// //     return view('admin.adminGerants');
+// })->name('gestionGerants');
+
+
+// Route::get('/hotel/manage', function () {
+//     return view('gerant.dashboard');
+// })->middleware('role:1,2');
 Route::get('/hotels/hotels', [GerantHotelController::class, 'index'])->middleware('role:2')->name("hotels.hotels");
 Route::get('/hotels/show/{hotel}', [GerantHotelController::class, 'show'])->name("hotels.detail");
 Route::get('/hotels/create', [GerantHotelController::class, 'create'])->middleware('role:2')->name('hotels.create');
@@ -83,9 +123,9 @@ Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->
 //Route::post('hotels/hotels', [ChambreController::class, 'index'])->middleware('role:2')->name('hotels.filter');
 
 
-Route::get('/admin/adminGerants', function (){
-    return view('admin.adminGerants');
-})->name('gestionGerants');
+// Route::get('/admin/adminGerants', function (){
+//     return view('admin.adminGerants');
+// })->name('gestionGerants');
 
 
 Route::get('/hotel/manage', function () {
@@ -96,3 +136,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/reservations', [ReservationController::class, 'store'])
         ->name('reservations.store');
 });
+// Route::get('/hotel/manage', function () {
+//     return view('gerant.dashboard');
+// })->middleware('role:1,2');
