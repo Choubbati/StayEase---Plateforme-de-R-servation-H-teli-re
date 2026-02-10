@@ -18,3 +18,8 @@ require __DIR__.'/../vendor/autoload.php';
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
 $app->handleRequest(Request::capture());
+
+$imagePath = public_path('assets/images');
+if (!file_exists($imagePath)) {
+    mkdir($imagePath, 0755, true);
+}   
