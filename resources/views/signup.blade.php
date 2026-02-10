@@ -4,81 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StayEase | Créer un compte</title>
+    <title>StayEase | Rejoindre l'aventure</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        body { font-family: 'Inter', sans-serif; }
+        .role-option input:checked + div {
+            border-color: #4f46e5;
+            background-color: #f5f3ff;
+            ring: 4px;
+            ring-color: #e0e7ff;
         }
     </style>
 </head>
 
-<body class="bg-gray-50 flex items-center justify-center min-h-screen p-6">
+<body class="bg-slate-50 flex items-center justify-center min-h-screen p-6">
 
-    <div class="max-w-md w-full bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-        <div class="p-8 md:p-10">
+    <div class="max-w-xl w-full bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden">
+        <div class="p-8 md:p-12">
             <div class="text-center mb-10">
-                <div class="inline-block p-3 bg-indigo-50 rounded-2xl mb-4">
-                    <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
-                        </path>
-                    </svg>
-                </div>
-                <h1 class="text-2xl font-extrabold text-gray-900">Rejoindre StayEase</h1>
-                <p class="text-gray-500 mt-2 text-sm">Commencez à planifier vos voyages d'exception.</p>
+                <h1 class="text-3xl font-black text-slate-900 tracking-tighter italic">Stay<span class="text-indigo-600">Ease</span></h1>
+                <p class="text-slate-500 mt-2 font-medium">Choisissez votre profil et commencez l'expérience.</p>
             </div>
 
-            <form action="{{ route('register') }}" class="space-y-5" method="POST">
+            <form action="{{ route('register') }}" method="POST" class="space-y-6">
                 @csrf
-                <div>
-                    <label for="prenom" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 ml-1">Prenom</label>
-                    <input id="prenom" name="prenom" type="text" placeholder="Jean"
-                        class="w-full p-4 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 outline-none transition-all">
-                </div>
-                <div>
-                    <label for="nom" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 ml-1">Nom</label>
-                    <input id="nom" name="nom" type="text" placeholder="Dupont"
-                        class="w-full p-4 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 outline-none transition-all">
+
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <label class="role-option cursor-pointer">
+                        <input type="radio" name="role_id" value="3" class="hidden" checked>
+                        <div class="border-2 border-slate-100 rounded-2xl p-4 text-center transition-all hover:border-indigo-200">
+                            <i class="fa-solid fa-suitcase text-indigo-600 text-xl mb-2"></i>
+                            <p class="text-sm font-black text-slate-800 uppercase tracking-tighter">Voyageur</p>
+                            <p class="text-[10px] text-slate-400 mt-1">Je souhaite réserver</p>
+                        </div>
+                    </label>
+
+                    <label class="role-option cursor-pointer">
+                        <input type="radio" name="role_id" value="2" class="hidden">
+                        <div class="border-2 border-slate-100 rounded-2xl p-4 text-center transition-all hover:border-indigo-200">
+                            <i class="fa-solid fa-hotel text-slate-400 text-xl mb-2"></i>
+                            <p class="text-sm font-black text-slate-800 uppercase tracking-tighter">Gérant</p>
+                            <p class="text-[10px] text-slate-400 mt-1">Je possède un hôtel</p>
+                        </div>
+                    </label>
                 </div>
 
-
-                <div>
-                    <label for="email" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 ml-1">Adresse
-                        Email</label>
-                    <input id="email" name="email" type="email" placeholder="jean@exemple.com"
-                        class="w-full p-4 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 outline-none transition-all">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="prenom" class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1">Prénom</label>
+                        <input id="prenom" name="prenom" type="text" required placeholder="Jean"
+                            class="w-full p-4 bg-slate-50 border border-transparent rounded-2xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-50 outline-none transition-all text-sm font-medium">
+                    </div>
+                    <div>
+                        <label for="nom" class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1">Nom</label>
+                        <input id="nom" name="nom" type="text" required placeholder="Dupont"
+                            class="w-full p-4 bg-slate-50 border border-transparent rounded-2xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-50 outline-none transition-all text-sm font-medium">
+                    </div>
                 </div>
 
                 <div>
-                    <label for="password" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 ml-1">Mot de
-                        passe</label>
-                    <input id="password" name="password" type="password" placeholder="••••••••"
-                        class="w-full p-4 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 outline-none transition-all">
+                    <label for="email" class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1">Adresse Email</label>
+                    <input id="email" name="email" type="email" required placeholder="jean@stayease.com"
+                        class="w-full p-4 bg-slate-50 border border-transparent rounded-2xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-50 outline-none transition-all text-sm font-medium">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1">Mot de passe</label>
+                    <input id="password" name="password" type="password" required placeholder="••••••••"
+                        class="w-full p-4 bg-slate-50 border border-transparent rounded-2xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-50 outline-none transition-all text-sm font-medium">
                 </div>
 
                 <button type="submit"
-                    class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition active:scale-[0.98] mt-4">
+                    class="w-full bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-xl shadow-indigo-100 hover:bg-slate-900 transition active:scale-[0.98] mt-4 uppercase tracking-widest text-xs">
                     Créer mon compte
                 </button>
             </form>
 
-            <p class="text-center mt-8 text-sm text-gray-500">
-                Déjà membre ?
-                <a href="/login" class="text-indigo-600 font-bold hover:underline">Se connecter</a>
-            </p>
-        </div>
-
-        <div class="bg-gray-50 p-6 text-center border-t border-gray-100">
-            <p class="text-[10px] text-gray-400 leading-relaxed uppercase tracking-tighter">
-                En vous inscrivant, vous acceptez nos <br>
-                <span class="underline cursor-pointer">Conditions d'utilisation</span> et notre <span
-                    class="underline cursor-pointer">Politique de confidentialité</span>.
+            <p class="text-center mt-8 text-xs font-bold text-slate-400">
+                Déjà parmi nous ?
+                <a href="/login" class="text-indigo-600 hover:underline">Se connecter</a>
             </p>
         </div>
     </div>
 
 </body>
-
 </html>
