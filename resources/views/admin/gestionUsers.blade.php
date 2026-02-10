@@ -27,8 +27,7 @@
         <nav class="flex-1 px-4 space-y-1">
             <a href="{{ route('admin.dashboard') }}"
                class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-xl font-bold transition">
-                <i class="fa-solid fa-chart-pie"></i>
-                <span>Vue d'ensemble</span>
+                <i class="fa-solid fa-chart-pie"></i> Vue d'ensemble
             </a>
 
             <div class="mt-8 mb-2 px-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">
@@ -70,8 +69,7 @@
                 @csrf
                 <button
                     class="flex items-center gap-3 w-full px-4 py-3 text-sm font-bold text-red-500 hover:bg-red-50 rounded-xl transition">
-                    <i class="fa-solid fa-power-off"></i>
-                    <span>Déconnexion</span>
+                    <i class="fa-solid fa-power-off"></i> Déconnexion
                 </button>
             </form>
         </div>
@@ -79,7 +77,6 @@
 
     {{-- Main --}}
     <main class="flex-1 overflow-y-auto">
-
         {{-- Header --}}
         <header class="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 flex justify-between items-center sticky top-0 z-20">
             <h2 class="text-xl font-black text-slate-800 tracking-tight">Console de Supervision</h2>
@@ -133,20 +130,19 @@
                 </div>
             </div>
 
-            {{-- Success --}}
+            {{-- Success message --}}
             @if(session('success'))
                 <div class="mb-6 rounded-2xl bg-green-50 border border-green-100 text-green-700 px-4 py-3 text-sm font-bold">
                     {{ session('success') }}
                 </div>
             @endif
 
-            {{-- Table --}}
+            {{-- Pending hotels --}}
             <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
-
                 <div class="p-8 border-b border-slate-50 flex justify-between items-center">
                     <div>
-                        <h3 class="font-black text-slate-800 text-lg">Demandes de partenariat</h3>
-                        <p class="text-sm text-slate-500">Hôtels souhaitant rejoindre le réseau StayEase</p>
+                        <h3 class="font-black text-slate-800 text-lg">Hôtels en attente de validation</h3>
+                        <p class="text-sm text-slate-500">Hôtels créés par les gérants, à approuver ou rejeter</p>
                     </div>
 
                     <span class="text-[11px] font-black text-indigo-600 uppercase tracking-widest">
@@ -226,7 +222,6 @@
                         {{ $hotels->links() }}
                     </div>
                 @endif
-
             </div>
 
         </div>

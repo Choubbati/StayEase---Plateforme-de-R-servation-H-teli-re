@@ -45,8 +45,11 @@
                 <a href="#" class="hover:text-indigo-600 transition">À propos</a>
             </div>
             <div class="flex gap-4">
-                <a href="{{ route('profile') }}"><button class="px-5 py-2 font-semibold text-gray-700">Profile</button></a>
-                <form method="post" action="{{ route('logout') }}">
+                <a href="{{ route('profile') }}">
+                    <div class="h-10 w-10 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center font-black">
+                        {{ strtoupper(Auth::user()->Firstname[0] . Auth::user()->Lastname[0]) }}
+                    </div>
+                </a>                <form method="post" action="{{ route('logout') }}">
                     @csrf
                 <button type="submit" class="px-5 py-2 bg-transparent text-red-500 border border-red-500 font-semibold rounded-lg shadow-md hover:bg-red-500 hover:text-white transition">Deconnection</button>
                 </form>

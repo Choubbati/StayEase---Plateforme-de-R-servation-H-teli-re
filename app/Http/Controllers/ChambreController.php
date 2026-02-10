@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Chambre;
 use App\Models\Tag;
 use App\Models\Propertie;
+use App\Models\Hotel;
 
 class ChambreController extends Controller
 {
@@ -15,13 +16,15 @@ class ChambreController extends Controller
      */
     public function index(Request $request)
     {
+        $allTags = Tag::all();
+        $allProperties = Propertie::all();
         $categories = Categorie::all();
         if($request['cat'] && $request['cat'] !== 0) {
             $chambres = Chambre::with('tags', 'properties')->where('chambres.category_id', $request['cat'])->get();
             return view('Chambres.index', compact('chambres', 'categories'));
         }
         $chambres = Chambre::with('tags', 'properties')->get();
-        return view('Chambres.index', compact('chambres', 'categories'));
+        return view('Chambres.index', compact('chambres', 'categories', 'allTags', 'allProperties'));
     }
 
     /**
@@ -29,10 +32,10 @@ class ChambreController extends Controller
      */
     public function create()
     {
+        $categories = Categorie::all();
          $tags = Tag::all();
         $properties = Propertie::all();
-        $categories = Categorie::all();
-        return view('Chambres.create', compact('tags', 'properties','categories'));
+        return view('Chambres.create', compact('tags', 'properties', 'categories'));
     }
 
     /**
@@ -46,6 +49,8 @@ class ChambreController extends Controller
             'price_per_night' => 'required|numeric|min:0',
             'capacity' => 'required|integer|min:1',
             'description' => 'nullable|string',
+            'image' => 'nullable|string|max:2048',
+            'category_id' => 'required|integer|exists:categories,id'
         ]);
         $chambre = Chambre::create($validated);
         $chambre->tags()->sync($request->get('tags', []));
@@ -59,7 +64,8 @@ class ChambreController extends Controller
      */
     public function show(Chambre $chambre)
     {
-        return view('Chambres.show', compact('chambre'));
+        $hotel = Hotel::with('chambres')->find($chambre->hotel_id);
+        return view('Chambres.show', compact('chambre', 'hotel'));
     }
 
     /**
@@ -70,7 +76,6 @@ class ChambreController extends Controller
 
         $tags = Tag::all();
     $properties = Propertie::all();
-
     return view('Chambres.edit', compact('chambre', 'tags', 'properties'));
     }
 
@@ -85,13 +90,14 @@ class ChambreController extends Controller
             'price_per_night' => 'required|numeric|min:0',
             'capacity' => 'required|integer|min:1',
             'description' => 'nullable|string',
+            'image' => 'nullable|string|max:2048',
+            'category_id' => 'required|integer|exists:categories,id'
         ]);
 
         $chambre->update($validated);
 
         $chambre->tags()->sync($request->get('tags', []));
         $chambre->properties()->sync($request->get('properties', []));
-
         return redirect()->route('chambres.show', $chambre);
     }
 

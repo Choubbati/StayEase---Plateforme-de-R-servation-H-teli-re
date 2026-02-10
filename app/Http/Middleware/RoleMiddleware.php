@@ -28,3 +28,4 @@ class RoleMiddleware
         return redirect('/')->with('error', "Vous n'avez pas les droits pour accéder à cette page.");
     }
 }
+    
