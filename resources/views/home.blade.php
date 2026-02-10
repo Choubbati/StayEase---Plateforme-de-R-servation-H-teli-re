@@ -14,19 +14,19 @@
 @guest
 
     <nav class="flex justify-between items-center px-10 py-6 bg-white shadow-sm">
-            <span class="text-2xl font-extrabold tracking-tight text-slate-900">
+            <a href="{{ route('home') }}" class="text-2xl font-extrabold tracking-tight text-slate-900">
                 Stay<span class="text-indigo-600">Ease</span>
-            </span>
+            </a>
         <div class="hidden md:flex gap-8 font-medium text-gray-600">
             <a href="{{ route('hotels.hotels') }}" class="hover:text-indigo-600 transition">Hôtels</a>
             <a href="#" class="hover:text-indigo-600 transition">Destinations</a>
             <a href="#" class="hover:text-indigo-600 transition">À propos</a>
         </div>
         <div class="flex gap-4">
-            <a href="/login">
+            <a href="{{ route('login') }}">
                 <button class="px-5 py-2 font-semibold text-gray-700">Connexion</button>
             </a>
-            <a href="/signup">
+            <a href="{{ route('register') }}">
                 <button
                     class="px-5 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition">
                     S'inscrire
@@ -37,12 +37,11 @@
 @endguest
 @auth
     <nav class="flex justify-between items-center px-10 py-6 bg-white shadow-sm">
-            <span class="text-2xl font-extrabold tracking-tight text-slate-900">
+            <a href="{{ route('home') }}" class="text-2xl font-extrabold tracking-tight text-slate-900">
                 Stay<span class="text-indigo-600">Ease</span>
-            </span>        <div class="hidden md:flex gap-8 font-medium text-gray-600">
+            </a>        <div class="hidden md:flex gap-8 font-medium text-gray-600">
                 <a href="{{ route('hotels.hotels') }}" class="hover:text-indigo-600 transition">Hôtels</a>
-                <a href="#" class="hover:text-indigo-600 transition">Destinations</a>
-                <a href="#" class="hover:text-indigo-600 transition">À propos</a>
+                <a href="#about" class="hover:text-indigo-600 transition">À propos</a>
             </div>
             <div class="flex gap-4">
                 <a href="{{ route('profile') }}">
@@ -115,6 +114,7 @@
 @endauth
 
 @guest
+
         <section class="max-w-7xl mx-auto px-10 py-20">
             <h2 class="text-3xl font-bold mb-10">Nos offres à la une</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">

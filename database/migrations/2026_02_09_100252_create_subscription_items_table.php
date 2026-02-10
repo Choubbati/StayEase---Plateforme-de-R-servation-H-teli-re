@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index(['subscription_id', 'stripe_price']);
+            $table->engine('InnoDB');
         });
     }
 

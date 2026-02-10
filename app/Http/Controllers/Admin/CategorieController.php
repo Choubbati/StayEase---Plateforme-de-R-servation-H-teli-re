@@ -25,6 +25,7 @@ class CategorieController extends Controller
 
         $validatedCategorie = $request->validate([
             'nom' => 'required',
+            'quantite' => 'required|min:0',
         ]);
         $validatedCategorie['user_id'] = Auth::id();
 
@@ -50,6 +51,7 @@ class CategorieController extends Controller
 
         $validatedCategorie = $request->validate([
             'nom' => 'required',
+            'quantite' => 'required|min:0',
         ]);
 
         $categorie->update($validatedCategorie);
@@ -74,4 +76,17 @@ class CategorieController extends Controller
         $chambres = Chambre::all()->with('categories')->where('categorie_id', $catgorie->id);
         return view('hotels.dashbord', compact('chambres'));
     }
+
+    public function disponibilite(Request $request, $hotelId)
+    {
+        $dateDebut = $request->date_debut;
+        $dateFin   = $request->date_fin;
+
+        $categoriesDisponibles = Categorie::where('hotel_id', $hotelId)
+            ->disponiblesEntre($dateDebut, $dateFin)
+            ->get();
+
+        return view('admin.categories.index', compact('categoriesDisponibles'));
+    }
+
 }
