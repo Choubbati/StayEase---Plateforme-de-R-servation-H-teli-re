@@ -91,23 +91,7 @@
                 </div>
             </div>
 
-            @if(Auth::user()->role_id == 3)
-            <div class="bg-indigo-900 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl shadow-indigo-100">
-                <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div>
-                        <h3 class="text-xl font-black mb-2">Devenir Gérant d'Hôtel</h3>
-                        <p class="text-indigo-200 text-sm max-w-md">Envoyez une demande pour transformer votre compte et commencer à publier vos propres établissements sur StayEase.</p>
-                    </div>
-                    <form action="" method="POST">
-                        @csrf
-                        <button type="submit" class="bg-white text-indigo-900 px-8 py-3 rounded-xl font-black hover:bg-indigo-50 transition whitespace-nowrap">
-                            Envoyer la demande
-                        </button>
-                    </form>
-                </div>
-                <i class="fa-solid fa-hotel absolute right-[-20px] bottom-[-20px] text-indigo-800 text-9xl opacity-50"></i>
-            </div>
-            @endif
+
 
         </div>
     </main>

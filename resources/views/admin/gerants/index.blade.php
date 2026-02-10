@@ -49,7 +49,7 @@
                 <a href="{{ route('admin.gerants.index') }}"
                     class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-xl transition group font-bold">
                     <i class="fa-solid fa-user-tie"></i>
-                    <span>Gestion des Gérants</span>
+                    <span>Validation des Gérants</span>
                 </a>
 
                 <a href="{{ route('admin.users.index') }}"

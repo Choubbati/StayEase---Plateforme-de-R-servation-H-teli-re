@@ -49,7 +49,7 @@
                 <a href="{{ route('admin.gerants.index') }}"
                     class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
                     <i class="fa-solid fa-user-tie"></i>
-                    <span>Gestion des Gérants</span>
+                    <span>Validation des Gérants</span>
                 </a>
 
                 <a href="{{ route('admin.users.index') }}"
@@ -92,10 +92,11 @@
                         <span class="text-[10px] text-indigo-600 font-bold uppercase tracking-tighter">Super
                             Admin</span>
                     </div>
+                    <a href="{{ route('profile') }}">
                     <div
                         class="h-11 w-11 rounded-xl bg-slate-900 flex items-center justify-center text-white font-black shadow-lg shadow-slate-200">
                         {{ strtoupper(Auth::user()->Firstname[0] . Auth::user()->Lastname[0]) }}
-                    </div>
+                    </div></a>
                 </div>
             </header>
 
