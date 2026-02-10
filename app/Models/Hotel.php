@@ -14,7 +14,7 @@ class Hotel extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['nom', 'description', 'ville', 'manager_id', 'image', 'status'];
+    protected $fillable = ['nom', 'description', 'ville', 'user_id', 'manager_id', 'image', 'status'];
 
     public function chambres(): HasMany
     {

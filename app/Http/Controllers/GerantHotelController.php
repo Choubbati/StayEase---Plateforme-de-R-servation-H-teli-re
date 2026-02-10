@@ -24,8 +24,9 @@ class GerantHotelController extends Controller
     public function  show($hotel)
     {
         if($hotel){
-        $hotel = Hotel::find($hotel)->where('user_id', Auth::id());
+        $hotel = Hotel::find($hotel);
         }
+
         return view('hotels.show', compact('hotel'));
     }
 
@@ -43,11 +44,11 @@ class GerantHotelController extends Controller
         ]);
         $validatedHotel['status'] = "pending";
         $validatedHotel['manager_id']=Auth::id();
-        //dd($validatedHotel);
-        $validatedHotel['user_id'] = Auth::id();
 
+        $validatedHotel['user_id'] = Auth::id();
+        //dd($validatedHotel['user_id']);
         $hotels= Hotel::create($validatedHotel);
-//        dd($hotels);
+       //dd($hotels);
         return redirect()->route('hotels.hotels')->with('success', "Hotel creer avec succes, Il faut attendre la validation de l'admin");
     }
 

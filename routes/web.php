@@ -108,8 +108,7 @@ Route::delete('admin/categories/{categorie}', [CategorieController::class, 'dest
 Route::get('/admin/adminDashboard', [AdminController::class,'index'])->middleware('role:1')->name('admin.dashboard');
 Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
 /* classer les chambres par categorie */
-//Route::post('hotels/hotels', [ChambreController::class, 'index'])->middleware('role:2')->name('hotels.filter');
-
+//Route::get('/Reservation', [CategorieController::class, 'disponibilite'])->name('reserve');
 
 // Route::get('/admin/adminGerants', function (){
 //     return view('admin.adminGerants');
