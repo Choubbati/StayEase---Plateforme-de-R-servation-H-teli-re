@@ -23,6 +23,8 @@ use App\Http\Controllers\ProfileController;
 //     Route::put("/hotels/{hotel}/reject",[AdminHotelController::class,'reject']->name('admin.hotels.reject'));
 // });
 
+
+
 //Route::get('/', function () {
 //    return view('home');
 //})->name('home');
