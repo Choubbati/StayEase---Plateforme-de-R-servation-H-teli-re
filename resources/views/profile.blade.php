@@ -40,6 +40,48 @@
                             <p class="text-slate-500">{{ Auth::user()->email }}</p>
                         </div>
                     </div>
+
+                    <div class="border-t border-slate-200 pt-6">
+                        <h3 class="text-sm font-black text-slate-600 uppercase tracking-wide mb-4">Détails du compte</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase">Prénom</p>
+                                <p class="text-slate-800 font-semibold mt-1">{{ $user->Firstname }}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase">Nom</p>
+                                <p class="text-slate-800 font-semibold mt-1">{{ $user->Lastname }}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase">Email</p>
+                                <p class="text-slate-800 font-semibold mt-1">{{ $user->email }}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase">Identifiant</p>
+                                <p class="text-slate-800 font-semibold mt-1">#{{ $user->id }}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase">Rôle</p>
+                                <p class="text-slate-800 font-semibold mt-1">
+                                    @if($user->role_id == 1)
+                                        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">Administrateur</span>
+                                    @elseif($user->role_id == 2)
+                                        <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">Gérant d'Hôtel</span>
+                                    @else
+                                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Client</span>
+                                    @endif
+                                </p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase">Date d'inscription</p>
+                                <p class="text-slate-800 font-semibold mt-1">{{ $user->created_at->format('d/m/Y à H:i') }}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase">Dernière mise à jour</p>
+                                <p class="text-slate-800 font-semibold mt-1">{{ $user->updated_at->format('d/m/Y à H:i') }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
