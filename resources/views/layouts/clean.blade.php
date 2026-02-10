@@ -19,7 +19,6 @@
         </a>
         <div class="hidden md:flex gap-8 font-medium text-gray-600">
             <a href="{{ route('hotels.hotels') }}" class="hover:text-indigo-600 transition">Hôtels</a>
-            <a href="#" class="hover:text-indigo-600 transition">Destinations</a>
             <a href="#" class="hover:text-indigo-600 transition">À propos</a>
         </div>
         <div class="flex gap-4">
