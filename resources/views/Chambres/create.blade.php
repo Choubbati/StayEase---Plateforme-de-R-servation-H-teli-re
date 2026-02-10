@@ -90,10 +90,11 @@
                 @endforeach
             </div>
         </div>
-        <div>
-            <label class="block text-sm font-medium text-gray-600">nom du fichier dans /assets/images/</label>
+         <label class="block text-sm font-medium text-gray-600">nom du fichier dans /assets/images/</label>
             <input type="text" name="image"
                    class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">
+        <div>
+           
         {{-- submit --}}
         <div class="text-right">
             <button type="submit"
