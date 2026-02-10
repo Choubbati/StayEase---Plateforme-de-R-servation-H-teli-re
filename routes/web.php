@@ -37,7 +37,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::resource('tags', TagController::class);
+Route::resource('tags', controller: TagController::class);
 Route::resource('properties', PropertieController::class);
 Route::resource('chambres', ChambreController::class);
 Route::prefix('admin')->group(function () {

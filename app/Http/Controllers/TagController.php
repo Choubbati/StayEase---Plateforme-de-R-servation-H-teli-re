@@ -58,7 +58,11 @@ class TagController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate(['name' => 'required|string|max:50']);
+        $validated['slug'] = Str::slug($validated['name']);
+        $tag = Tag::findOrFail($id);
+        $tag->update($validated);
+        return redirect()->route('tags.index');
     }
 
     /**

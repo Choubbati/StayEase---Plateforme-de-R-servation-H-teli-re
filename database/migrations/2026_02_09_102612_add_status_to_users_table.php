@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('chambres', function (Blueprint $table) {
-            $table->foreignId('category_id')->constrained();
+        Schema::table('users', function (Blueprint $table) {
+            //
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('chambres', function (Blueprint $table) {
-            $table->dropColumn('categorie_id');
+        Schema::table('users', function (Blueprint $table) {
+            //
         });
     }
 };
