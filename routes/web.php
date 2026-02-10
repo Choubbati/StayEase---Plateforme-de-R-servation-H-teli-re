@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategorieController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\PropertieController;
 use App\Http\Controllers\GerantHotelController;
@@ -11,6 +12,12 @@ use App\Http\Controllers\Admin\AdminHotelController;
 use App\Http\Controllers\ChambreController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+
+
+
+//Route::get('/', function () {
+//    return view('home');
+//})->name('home');
 
 Route::get('/', [UserController::class, 'index'])->name('home');
 
