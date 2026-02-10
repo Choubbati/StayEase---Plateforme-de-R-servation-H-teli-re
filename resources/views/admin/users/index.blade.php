@@ -112,11 +112,15 @@
                                     </div>
                                 </td>
                                 <td class="px-10 py-6">
-                                    <span class="px-3 py-1 bg-green-100 text-green-700 text-[10px] font-black rounded-full uppercase border border-green-200">Actif</span>
+                                    <span class="font-black text-slate-800 text-sm">{{ $user->email }}</span>
                                 </td>
-                                <td class="px-10 py-6 text-xs font-bold text-slate-500 italic">Il y a 2 heures</td>
+                                <td class="px-10 py-6 text-xs font-bold text-slate-500 italic">{{ $user->created_at->format('d/m/Y') }}</td>
                                 <td class="px-10 py-6 text-right">
-                                    <button class="p-2 text-slate-400 hover:text-red-500 transition"><i class="fa-solid fa-ban"></i></button>
+                                    <form action="{{ route('admin.users.ban', $user->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Ban user ?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="p-2 text-slate-400 hover:text-red-500 transition"><i class="fa-solid fa-ban"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
