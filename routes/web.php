@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategorieController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\PropertieController;
 use App\Http\Controllers\GerantHotelController;
@@ -22,6 +23,12 @@ use Illuminate\Support\Facades\Auth;
 //     Route::put("/hotels/{hotel}/aprove",[AdminHotelController::class,'aprove']->name('admin.hotls.aprove'));
 //     Route::put("/hotels/{hotel}/reject",[AdminHotelController::class,'reject']->name('admin.hotels.reject'));
 // });
+
+
+
+//Route::get('/', function () {
+//    return view('home');
+//})->name('home');
 
 Route::get('/', [UserController::class, 'index'])->name('home');
 
@@ -121,6 +128,14 @@ Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->
 // })->name('gestionGerants');
 
 
+Route::get('/hotel/manage', function () {
+    return view('gerant.dashboard');
+})->middleware('role:1,2');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/reservations', [ReservationController::class, 'store'])
+        ->name('reservations.store');
+});
 // Route::get('/hotel/manage', function () {
 //     return view('gerant.dashboard');
 // })->middleware('role:1,2');
