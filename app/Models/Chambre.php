@@ -16,7 +16,7 @@ class Chambre extends Model
 
        protected $fillable =
     [
-        'hotel_id', 'number', 'price_per_night', 'capacity', 'description', 'category_id'
+        'hotel_id', 'number', 'price_per_night', 'capacity', 'description', 'category_id', 'image'
     ];
 
     public function tags(): BelongsToMany
