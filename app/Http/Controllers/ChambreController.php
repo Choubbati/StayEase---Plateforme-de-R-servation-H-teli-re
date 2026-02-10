@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Chambre;
 use App\Models\Tag;
 use App\Models\Propertie;
+use App\Models\Hotel;
 
 class ChambreController extends Controller
 {
@@ -15,36 +16,15 @@ class ChambreController extends Controller
      */
     public function index(Request $request)
     {
+        $allTags = Tag::all();
+        $allProperties = Propertie::all();
         $categories = Categorie::all();
-
-        // Étape 1 : Récupérer et valider les dates (pour US 4.2)
-        $dateDebut = $request->input('date_debut');
-        $dateFin = $request->input('date_fin');
-
-        // Validation des dates : check-in doit être aujourd'hui ou après, check-out après check-in
-        $request->validate([
-            'date_debut' => 'nullable|date|after_or_equal:today',  // nullable si pas fourni
-            'date_fin' => 'nullable|date|after:date_debut',
-        ]);
-
-        // Étape 2 : Construire la requête de base avec eager loading (pour optimiser)
-        $query = Chambre::with('tags', 'properties', 'categories');  // Ajoute 'categorie' si relation existe
-
-        // Étape 3 : Appliquer le filtre par catégorie (ton code original)
-        if ($request->has('cat') && $request['cat'] !== 0) {
-            $query->where('category_id', $request['cat']);  // Utilise 'category_id' si c'est le nom de la colonne
+        if($request['cat'] && $request['cat'] !== 0) {
+            $chambres = Chambre::with('tags', 'properties')->where('chambres.category_id', $request['cat'])->get();
+            return view('Chambres.index', compact('chambres', 'categories'));
         }
-
-        // Étape 4 : Appliquer le filtre de disponibilité si les dates sont fournies (US 4.2)
-        if ($dateDebut && $dateFin) {
-            $query->disponiblesEntre($dateDebut, $dateFin);  // Utilise le scope défini dans Chambre.php
-        }
-
-        // Étape 5 : Exécuter la requête et paginer (ajoute pagination pour fluidité, comme dans US 2.3)
-        $chambres = $query->paginate(10);  // Ou get() si tu préfères sans pagination pour l'instant
-
-        // Étape 6 : Retourner la vue avec les données (ajoute les dates pour les garder dans le formulaire)
-        return view('Chambres.index', compact('chambres', 'categories', 'dateDebut', 'dateFin'));
+        $chambres = Chambre::with('tags', 'properties')->get();
+        return view('Chambres.index', compact('chambres', 'categories', 'allTags', 'allProperties'));
     }
 
     /**
@@ -52,10 +32,10 @@ class ChambreController extends Controller
      */
     public function create()
     {
-        $tags = Tag::all();
-        $properties = Propertie::all();
         $categories = Categorie::all();
-        return view('Chambres.create', compact('tags', 'properties','categories'));
+         $tags = Tag::all();
+        $properties = Propertie::all();
+        return view('Chambres.create', compact('tags', 'properties', 'categories'));
     }
 
     /**
@@ -69,6 +49,8 @@ class ChambreController extends Controller
             'price_per_night' => 'required|numeric|min:0',
             'capacity' => 'required|integer|min:1',
             'description' => 'nullable|string',
+            'image' => 'nullable|string|max:2048',
+            'category_id' => 'required|integer|exists:categories,id'
         ]);
         $chambre = Chambre::create($validated);
         $chambre->tags()->sync($request->get('tags', []));
@@ -82,7 +64,8 @@ class ChambreController extends Controller
      */
     public function show(Chambre $chambre)
     {
-        return view('Chambres.show', compact('chambre'));
+        $hotel = Hotel::with('chambres')->find($chambre->hotel_id);
+        return view('Chambres.show', compact('chambre', 'hotel'));
     }
 
     /**
@@ -92,9 +75,8 @@ class ChambreController extends Controller
     {
 
         $tags = Tag::all();
-        $properties = Propertie::all();
-
-        return view('Chambres.edit', compact('chambre', 'tags', 'properties'));
+    $properties = Propertie::all();
+    return view('Chambres.edit', compact('chambre', 'tags', 'properties'));
     }
 
     /**
@@ -108,13 +90,14 @@ class ChambreController extends Controller
             'price_per_night' => 'required|numeric|min:0',
             'capacity' => 'required|integer|min:1',
             'description' => 'nullable|string',
+            'image' => 'nullable|string|max:2048',
+            'category_id' => 'required|integer|exists:categories,id'
         ]);
 
         $chambre->update($validated);
 
         $chambre->tags()->sync($request->get('tags', []));
         $chambre->properties()->sync($request->get('properties', []));
-
         return redirect()->route('chambres.show', $chambre);
     }
 

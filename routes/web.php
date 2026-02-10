@@ -41,6 +41,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::resource('tags', controller: TagController::class);
+Route::resource('properties', PropertieController::class);
+Route::resource('chambres', ChambreController::class);
+Route::prefix('admin')->group(function () {
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.adminDashboard');
