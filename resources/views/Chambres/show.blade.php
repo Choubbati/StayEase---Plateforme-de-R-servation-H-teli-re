@@ -10,19 +10,19 @@
 <body class="bg-slate-50 text-slate-900 min-h-screen flex items-center justify-center py-10 px-4">
 
     <div class="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
-        
+
         <!-- IMAGE SECTION (Left on Desktop, Top on Mobile) -->
         <div class="w-full md:w-5/12 h-64 md:h-auto relative bg-slate-200 overflow-hidden group">
-            <img 
-                src="/assets/images/{{ $chambre->image }}" 
-                alt="Image de la chambre {{ $chambre->number }}" 
+            <img
+                src="{{ $chambre->image }}"
+                alt="Image de la chambre {{ $chambre->number }}"
                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             >
         </div>
 
         <!-- CONTENT SECTION (Right on Desktop, Bottom on Mobile) -->
         <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-between">
-            
+
             <div>
                 <!-- Header: Hotel Name & Room Number -->
                 <div class="mb-6">

@@ -40,6 +40,9 @@
             Stay<span class="text-indigo-600">Ease</span>
         </a>        <div class="hidden md:flex gap-8 font-medium text-gray-600">
             <a href="{{ route('hotels.hotels') }}" class="hover:text-indigo-600 transition">Hôtels</a>
+            @if(auth()->user()->role->name === "gerant")
+            <a href="{{ route('chambres.index') }}" class="hover:text-indigo-600 transition">chambres</a>
+            @endif
             <a href="#about" class="hover:text-indigo-600 transition">À propos</a>
         </div>
         <div class="flex gap-4">
