@@ -55,7 +55,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::resource('tags', TagController::class);
     Route::resource('properties', PropertieController::class);
-    Route::resource('chambres', ChambreController::class);
+    Route::resource('chambres', controller: ChambreController::class);
+    Route::get('chambres/filter', [ChambreController::class, 'filter'])->name('chambres.filter');
+
 });
     Route::prefix('admin')->group(function () {
 

@@ -28,12 +28,12 @@
 
         <!-- Filter Section -->
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-10">
-            <form action="{{ route('hotels.hotels') }}" method="post"
-                  class="flex flex-col lg:flex-row items-end lg:items-center gap-4">
+                    <form action="{{ route('chambres.filter') }}" method="GET">
                 @csrf
 
                 <!-- Select Category -->
-                <div class="w-full lg:w-1/4">
+                 <div class ="d-flex inline-flex flex-wrap gap-9 mb-9">
+                                   <div class="w-full lg:w-1/4">
                     <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Catégorie</label>
                     <select name="cat"
                         class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block p-2.5 transition-colors">
@@ -83,6 +83,8 @@
                     </button>
                 </div>
             </form>
+                 </div>
+     
         </div>
 
         <!-- Rooms Grid -->
