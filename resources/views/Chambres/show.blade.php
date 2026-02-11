@@ -49,7 +49,15 @@
                         </span>
                     </div>
                 </div>
-
+                <!-- Description Section -->
+                <div class="mb-8">
+                    <h5 class="text-sm font-bold text-slate-900 uppercase tracking-wide mb-3">
+                        Description
+                    </h5>
+                    <p class="text-slate-700 leading-relaxed">
+                        {{ $chambre->description }}
+                    </p>
+                </div>
                 <!-- Tags Section -->
                 <div class="mb-6">
                     <h5 class="text-sm font-bold text-slate-900 uppercase tracking-wide mb-3">
@@ -89,7 +97,7 @@
 
             <!-- Action Footer -->
             <div class="pt-4 border-t border-slate-100">
-                <a href="{{ url()->previous() }}" class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 hover:text-slate-900 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <a href="{{ route('chambres.index') }}" class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 hover:text-slate-900 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>

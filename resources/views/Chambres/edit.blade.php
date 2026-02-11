@@ -17,10 +17,11 @@
 
         {{-- hotel_id --}}
         <div>
-            <label class="block text-sm font-medium text-gray-600">Hotel ID</label>
+            <label class="block text-sm font-medium text-gray-600">Hotel</label>
             <input type="number" name="hotel_id"
                    value="{{ old('hotel_id', $chambre->hotel_id) }}"
-                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
+                   required>
         </div>
 
         {{-- number --}}
@@ -28,7 +29,8 @@
             <label class="block text-sm font-medium text-gray-600">Numéro de chambre</label>
             <input type="text" name="number"
                    value="{{ old('number', $chambre->number) }}"
-                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
+                   required>
         </div>
 
         {{-- price --}}
@@ -36,7 +38,23 @@
             <label class="block text-sm font-medium text-gray-600">Prix par nuit</label>
             <input type="number" step="0.01" name="price_per_night"
                    value="{{ old('price_per_night', $chambre->price_per_night) }}"
-                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
+                   required>
+        </div>
+
+        {{-- category --}}
+        <div>
+            <label class="block text-sm font-medium text-gray-600">Catégorie</label>
+            <select name="category_id"
+                    class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">
+                <option value="">Choisir une catégorie</option>
+                @foreach($categories as $categorie)
+                    <option value="{{ $categorie->id }}"
+                        {{ $chambre->category_id == $categorie->id ? 'selected' : '' }}>
+                        {{ $categorie->nom }}
+                    </option>
+                @endforeach
+            </select>
         </div>
 
         {{-- capacity --}}
@@ -44,7 +62,8 @@
             <label class="block text-sm font-medium text-gray-600">Capacité</label>
             <input type="number" name="capacity"
                    value="{{ old('capacity', $chambre->capacity) }}"
-                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
+                   required>
         </div>
 
         {{-- description --}}
@@ -54,7 +73,7 @@
                       class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">{{ old('description', $chambre->description) }}</textarea>
         </div>
 
-        {{-- Tags --}}
+        {{-- tags --}}
         <div>
             <p class="font-medium text-gray-700 mb-2">Tags</p>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -69,7 +88,7 @@
             </div>
         </div>
 
-        {{-- Properties --}}
+        {{-- properties --}}
         <div>
             <p class="font-medium text-gray-700 mb-2">Propriétés</p>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -84,16 +103,25 @@
             </div>
         </div>
 
-        {{-- Submit --}}
+        {{-- image --}}
+        <div>
+            <label class="block text-sm font-medium text-gray-600">Nom du fichier dans /assets/images/</label>
+            <input type="text" name="image"
+                   value="{{ old('image', $chambre->image) }}"
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">
+        </div>
+
+        {{-- submit --}}
         <div class="flex justify-between">
             <a href="{{ route('chambres.index') }}"
-               class="text-gray-600 hover:underline">⬅ Retour</a>
+               class="text-gray-600 hover:underline">Retour</a>
 
             <button type="submit"
                     class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded font-semibold">
                 Mettre à jour
             </button>
         </div>
+
     </form>
 </div>
 
