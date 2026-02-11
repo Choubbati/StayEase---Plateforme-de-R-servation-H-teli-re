@@ -19,12 +19,32 @@ class ChambreController extends Controller
         $allTags = Tag::all();
         $allProperties = Propertie::all();
         $categories = Categorie::all();
-        if($request['cat'] && $request['cat'] !== 0) {
-            $chambres = Chambre::with('tags', 'properties')->where('chambres.category_id', $request['cat'])->get();
-            return view('Chambres.index', compact('chambres', 'categories'));
+
+        $query = Chambre::with('tags', 'properties');
+
+        if ($request->filled('cat') && $request->cat != "0") {
+            $query->where('category_id', $request->cat);
         }
-        $chambres = Chambre::with('tags', 'properties')->get();
-        return view('Chambres.index', compact('chambres', 'categories', 'allTags', 'allProperties'));
+        if ($request->filled('tag')) {
+            $query->whereHas('tags', function ($q) use ($request) {
+                $q->where('tags.id', $request->tag);
+            });
+        }
+
+        if ($request->filled('property')) {
+            $query->whereHas('properties', function ($q) use ($request) {
+                $q->where('properties.id', $request->property);
+            });
+        }
+
+        $chambres = $query->get();
+
+        return view('Chambres.index', compact(
+            'chambres',
+            'categories',
+            'allTags',
+            'allProperties'
+        ));
     }
 
     /**

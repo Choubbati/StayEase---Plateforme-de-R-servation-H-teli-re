@@ -48,6 +48,7 @@
                                       d="M9 5l7 7-7 7"></path>
                             </svg>
                         </a>
+                        @auth
                         <div class="mt-auto pt-5 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
 
                             <a href="{{ route('hotels.edit', $hotel) }}"
@@ -67,6 +68,7 @@
                                 </button>
                             </form>
                         </div>
+                        @endauth
 
                     </div>
                 </div>
