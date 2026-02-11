@@ -7,9 +7,15 @@
     <title>StayEase | Gestion des Gérants</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
 
-<body class="bg-[#fcfcfd] font-sans antialiased text-slate-900">
+<body class="bg-[#fcfcfd] antialiased text-slate-900">
 
     <div class="flex min-h-screen">
         <aside class="w-72 bg-white border-r border-slate-200 hidden lg:flex flex-col">
@@ -43,7 +49,7 @@
                 <a href="{{ route('admin.gerants.index') }}"
                     class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-xl transition group font-bold">
                     <i class="fa-solid fa-user-tie"></i>
-                    <span>Gestion des Gérants</span>
+                    <span>Validation des Gérants</span>
                 </a>
 
                 <a href="{{ route('admin.users.index') }}"
@@ -89,39 +95,46 @@
                     <thead>
                         <tr class="bg-slate-50/50 border-b border-slate-50 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                             <th class="px-8 py-5">Gérant</th>
-                            <th class="px-8 py-5">Établissements</th>
+                            <th class="px-8 py-5">email</th>
                             <th class="px-8 py-5">Date d'inscription</th>
                             <th class="px-8 py-5">Statut</th>
                             <th class="px-8 py-5 text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-50">
+                        @foreach ($notValidated as $nv)
+                            
                         <tr class="hover:bg-indigo-50/20 transition">
                             <td class="px-8 py-6">
                                 <div class="flex items-center gap-3">
                                     <div class="h-10 w-10 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 font-bold">
+                                         {{strtoupper($nv->Firstname[0] . $nv->Lastname[0])}}
                                     </div>
                                     <div>
-                                        <p class="text-sm font-black text-slate-800">jldskn</p>
-                                        <p class="text-xs text-slate-400">jvkdlfsnk</p>
+                                        <p class="text-sm font-black text-slate-800">{{ $nv->Firstname }}</p>
+                                        <p class="text-xs text-slate-400">{{ $nv->Lastname }}</p>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-8 py-6 text-sm font-bold text-slate-600">
-                                <span class="bg-slate-100 px-2 py-1 rounded-md text-[10px]">3 Hôtels</span>
+                            <td class="text-sm font-black text-slate-800">
+                                {{ $nv->email }}
                             </td>
                             <td class="px-8 py-6 text-sm text-slate-500">
+                                {{ $nv->created_at->format('d/m/Y') }}
                             </td>
                             <td class="px-8 py-6">
-                                <span class="px-3 py-1 bg-green-100 text-green-700 text-[10px] font-black rounded-full uppercase">Actif</span>
+                                <span class="px-3 py-1 bg-red-100 text-red-700 text-[10px] font-black rounded-full uppercase">Not Validated</span>
                             </td>
                             <td class="px-8 py-6 text-right">
                                 <div class="flex justify-end gap-2">
-                                    <button title="Modifier" class="p-2 text-slate-400 hover:text-indigo-600"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button title="Suspendre" class="p-2 text-slate-400 hover:text-red-500"><i class="fa-solid fa-user-slash"></i></button>
+                                    <form action="{{ route('admin.gerants.validate', $nv->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="p-2 text-slate-400 hover:text-green-500"><i class="fa-regular fa-circle-check"></i></button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

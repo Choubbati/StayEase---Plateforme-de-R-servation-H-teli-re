@@ -34,6 +34,15 @@
             <div class="mt-8 mb-2 px-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">
                 Contrôle Réseau
             </div>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#fcfcfd] antialiased text-slate-900">
 
             <a href="{{ route('admin.hotels.validation') }}"
                class="flex items-center justify-between px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
@@ -108,6 +117,66 @@
                         <h3 class="text-3xl font-black text-slate-900">542,800 €</h3>
                         <span class="text-green-500 text-xs font-bold">+15%</span>
                     </div>
+                <a href="{{ route('admin.hotels.validation') }}"
+                    class="flex items-center justify-between px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-hotel group-hover:scale-110 transition"></i>
+                        <span>Validation Hôtels</span>
+                    </div>
+                    <span class="bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded-full font-black">8</span>
+                </a>
+
+                <a href="{{ route('admin.gerants.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>Validation des Gérants</span>
+                </a>
+
+                <a href="{{ route('admin.users.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Comptes Clients</span>
+                </a>
+                <a href="{{ route('admin.roles.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                    </svg>
+                    <span>Roles</span>
+                </a>
+
+
+            </nav>
+
+            <div class="p-6 mt-auto border-t border-slate-100">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button
+                        class="flex items-center gap-3 w-full px-4 py-3 text-sm font-bold text-red-500 hover:bg-red-50 rounded-xl transition">
+                        <i class="fa-solid fa-power-off"></i> Déconnexion
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        <main class="flex-1 overflow-y-auto" id="dashboardMain">
+            <header
+                class="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 flex justify-between items-center sticky top-0 z-20">
+                <h2 class="text-xl font-black text-slate-800 tracking-tight">Console de Supervision</h2>
+
+                <div class="flex items-center gap-4">
+                    <div class="flex flex-col items-end">
+                        <span class="text-sm font-black text-slate-900">{{ Auth::user()->Firstname }}</span>
+                        <span class="text-[10px] text-indigo-600 font-bold uppercase tracking-tighter">Super
+                            Admin</span>
+                    </div>
+                    <a href="{{ route('profile') }}">
+                    <div
+                        class="h-11 w-11 rounded-xl bg-slate-900 flex items-center justify-center text-white font-black shadow-lg shadow-slate-200">
+                        {{ strtoupper(Auth::user()->Firstname[0] . Auth::user()->Lastname[0]) }}
+                    </div></a>
                 </div>
 
                 <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:border-indigo-200 transition">

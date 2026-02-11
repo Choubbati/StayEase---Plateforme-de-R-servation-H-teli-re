@@ -94,16 +94,27 @@
             <input type="text" name="image"
                    class="w-full border rounded px-4 py-2 mt-1 bg-gray-50">
         <div>
-           
+
         {{-- submit --}}
         <div class="text-right">
             <button type="submit"
                     class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-semibold">
                 Créer la chambre
             </button>
-        </div>
 
+        </div>
+            <div class="pt-4 border-t border-slate-100 text-left">
+                <a href="{{ route('chambres.index') }}" class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 hover:text-slate-900 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Retour
+                </a>
+            </div>
+
+        </div>
     </form>
+
 </div>
 
 </body>

@@ -28,12 +28,12 @@
 
         <!-- Filter Section -->
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-10">
-            <form action="{{ route('hotels.hotels') }}" method="post"
+            <form action="{{ route('chambres.index') }}" method="get"
                   class="flex flex-col lg:flex-row items-end lg:items-center gap-4">
-                @csrf
 
                 <!-- Select Category -->
-                <div class="w-full lg:w-1/4">
+                 <div class ="d-flex inline-flex flex-wrap gap-9 mb-9">
+                                   <div class="w-full lg:w-1/4">
                     <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Catégorie</label>
                     <select name="cat"
                         class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block p-2.5 transition-colors">
@@ -44,6 +44,7 @@
                             </option>
                         @endforeach
                     </select>
+
                 </div>
 
                 <!-- Select Tag -->
@@ -62,8 +63,9 @@
                     <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Propriétés</label>
                     <select name='property' class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block p-2.5 transition-colors">
                         <option value=''>Toutes les propriétés</option>
+
                         @foreach ($allProperties as $prop)
-                        <option value='{{ $prop->id }}'>{{ $prop->name }}</option>
+                        <option value='{{ $prop->id }}'>{{ $prop->nom }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -83,17 +85,19 @@
                     </button>
                 </div>
             </form>
+                 </div>
+     
         </div>
 
         <!-- Rooms Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @foreach ($chambres as $chambre)
+            @forelse ($chambres as $chambre)
                 <div class="group bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden flex flex-col hover:shadow-2xl transition-shadow duration-300">
 
                     <!-- Image -->
                     <div class="h-56 bg-slate-200 relative overflow-hidden">
                         @if($chambre->image)
-                            <img src="/assets/images/{{ $chambre->image }}" alt="Image de la chambre {{ $chambre->number }}"
+                            <img src="{{ $chambre->image }}" alt="Image de la chambre {{ $chambre->number }}"
                                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         @else
                             <div class="w-full h-full flex items-center justify-center bg-slate-100">
@@ -111,6 +115,9 @@
                         <div class="flex justify-between items-start mb-3">
                             <h5 class="text-xl font-bold text-slate-900 leading-snug">
                                 Chambre {{ $chambre->number }}
+                            </h5>
+                            <h5 class="text-xl font-bold text-slate-900 leading-snug">
+                                 {{ $chambre->category->nom }}
                             </h5>
                         </div>
 
@@ -158,7 +165,16 @@
 
                     </div>
                 </div>
-            @endforeach
+
+            @empty
+                <div>
+                    <h2 class="text-3xl  font-extrabold text-slate-900 tracking-tight">
+                        Aucune chambre existe
+                    </h2>
+
+                </div>
+
+            @endforelse
         </div>
     </div>
 @endsection
