@@ -48,6 +48,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
 
     Route::get('/gerant/validation', [AdminController::class, 'showGerantNotValidated'])->name('admin.gerants.index');
+    Route::post('/gerant/validation/{id}', [AdminController::class, 'ValidateGerant'])->name('admin.gerants.validate');   
     Route::get('/users', [AdminController::class, 'showUsers'])->name('admin.users.index');
     Route::delete('/users/{user}', [AdminController::class, 'banUser'])->name('admin.users.ban');
 

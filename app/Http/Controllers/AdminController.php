@@ -25,4 +25,11 @@ class AdminController extends Controller
         $notValidated = User::all()->where('isValidated', false);
         return view('admin.gerants.index', compact('notValidated'));
     }
-}   
+    public function ValidateGerant($id){
+        $user = User::find($id);
+        $user->isValidated = true;
+        $user->save();
+        return back()->with('success', "Le gérant {$user->Firstname} a été validé !");
+    }
+    
+    }   
