@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StayEase | Administration Centrale</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-[#fcfcfd] font-sans antialiased text-slate-900">
+<div class="flex min-h-screen">
+
+    {{-- Sidebar --}}
+    <aside class="w-72 bg-white border-r border-slate-200 hidden lg:flex flex-col">
+        <div class="p-8">
+            <div class="flex items-center gap-3">
+                <h1 class="text-slate-900 text-2xl font-black tracking-tight">
+                    Stay<span class="text-indigo-600">Ease</span>
+                </h1>
+            </div>
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-4 ml-1">
+                Administration Système
+            </p>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-1">
+            <a href="{{ route('admin.dashboard') }}"
+               class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-xl font-bold transition">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Vue d'ensemble</span>
+            </a>
+
+            <div class="mt-8 mb-2 px-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">
+                Contrôle Réseau
+            </div>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -17,26 +44,79 @@
 
 <body class="bg-[#fcfcfd] antialiased text-slate-900">
 
-    <div class="flex min-h-screen">
-        <aside class="w-72 bg-white border-r border-slate-200 hidden lg:flex flex-col">
-            <div class="p-8">
+            <a href="{{ route('admin.hotels.validation') }}"
+               class="flex items-center justify-between px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
                 <div class="flex items-center gap-3">
-                    <h1 class="text-slate-900 text-2xl font-black tracking-tight">Stay<span
-                            class="text-indigo-600">Ease</span></h1>
+                    <i class="fa-solid fa-hotel group-hover:scale-110 transition"></i>
+                    <span>Validation Hôtels</span>
                 </div>
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-4 ml-1">Administration
-                    Système</p>
+                <span class="bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded-full font-black">
+                    {{ optional($hotels)->total() ?? 0 }}
+                </span>
+            </a>
+
+            <a href="{{ route('admin.gerants.index') }}"
+               class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Gestion des Gérants</span>
+            </a>
+
+            <a href="{{ route('admin.users.index') }}"
+               class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                <i class="fa-solid fa-users"></i>
+                <span>Comptes Clients</span>
+            </a>
+
+            <a href="{{ route('admin.roles.index') }}"
+               class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
+                <i class="fa-solid fa-user-shield"></i>
+                <span>Roles</span>
+            </a>
+        </nav>
+
+        <div class="p-6 mt-auto border-t border-slate-100">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button
+                    class="flex items-center gap-3 w-full px-4 py-3 text-sm font-bold text-red-500 hover:bg-red-50 rounded-xl transition">
+                    <i class="fa-solid fa-power-off"></i>
+                    <span>Déconnexion</span>
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    {{-- Main --}}
+    <main class="flex-1 overflow-y-auto">
+
+        {{-- Header --}}
+        <header class="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 flex justify-between items-center sticky top-0 z-20">
+            <h2 class="text-xl font-black text-slate-800 tracking-tight">Console de Supervision</h2>
+
+            <div class="flex items-center gap-4">
+                <div class="flex flex-col items-end">
+                    <span class="text-sm font-black text-slate-900">{{ Auth::user()->Firstname }}</span>
+                    <span class="text-[10px] text-indigo-600 font-bold uppercase tracking-tighter">Super Admin</span>
+                </div>
+
+                <div class="h-11 w-11 rounded-xl bg-slate-900 flex items-center justify-center text-white font-black shadow-lg shadow-slate-200">
+                    {{ strtoupper(substr(Auth::user()->Firstname ?? '', 0, 1) . substr(Auth::user()->Lastname ?? '', 0, 1)) }}
+                </div>
             </div>
+        </header>
 
-            <nav class="flex-1 px-4 space-y-1">
-                <a href="{{ route('admin.dashboard') }}"
-                    class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-xl font-bold transition">
-                    <i class="fa-solid fa-chart-pie"></i> Vue d'ensemble
-                </a>
+        <div class="p-8 max-w-7xl mx-auto">
 
-                <div class="mt-8 mb-2 px-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Contrôle
-                    Réseau</div>
-
+            {{-- Stats cards --}}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:border-indigo-200 transition">
+                    <p class="text-slate-400 text-[11px] font-black uppercase tracking-widest mb-2">
+                        Chiffre d'Affaire Réseau
+                    </p>
+                    <div class="flex items-baseline gap-2">
+                        <h3 class="text-3xl font-black text-slate-900">542,800 €</h3>
+                        <span class="text-green-500 text-xs font-bold">+15%</span>
+                    </div>
                 <a href="{{ route('admin.hotels.validation') }}"
                     class="flex items-center justify-between px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group cursor-pointer">
                     <div class="flex items-center gap-3">
@@ -98,100 +178,128 @@
                         {{ strtoupper(Auth::user()->Firstname[0] . Auth::user()->Lastname[0]) }}
                     </div></a>
                 </div>
-            </header>
 
-            <div class="p-8 max-w-7xl mx-auto" id="dashboardAdmin">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                    <div
-                        class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm group hover:border-indigo-200 transition">
-                        <p class="text-slate-400 text-[11px] font-black uppercase tracking-widest mb-2">Chiffre
-                            d'Affaire Réseau</p>
-                        <div class="flex items-baseline gap-2">
-                            <h3 class="text-3xl font-black text-slate-900">542,800 €</h3>
-                            <span class="text-green-500 text-xs font-bold">+15%</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm group hover:border-indigo-200 transition">
-                        <p class="text-slate-400 text-[11px] font-black uppercase tracking-widest mb-2">Revenus
-                            Commissions</p>
-                        <div class="flex items-baseline gap-2">
-                            <h3 class="text-3xl font-black text-indigo-600">81,420 €</h3>
-                            <span class="text-slate-400 text-xs font-bold">Net</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm group hover:border-indigo-200 transition">
-                        <p class="text-slate-400 text-[11px] font-black uppercase tracking-widest mb-2">Hôtels Actifs
-                        </p>
-                        <div class="flex items-baseline gap-2">
-                            <h3 class="text-3xl font-black text-slate-900">124</h3>
-                            <span class="text-amber-500 text-xs font-bold">8 en attente</span>
-                        </div>
+                <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:border-indigo-200 transition">
+                    <p class="text-slate-400 text-[11px] font-black uppercase tracking-widest mb-2">
+                        Revenus Commissions
+                    </p>
+                    <div class="flex items-baseline gap-2">
+                        <h3 class="text-3xl font-black text-indigo-600">81,420 €</h3>
+                        <span class="text-slate-400 text-xs font-bold">Net</span>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
-                    <div class="p-8 border-b border-slate-50 flex justify-between items-center">
-                        <div>
-                            <h3 class="font-black text-slate-800 text-lg">Demandes de partenariat</h3>
-                            <p class="text-sm text-slate-500">Hôtels souhaitant rejoindre le réseau StayEase</p>
-                        </div>
-                        <button
-                            class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-xs font-bold hover:bg-indigo-600 transition" id="test">Voir
-                            tout le catalogue</button>
-                    </div>
-
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left">
-                            <thead
-                                class="bg-slate-50/50 text-slate-400 text-[10px] uppercase font-black tracking-widest">
-                                <tr>
-                                    <th class="px-8 py-4">Établissement</th>
-                                    <th class="px-8 py-4">Propriétaire</th>
-                                    <th class="px-8 py-4">Documents</th>
-                                    <th class="px-8 py-4">Date de demande</th>
-                                    <th class="px-8 py-4 text-right">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-50">
-                                <tr class="hover:bg-indigo-50/20 transition">
-                                    <td class="px-8 py-5">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="h-10 w-10 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 font-bold">
-                                                H</div>
-                                            <span class="font-bold text-slate-800 text-sm">Grand Riviera Resort</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-8 py-5 text-sm text-slate-600">Sophie Lefebvre</td>
-                                    <td class="px-8 py-5">
-                                        <span class="flex items-center gap-1 text-[10px] font-black text-indigo-600">
-                                            <i class="fa-solid fa-file-circle-check"></i> DOSSIER COMPLET
-                                        </span>
-                                    </td>
-                                    <td class="px-8 py-5 text-xs text-slate-400 italic">Il y a 2 heures</td>
-                                    <td class="px-8 py-5 text-right">
-                                        <div class="flex justify-end gap-2">
-                                            <button
-                                                class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-indigo-700 transition shadow-md shadow-indigo-100">Approuver</button>
-                                            <button
-                                                class="p-2 bg-slate-100 text-slate-400 rounded-lg hover:bg-red-50 hover:text-red-500 transition"><i
-                                                    class="fa-solid fa-trash text-xs"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:border-indigo-200 transition">
+                    <p class="text-slate-400 text-[11px] font-black uppercase tracking-widest mb-2">
+                        Hôtels Actifs
+                    </p>
+                    <div class="flex items-baseline gap-2">
+                        <h3 class="text-3xl font-black text-slate-900">124</h3>
+                        <span class="text-amber-500 text-xs font-bold">
+                            {{ optional($hotels)->total() ?? 0 }} en attente
+                        </span>
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
 
+            {{-- Success --}}
+            @if(session('success'))
+                <div class="mb-6 rounded-2xl bg-green-50 border border-green-100 text-green-700 px-4 py-3 text-sm font-bold">
+                    {{ session('success') }}
+                </div>
+            @endif
 
+            {{-- Table --}}
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+
+                <div class="p-8 border-b border-slate-50 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-black text-slate-800 text-lg">Demandes de partenariat</h3>
+                        <p class="text-sm text-slate-500">Hôtels souhaitant rejoindre le réseau StayEase</p>
+                    </div>
+
+                    <span class="text-[11px] font-black text-indigo-600 uppercase tracking-widest">
+                        Total : {{ optional($hotels)->total() ?? 0 }}
+                    </span>
+                </div>
+
+                @if(!isset($hotels) || $hotels->count() === 0)
+                    <div class="m-8 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-700 px-4 py-3 text-sm font-bold">
+                        Aucun hôtel en attente.
+                    </div>
+                @else
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-50/50 text-slate-400 text-[10px] uppercase font-black tracking-widest">
+                            <tr>
+                                <th class="px-8 py-4">Nom</th>
+                                <th class="px-8 py-4">Ville</th>
+                                <th class="px-8 py-4">Date</th>
+                                <th class="px-8 py-4 text-right">Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody class="divide-y divide-slate-50">
+                            @foreach($hotels as $hotel)
+                                <tr class="hover:bg-indigo-50/20 transition">
+                                    <td class="px-8 py-5">
+                                        <div class="flex items-center gap-3">
+                                            <div class="h-10 w-10 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 font-black">
+                                                {{ strtoupper(substr($hotel->nom ?? '', 0, 1)) }}
+                                            </div>
+                                            <span class="font-bold text-slate-800 text-sm">
+                                                {{ $hotel->nom }}
+                                            </span>
+                                        </div>
+                                    </td>
+
+                                    <td class="px-8 py-5">
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black bg-slate-100 text-slate-600">
+                                            {{ $hotel->ville }}
+                                        </span>
+                                    </td>
+
+                                    <td class="px-8 py-5 text-xs text-slate-400 italic">
+                                        {{ optional($hotel->created_at)->format('d/m/Y') }}
+                                    </td>
+
+                                    <td class="px-8 py-5 text-right">
+                                        <div class="flex justify-end gap-2">
+                                            <form method="POST" action="{{ route('admin.hotels.approve', $hotel) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"
+                                                        class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-indigo-700 transition shadow-md shadow-indigo-100">
+                                                    Approuver
+                                                </button>
+                                            </form>
+
+                                            <form method="POST" action="{{ route('admin.hotels.reject', $hotel) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"
+                                                        class="p-2 bg-slate-100 text-slate-400 rounded-lg hover:bg-red-50 hover:text-red-600 transition"
+                                                        title="Rejeter">
+                                                    <i class="fa-solid fa-trash text-xs"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="p-6 border-t border-slate-50">
+                        {{ $hotels->links() }}
+                    </div>
+                @endif
+
+            </div>
+
+        </div>
+    </main>
+</div>
 </body>
-
 </html>

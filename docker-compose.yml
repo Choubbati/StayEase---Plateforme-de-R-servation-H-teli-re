@@ -1,0 +1,45 @@
+services:
+  app:
+    build:
+      context: .
+    container_name: stayease_app
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+    networks:
+      - stayease
+
+  nginx:
+    image: nginx:alpine
+    container_name: stayease_nginx
+    ports:
+      - "8081:80"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - stayease
+
+  db:
+    image: mysql:8.0
+    container_name: stayease_db
+    environment:
+      MYSQL_DATABASE: stayease
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: stayease
+      MYSQL_PASSWORD: stayease
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - stayease
+
+networks:
+  stayease:
+
+volumes:
+  db_data:
