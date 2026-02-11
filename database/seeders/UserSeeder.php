@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => bcrypt('admin123'), // or Hash::make('admin123')
             'role_id' => 1, // assuming role_id 1 = admin
+            'isValidated' => true
         ]);
 
         // ✅ Create a normal user
@@ -30,7 +31,8 @@ class UserSeeder extends Seeder
             'Lastname' => 'Doe',
             'email' => 'user@example.com',
             'password' => bcrypt('user123'),
-            'role_id' => 2, // assuming role_id 2 = regular user
+            'role_id' => 3, // assuming role_id 2 = regular user
+            'isValidated' => true
         ]);
     }
 }

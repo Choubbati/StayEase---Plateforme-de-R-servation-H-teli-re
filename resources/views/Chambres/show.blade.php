@@ -49,7 +49,15 @@
                         </span>
                     </div>
                 </div>
-
+                <!-- Description Section -->
+                <div class="mb-8">
+                    <h5 class="text-sm font-bold text-slate-900 uppercase tracking-wide mb-3">
+                        Description
+                    </h5>
+                    <p class="text-slate-700 leading-relaxed">
+                        {{ $chambre->description }}
+                    </p>
+                </div>
                 <!-- Tags Section -->
                 <div class="mb-6">
                     <h5 class="text-sm font-bold text-slate-900 uppercase tracking-wide mb-3">

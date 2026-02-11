@@ -46,16 +46,17 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         return view('admin.hotels.validation');
     })->name('admin.hotels.validation');
 
-    Route::get('/gerants', function () {
-        return view('admin.gerants.index');
-    })->name('admin.gerants.index');
 
+    Route::get('/gerant/validation', [AdminController::class, 'showGerantNotValidated'])->name('admin.gerants.index');
+    Route::post('/gerant/validation/{id}', [AdminController::class, 'ValidateGerant'])->name('admin.gerants.validate');   
     Route::get('/users', [AdminController::class, 'showUsers'])->name('admin.users.index');
     Route::delete('/users/{user}', [AdminController::class, 'banUser'])->name('admin.users.ban');
 
     Route::resource('tags', TagController::class);
     Route::resource('properties', PropertieController::class);
-    Route::resource('chambres', ChambreController::class);
+    Route::resource('chambres', controller: ChambreController::class);
+    Route::get('chambres/filter', [ChambreController::class, 'filter'])->name('chambres.filter');
+
 });
     Route::prefix('admin')->group(function () {
 
