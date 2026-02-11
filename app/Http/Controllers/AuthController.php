@@ -49,14 +49,20 @@ class AuthController extends Controller
                   if (Auth::user()->role_id == 1) {
                         return redirect()->route('admin.dashboard');
                   }
-                if (Auth::user()->isValidated == true) {
+                  else{
                     return redirect()->route('home');
-                    } else {
-                        return view('wait');
-                    }
+                  }
+
+            }
+            else{
+                Auth::logout();
+                return view('wait');
             }
                 
 
+        }
+        else{
+         
         }
     }
 
