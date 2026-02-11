@@ -7,10 +7,15 @@
     <title>StayEase | Administration Centrale</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
 
-<body class="bg-[#fcfcfd] font-sans antialiased text-slate-900">
+<body class="bg-[#fcfcfd] antialiased text-slate-900">
 
     <div class="flex min-h-screen">
         <aside class="w-72 bg-white border-r border-slate-200 hidden lg:flex flex-col">
@@ -44,7 +49,7 @@
                 <a href="{{ route('admin.gerants.index') }}"
                     class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
                     <i class="fa-solid fa-user-tie"></i>
-                    <span>Gestion des Gérants</span>
+                    <span>Validation des Gérants</span>
                 </a>
 
                 <a href="{{ route('admin.users.index') }}"
@@ -87,10 +92,11 @@
                         <span class="text-[10px] text-indigo-600 font-bold uppercase tracking-tighter">Super
                             Admin</span>
                     </div>
+                    <a href="{{ route('profile') }}">
                     <div
                         class="h-11 w-11 rounded-xl bg-slate-900 flex items-center justify-center text-white font-black shadow-lg shadow-slate-200">
                         {{ strtoupper(Auth::user()->Firstname[0] . Auth::user()->Lastname[0]) }}
-                    </div>
+                    </div></a>
                 </div>
             </header>
 
