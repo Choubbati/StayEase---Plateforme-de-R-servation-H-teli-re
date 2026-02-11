@@ -62,7 +62,7 @@ class AuthController extends Controller
 
         }
         else{
-         
+            $error = 'email ou password invalide';
         }
     }
 

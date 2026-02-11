@@ -127,7 +127,7 @@
                             </td>
                             <td class="px-8 py-6 text-right">
                                 <div class="flex justify-end gap-2">
-                                    <form action="{{ route('admin.gerants.validate', $nv->id) }}" method="POST" style="display:inline;">
+                                    <form action="{{ route('admin.gerants.validate', $nv->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Voulez-vous vraiment valider ce gérant ?')">
                                     @csrf
                                     <button type="submit" class="p-2 text-slate-400 hover:text-green-500"><i class="fa-regular fa-circle-check"></i></button>
                                     </form>

@@ -50,6 +50,7 @@
                     class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition group">
                     <i class="fa-solid fa-user-tie"></i>
                     <span>Validation des Gérants</span>
+
                 </a>
 
                 <a href="{{ route('admin.users.index') }}"
