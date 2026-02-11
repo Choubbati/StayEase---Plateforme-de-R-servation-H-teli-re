@@ -49,7 +49,7 @@ class GerantHotelController extends Controller
         //dd($validatedHotel['user_id']);
         $hotels= Hotel::create($validatedHotel);
        //dd($hotels);
-        return redirect()->route('hotels.hotels')->with('success', "Hotel creer avec succes, Il faut attendre la validation de l'admin");
+        return redirect()->route('home')->with('success', "Hotel creer avec succes, Il faut attendre la validation de l'admin");
     }
 
     public function edit($hotel){
