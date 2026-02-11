@@ -21,4 +21,8 @@ class AdminController extends Controller
         return redirect()->route('admin.users.index');
     }
     
-}
+    public function showGerantNotValidated(){
+        $notValidated = User::all()->where('isValidated', false);
+        return view('admin.gerants.index', compact('notValidated'));
+    }
+}   
