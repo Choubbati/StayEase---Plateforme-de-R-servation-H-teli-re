@@ -21,12 +21,8 @@ class GerantHotelController extends Controller
         return view('hotels.dashbord', compact('hotels', 'count', 'categories'));
     }
 
-    public function  show($hotel)
+    public function  show(Hotel $hotel)
     {
-        if($hotel){
-        $hotel = Hotel::find($hotel);
-        }
-
         return view('hotels.show', compact('hotel'));
     }
 
@@ -40,7 +36,7 @@ class GerantHotelController extends Controller
             'nom' => 'required|unique:hotels|min:6',
             'description' => 'required|max:255',
             'ville' => 'required',
-            'image' => 'required',
+            'image' => 'required|url',
         ]);
         $validatedHotel['status'] = "pending";
         $validatedHotel['manager_id']=Auth::id();
@@ -52,20 +48,11 @@ class GerantHotelController extends Controller
         return redirect()->route('home')->with('success', "Hotel creer avec succes, Il faut attendre la validation de l'admin");
     }
 
-    public function edit($hotel){
-
-        if($hotel){
-            $hotel = Hotel::find($hotel)->where('user_id', Auth::id());
-        }
-
+    public function edit(Hotel $hotel){
         return view('hotels.edit', compact('hotel'));
     }
 
-    public function update(Request $request, $hotel){
-
-        if($hotel){
-            $hotel = Hotel::find($hotel)->where('user_id', Auth::id());
-        }
+    public function update(Request $request,Hotel $hotel){
 
         $validatedHotel = $request->validate([
             'nom' => 'required',
@@ -108,13 +95,13 @@ class GerantHotelController extends Controller
 
         return view('admin.hotels.index', compact('hotels'));
     }
-    public function filter(Request $request)
-    {
-        //dd($request['cat']);
-        $chambres = Chambre::with('categories')->where('chambres.category_id', $request['cat'])->get();
-        //dd($chambres);
-        return view('hotels.dashbord', compact('chambres'));
-
-    }
+//    public function filter(Request $request)
+//    {
+//        //dd($request['cat']);
+//        $chambres = Chambre::with('categories')->where('chambres.category_id', $request['cat'])->get();
+//        //dd($chambres);
+//        return view('hotels.dashbord', compact('chambres'));
+//
+//    }
 
 }

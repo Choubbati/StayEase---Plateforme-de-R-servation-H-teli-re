@@ -70,6 +70,7 @@
                                             </svg>
                                             Edit
                                         </a>
+                                        
                                         <a href="{{ route('hotels.detail', $hotel)}}" type="button" class="py-3 px-3 flex items-center text-sm font-medium text-center text-white focus:outline-none bg-blue-400 rounded-lg border border-blue-200 hover:bg-gray-100 hover:text-gray-900  focus:z-10 focus:ring-4 focus:ring-gray-200 ">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-2 -ml-0.5">
                                                 <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />

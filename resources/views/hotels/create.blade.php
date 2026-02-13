@@ -18,19 +18,19 @@
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                     <div class="sm:col-span-2">
                         <label for="nom" class="block mb-2 text-sm font-medium text-gray-900">Nom Hotel</label>
-                        <input type="text" name="nom" id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-[#2563eb] focus:border-primary-[#2563eb] block w-full p-2.5 " placeholder="Entrer nom de l'hôtel" required="">
+                        <input type="text" name="nom" id="nom"  value="{{ old('nom') }} " class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-[#2563eb] focus:border-primary-[#2563eb] block w-full p-2.5 " placeholder="Entrer nom de l'hôtel" required="">
                     </div>
                     <div class="sm:col-span-2">
                         <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Image Hotel</label>
-                        <input type="text" name="image" id="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-[#2563eb] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Http:\\..." required="">
+                        <input type="text" name="image" id="image" value="{{ old('image') }} " class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-[#2563eb] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Http:\\..." required="">
                     </div>
                     <div class="sm:col-span-2">
                         <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description de l'hôtel</label>
-                        <textarea id="description" name="description" rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-[#3b82f6] focus:border-primary-[#3b82f6] " placeholder="Description de l'hôtel"></textarea>
+                        <textarea id="description" name="description"  rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-[#3b82f6] focus:border-primary-[#3b82f6] " placeholder="Description de l'hôtel">{{old('description') }}</textarea>
                     </div>
                     <div class="w-full">
                         <label for="Ville" class="block mb-2 text-sm font-medium text-gray-900">Ville</label>
-                        <input type="text" name="ville" id="ville" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-[#2563eb] focus:border-primary-[#2563eb] block w-full p-2.5 " placeholder="2999MAD" required="">
+                        <input type="text" name="ville" id="ville" value="{{ old('ville') }} " class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-[#2563eb] focus:border-primary-[#2563eb] block w-full p-2.5 " placeholder="2999MAD" required="">
                     </div>
                     <!--
                     <div>

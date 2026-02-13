@@ -48,27 +48,7 @@
                                       d="M9 5l7 7-7 7"></path>
                             </svg>
                         </a>
-                        @auth
-                        <div class="mt-auto pt-5 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
 
-                            <a href="{{ route('hotels.edit', $hotel) }}"
-                               class="flex-1 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold py-2.5 px-4 rounded-xl text-sm text-center transition-colors duration-200 shadow-sm">
-                                Modifier
-                            </a>
-
-                            <form method="POST"
-                                  action="{{ route('hotels.destroy', $hotel) }}"
-                                  class="flex-1">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce hotel ?')"
-                                        class="w-full bg-red-50 hover:bg-red-100 text-red-600 font-semibold py-2.5 px-4 rounded-xl text-sm border border-transparent transition-colors duration-200">
-                                    Supprimer
-                                </button>
-                            </form>
-                        </div>
-                        @endauth
 
                     </div>
                 </div>
@@ -96,16 +76,7 @@
                     </div>
                 </div>
                 <div class="flex justify-center">
-                    <div
-                        class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-gray-100">
-                        <img
-                            src="https://static.vecteezy.com/system/resources/thumbnails/052/947/382/small/modern-and-clean-design-of-a-hotel-building-icon-for-graphic-representation-vector.jpg"
-                            class="h-56 w-full object-cover" alt="image Hotel">
 
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mt-2">Aucun Hotels existes</h3>
-                        </div>
-                    </div>
                 </div>
             @endforelse
         </div>

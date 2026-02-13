@@ -47,15 +47,15 @@ class AuthController extends Controller
 
                 $request->session()->regenerate();
                   if (Auth::user()->role_id == 1) {
-                        return redirect()->route('admin.dashboard');
+                      return redirect()->route('admin.dashboard');
                   }
-                if (Auth::user()->isValidated == true) {
+
                     return redirect()->route('home');
-                    } else {
-                        return view('wait');
-                    }
+
+
+
             }
-                
+            return view('wait');
 
         }
     }

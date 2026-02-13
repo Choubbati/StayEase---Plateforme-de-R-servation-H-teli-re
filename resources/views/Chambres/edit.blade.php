@@ -20,7 +20,7 @@
             <label class="block text-sm font-medium text-gray-600">Hotel</label>
             <input type="number" name="hotel_id"
                    value="{{ old('hotel_id', $chambre->hotel_id) }}"
-                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-50"
+                   class="w-full border rounded px-4 py-2 mt-1 bg-gray-300" disabled
                    required>
         </div>
 

@@ -18,6 +18,7 @@ class UserController extends Controller
 //        }
 
         $hotelsApprouved = Hotel::where('status', 'approved')
+            ->where('user_id', Auth::id())
             ->latest()
             ->paginate(6);
         //dd($hotelsApprouved);
